@@ -12,7 +12,7 @@
           
            
             
-            return "Test";
+            return "<a href=\"javascript:\" onclick=\"alert('TODO: Export in here'); \">MedImage Export</a>";
             
         }
         
