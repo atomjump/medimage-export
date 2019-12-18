@@ -11,8 +11,8 @@
             $api = new cls_plugin_api();
           
            
-            
-            return "<a href=\"javascript:\" onclick=\"alert('TODO: Export in here'); \">MedImage Export</a>";
+            $ret_text = "<a href=\"javascript:\" onclick=\"alert('TODO: Export in here. Msg ID: " . $message_id . "'); \">MedImage Export</a>";
+            return $ret_text;
             
         }
         
