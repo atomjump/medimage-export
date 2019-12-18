@@ -28,7 +28,7 @@
            
             ?>
             	<br/>
-            	<h4>MedImage Forum Export</h4>
+            	<h4>Export Forum to MedImage (.pdf)</h4>
             
             <?php
            
