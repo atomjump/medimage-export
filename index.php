@@ -18,7 +18,7 @@
             
         }
         
-        public function on_upload_screen($message_id)
+        public function on_upload_screen()
         {
         	global $root_server_url;
         	
@@ -27,11 +27,12 @@
           
            
             ?>
-            	Test in here
+            	<br/>
+            	<h4>MedImage Forum Export</h4>
             
             <?php
            
-            $ret_text = "<a href=\"javascript:\" onclick=\"alert('TODO: MedImage Photo Export in here. Msg ID: " . $message_id . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
+            $ret_text = "<a href=\"javascript:\" onclick=\"alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_SESSION['authenticated-layer'] . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
             
             
             echo $ret_text;
