@@ -26,8 +26,17 @@
             $api = new cls_plugin_api();
           
            
+            ?>
+            	Test in here
+            
+            <?php
+           
             $ret_text = "<a href=\"javascript:\" onclick=\"alert('TODO: MedImage Photo Export in here. Msg ID: " . $message_id . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
-            return $ret_text;
+            
+            
+            echo $ret_text;
+            
+            return true;
             
         }
         
