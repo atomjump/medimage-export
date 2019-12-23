@@ -13,7 +13,7 @@
             $api = new cls_plugin_api();
           
            
-            $ret_text = "<a href=\"javascript:\" onclick=\"alert('TODO: MedImage Photo Export in here. Msg ID: " . $message_id . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
+            $ret_text = "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('TODO: MedImage Photo Export in here. Msg ID: " . $message_id . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
             return $ret_text;
             
         }
@@ -32,7 +32,7 @@
             
             <?php
            
-            $ret_text = "<a href=\"javascript:\" onclick=\"alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
+            $ret_text = "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "'); \"><img src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
             
             
             echo $ret_text;
