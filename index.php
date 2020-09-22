@@ -20,6 +20,7 @@
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
+            //TODO: generalise languages here
  
  				$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
 				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
@@ -50,11 +51,20 @@
 								//TODO: Send this image to the MedImage Server
 								//send_image($image_name, $image_folder, $preview);
 								//send_image($image_hi_name, $image_folder, $preview);
+								
+								$new_message = "Sending photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
+				      		$recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
+				      		$sender_name_str = "MedImage";
+				      		$sender_email = "info@medimage.co.nz";
+				      		$sender_ip = "111.111.111.111";
+				      		$options = array('notification' => false, 'allow_plugins' => false);
+				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+								
 							}
 						} else {
 							//Sorry, no medimage server detected. Give the option via a return private message, and syntax for setting the MedImage Server, with 'pair aBc1' or 'pr aBc1'
 							 $new_message = "You have uploaded a photo, but you haven't paired yet with the MedImage Server. You can do this by clicking one of the large buttons on the MedImage Server, and then typing 'pair [your 4 digit code]' or 'pr [your 4 digit code]' in here";
-				     		 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//The sender of the original message
+				     		 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
 				      	 $sender_name_str = "MedImage";
 				      	 $sender_email = "info@medimage.co.nz";
 				      	 $sender_ip = "111.111.111.111";
@@ -86,6 +96,21 @@
 				      $options = array('notification' => false, 'allow_plugins' => false);
 				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 				   }
+				   
+				   
+				   if((strpos($uc_message, "PAIR ") === 0)||
+				   	(strpos($uc_message, "PR ") === 0)) {
+				   	//A pairing request.
+					   $new_message = "You have successfully paired with your MedImage Server! [TODO - not complete]";
+				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
+				      $sender_name_str = "MedImage";
+				      $sender_email = "info@medimage.co.nz";
+				      $sender_ip = "111.111.111.111";
+				      $options = array('notification' => false, 'allow_plugins' => false);
+				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);			   		
+				   		
+				   }
+				   
 				}
             
             return true;

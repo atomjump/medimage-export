@@ -72,7 +72,7 @@
 			
 				
 					
-			if(count($matches) > 1) {
+			if(count($matches[0]) > 0) {
 				//Yes we have at least one image
 				for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
 					echo "Matched image raw: " . $matches[1][$cnt] . "\n";
