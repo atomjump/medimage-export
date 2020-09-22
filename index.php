@@ -13,7 +13,7 @@
             
             $api = new cls_plugin_api();
                       
-            $actual_message = explode($message, ": ");
+            $actual_message = explode(": ", $message);
             
             //TODO: notify if there is no id when a photo is detected.
             //Check for existence of photo in message and initiate a sending process for that photo
