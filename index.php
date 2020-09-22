@@ -7,6 +7,24 @@
     class plugin_medimage_export
     {
        
+        private function get_medimage_config() {
+				 if(!isset($medimage_config)) {
+					  //Get global plugin config - but only once
+					  $data = file_get_contents (dirname(__FILE__) . "/config/config.json");
+					  if($data) {
+						   $medimage_config = json_decode($data, true);
+						   if(!isset($medimage_config)) {
+						       echo "Error: MedImage config/config.json is not valid JSON.";
+						       exit(0);
+						   }
+					  } else {
+						   echo "Error: MedImage config/config.json in medimage_export plugin.";
+						   exit(0);
+					  }
+				 }
+       		
+        		return $medimage_config;
+        }
        
  		  public function on_message($message_forum_id, $message, $message_id, $sender_id, $recipient_id, $sender_name, $sender_email, $sender_phone)
         {
@@ -52,7 +70,7 @@
 								//send_image($image_name, $image_folder, $preview);
 								//send_image($image_hi_name, $image_folder, $preview);
 								
-								$new_message = "Sending photo to the MedImage Server: 'image' DEBUG:" . $image_name;		//TODO: get the latest ID entered here
+								$new_message = "Sending photo to the MedImage Server: 'image' DEBUG:" . $image_hi_name;		//TODO: get the latest ID entered here
 				      		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 				      		$sender_name_str = "MedImage";
 				      		$sender_email = "info@medimage.co.nz";
@@ -60,14 +78,24 @@
 				      		$options = array('notification' => false, 'allow_plugins' => false);
 				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 				   			
+				   			
+				   			 //Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
+				   			$medimage_config = get_medimage_config();
+                        $command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id;
+                        global $staging;
+                        if($staging == true) {
+                            $command = $command . " staging";   //Ensure this works on a staging server  
+                        }
+                        $api->parallel_system_call($command, "linux");
+				   			
 				   			//TODO: After a successful receipt event
-				   			$new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
+				   			/*$new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
 				      		$recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 				      		$sender_name_str = "MedImage";
 				      		$sender_email = "info@medimage.co.nz";
 				      		$sender_ip = "111.111.111.111";
 				      		$options = array('notification' => false, 'allow_plugins' => false);
-				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);*/
 								
 							}
 						} else {
