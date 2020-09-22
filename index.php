@@ -26,7 +26,7 @@
 		         if(strpos($uc_message, "ID ") === 0) {
 				      //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 				      //backend MedImage Server
-				      $id = strpos($actual_message[1], 3);
+				      $id = substr($actual_message[1], 3);
 				      $id = preg_replace('/\s+/', ' ', trim($id));
 				      $new_message = "Switched MedImage patient to ID: '" . $id . "'";
 				      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
