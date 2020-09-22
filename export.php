@@ -92,6 +92,7 @@
 	}
 	
 	//parse_for_image($message_id)
+	parse_for_image($_REQUEST['msg_id']);
 	echo "Got to the end: " . $_REQUEST['msg_id'];
 
 
