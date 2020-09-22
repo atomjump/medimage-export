@@ -80,7 +80,7 @@
 				   			
 				   			
 				   			 //Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
-				   			$medimage_config = get_medimage_config();
+				   			$medimage_config = $this->get_medimage_config();
 				   			
 				   			//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
             				$layer_name = "";
