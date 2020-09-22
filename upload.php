@@ -1,5 +1,7 @@
 <?php
 
+	$verbose = false;
+
   	function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
     }
@@ -44,7 +46,7 @@
  
     sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
     
-    error_log("About to post to the group with success transfer.");
+    if($verbose == true) error_log("About to post to the group with success transfer.");
     
     //TODO: After a successful receipt event
 	 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
@@ -54,7 +56,7 @@
 	 $sender_ip = "111.111.111.111";
 	 $options = array('allow_plugins' => false);
 	 $message_forum_id = $argv[3];
-	 error_log("About to post to the group:" . $message_forum_id);
+	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
 	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
     
        

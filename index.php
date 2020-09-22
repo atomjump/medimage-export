@@ -1,12 +1,13 @@
 <?php
     include_once("classes/cls.pluginapi.php");
     
-
+	
     
     
     class plugin_medimage_export
     {
-       
+        $verbose = false;
+        
         private function get_medimage_config() {
 				 if(!isset($medimage_config)) {
 					  //Get global plugin config - but only once
@@ -47,10 +48,10 @@
  				$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
 				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
  				$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
-				error_log($preg_search);
-				error_log($message);
+				if($verbose == true) error_log($preg_search);
+				if($verbose == true) error_log($message);
 				preg_match_all($preg_search, $message, $matches);
-				error_log(json_encode($matches));
+				if($verbose == true) error_log(json_encode($matches));
 				if(count($matches[0]) > 0) {
 						//Yes we have at least one image
 						
@@ -123,7 +124,7 @@
             $actual_message = explode(": ", $message);			//Remove name of sender         
             if($actual_message[1]) {
             	$uc_message = strtoupper($actual_message[1]);
-            	error_log($uc_message);
+            	if($verbose == true) error_log($uc_message);
 		         if(strpos($uc_message, "ID ") === 0) {
 				      //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 				      //backend MedImage Server
