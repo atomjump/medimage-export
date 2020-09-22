@@ -74,7 +74,7 @@
 								//send_image($image_name, $image_folder, $preview);
 								//send_image($image_hi_name, $image_folder, $preview);
 								
-								$new_message = "Sending photo to the MedImage Server: 'image' DEBUG:" . $image_hi_name;		//TODO: get the latest ID entered here
+								$new_message = "Sending photo to the MedImage Server: 'image' [TESTING:" . $image_hi_name . "]";		//TODO: get the latest ID entered here
 				      		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 				      		$sender_name_str = "MedImage";
 				      		$sender_email = "info@medimage.co.nz";

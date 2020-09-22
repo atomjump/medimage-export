@@ -42,12 +42,12 @@
     $api = new cls_plugin_api();
 
  
-    sleep(2);		//TODO: simulated
+    sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
     
     error_log("About to post to the group with success transfer.");
     
     //TODO: After a successful receipt event
-	 $new_message = "Successfully sent the photo to the MedImage Server: 'image' DEBUG:" . $argv[1];		//TODO: get the latest ID entered here
+	 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
 	 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 	 $sender_name_str = "MedImage";
 	 $sender_email = "info@medimage.co.nz";
