@@ -147,7 +147,7 @@
 				   if((strpos($uc_message, "PAIR ") === 0)||
 				   	(strpos($uc_message, "PR ") === 0)) {
 				   	//A pairing request.
-					   $new_message = "You have successfully paired with your MedImage Server! [TODO - not complete]";
+					   $new_message = "You have successfully paired with your MedImage Server! [TODO complete] To unpair, enter 'unpair'.";
 				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
 				      $sender_name_str = "MedImage";
 				      $sender_email = "info@medimage.co.nz";
@@ -156,6 +156,18 @@
 				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);			
 				   	setcookie("medimage-server", "https://medimage-nz1.atomjump.com/morehere");   		
 				   		
+				   }
+				   
+				    if(strpos($uc_message, "UNPAIR") === 0) {
+				   	//An unpairing request.
+					   $new_message = "You have successfully unpaired with your MedImage Server! [TODO complete]";
+				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
+				      $sender_name_str = "MedImage";
+				      $sender_email = "info@medimage.co.nz";
+				      $sender_ip = "111.111.111.111";
+				      $options = array('notification' => false, 'allow_plugins' => false);
+				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);					
+				   	setcookie("medimage-server", "", time()-3600);	
 				   }
 				   
 				}
