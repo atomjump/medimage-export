@@ -13,6 +13,8 @@
             
             $api = new cls_plugin_api();
             
+            error_log("Input forum id:" . $message_forum_id);
+            
             //TODO: notify if there is no id when a photo is detected.
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
