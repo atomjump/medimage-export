@@ -18,7 +18,7 @@
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
                       
-            if(strpos($message, "id ") === 0) {
+            //TEMPOUT if(strpos($message, "id ") === 0) {
 		         //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 		         //backend MedImage Server
 		         $new_message = "Switched MedImage patient to ID: '" . $message . "'";
@@ -27,7 +27,7 @@
 		         $sender_ip = "111.111.111.111";
 		         $options = array('notification' => false, 'allow_plugins' => false);
 		      	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
-		      }
+		      //}
             
             return true;
             
