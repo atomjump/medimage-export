@@ -25,6 +25,7 @@
 				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
  				$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
 				preg_match_all($preg_search, $message, $matches);
+				error_log($matches[0] . " " . $matches[1]);
 				if(count($matches) > 1) {
 						//Yes we have at least one image
 						
