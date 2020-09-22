@@ -157,7 +157,7 @@
 				   	$pairing_string = "https://medimage-pair.atomjump.com/med-genid.php?compare=" . $id;
 				   	$paired = file_get_contents($pairing_string);		//TODO could implement POST here for security + timeouts
 				   	
-				   	if($paired && $paired !== "nomatch") {
+				   	if($paired && trim($paired) !== "nomatch") {
 					  		$new_message = "You have successfully paired with your MedImage Server! [TESTING: " . $paired . " TODO complete] To unpair, enter 'unpair'.";
 					  		setcookie("medimage-server", $paired);   	
 					   
