@@ -28,7 +28,7 @@
 				error_log($message);
 				preg_match_all($preg_search, $message, $matches);
 				error_log(json_encode($matches));
-				if(count($matches[0]) > 1) {
+				if(count($matches[0]) > 0) {
 						//Yes we have at least one image
 						
 						//Check if we have a pairing
