@@ -39,9 +39,9 @@
 							//should set the id with 'id [patientId] [optional description tags]'
 							
 							
-							for($cnt = 0; $cnt < count($matches[0][1]); $cnt++) {
+							for($cnt = 0; $cnt < count($matches[0]); $cnt++) {
 								//echo "Matched image raw: " . $matches[1][$cnt] . "\n";
-								$between_slashes = explode( "/", $matches[1][$cnt]);
+								$between_slashes = explode( "/", $matches[0][$cnt]);
 								$len = count($between_slashes) - 1;
 								$image_name = $between_slashes[$len] . ".jpg";
 								$image_hi_name = $between_slashes[$len] . "_HI.jpg";
