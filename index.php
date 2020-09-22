@@ -155,15 +155,23 @@
 				      $id = str_replace("\\n","", $id);
 				      $id = preg_replace('/\s+/', ' ', trim($id));
 				   	$pairing_string = "https://medimage-pair.atomjump.com/med-genid.php?compare=" . $id;
+				   	$paired = file_get_contents($pairing_string);		//TODO could implement POST here for security + timeouts
 				   	
-					   $new_message = "You have successfully paired with your MedImage Server! [TESTING: " . $pairing_string . " TODO complete] To unpair, enter 'unpair'.";
+				   	if($paired && $paired != "nomatch") {
+					  		$new_message = "You have successfully paired with your MedImage Server! [TESTING: " . $paired . " TODO complete] To unpair, enter 'unpair'.";
+					  		setcookie("medimage-server", $paired);   	
+					   
+					   } else {
+					   	$new_message = "Sorry, that was an invalid code. Please try again. [TESTING: " . $pairing_string . " TODO complete] To unpair, enter 'unpair'.";
+					   }
+					   
 				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
 				      $sender_name_str = "MedImage";
 				      $sender_email = "info@medimage.co.nz";
 				      $sender_ip = "111.111.111.111";
 				      $options = array('notification' => false, 'allow_plugins' => false);
 				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);			
-				   	setcookie("medimage-server", "https://medimage-nz1.atomjump.com/morehere");   		
+				   		
 				   		
 				   }
 				   

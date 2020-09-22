@@ -46,6 +46,12 @@
  
     sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
     
+    if(isset($_COOKIE['medimage-server'])) {
+    	
+    		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
+    		error_log("MedImage Server on upload:" . $_COOKIE['medimage-server']);
+    }
+    
     if($verbose == true) error_log("About to post to the group with success transfer.");
     
     //TODO: After a successful receipt event
