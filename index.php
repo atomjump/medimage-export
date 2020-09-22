@@ -53,7 +53,16 @@
 								//send_image($image_hi_name, $image_folder, $preview);
 								
 								$new_message = "Sending photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
-				      		$recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
+				      		$recipient_ip_colon_id =  "123.123.123.123:" . $recipient_id;		//Send privately to the recipient
+				      		$sender_name_str = "MedImage";
+				      		$sender_email = "info@medimage.co.nz";
+				      		$sender_ip = "111.111.111.111";
+				      		$options = array('notification' => false, 'allow_plugins' => false);
+				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+				   			
+				   			//TODO: After a successful receipt event
+				   			$new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
+				      		$recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 				      		$sender_name_str = "MedImage";
 				      		$sender_email = "info@medimage.co.nz";
 				      		$sender_ip = "111.111.111.111";
