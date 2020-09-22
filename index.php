@@ -109,7 +109,7 @@
 							}
 						} else {
 							//Sorry, no medimage server detected. Give the option via a return private message, and syntax for setting the MedImage Server, with 'pair aBc1' or 'pr aBc1'
-							 $new_message = "You have uploaded a photo, but you haven't paired yet with your MedImage Server. You can do this by clicking one of the large buttons on the MedImage Server, and then typing 'pair [your 4 digit code]' or 'pr [your 4 digit code]' into this app, with the 4 digit code the server gave you.";
+							 $new_message = "You have uploaded a photo to the group, but you haven't paired yet with your MedImage desktop. Click one of the large pairing buttons on the desktop MedImage, and then type 'pr [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you.";
 				     		 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
 				      	 $sender_name_str = "MedImage";
 				      	 $sender_email = "info@medimage.co.nz";
