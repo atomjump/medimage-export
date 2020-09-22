@@ -148,7 +148,15 @@
 				   if((strpos($uc_message, "PAIR ") === 0)||
 				   	(strpos($uc_message, "PR ") === 0)) {
 				   	//A pairing request.
-					   $new_message = "You have successfully paired with your MedImage Server! [TODO complete] To unpair, enter 'unpair'.";
+				   	//See: http://medimage.co.nz/building-an-alternative-client-to-medimage/
+				   	//https://medimage-pair.atomjump.com/med-genid.php?compare=
+				   	$ids = explode(" ", $actual_message[1]);
+				   	$id = str_replace("\\r","", $ids[1]);
+				      $id = str_replace("\\n","", $id);
+				      $id = preg_replace('/\s+/', ' ', trim($id));
+				   	$pairing_string = "https://medimage-pair.atomjump.com/med-genid.php?compare=" . $id;
+				   	
+					   $new_message = "You have successfully paired with your MedImage Server! [TESTING: " . $pairing_string . " TODO complete] To unpair, enter 'unpair'.";
 				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
 				      $sender_name_str = "MedImage";
 				      $sender_email = "info@medimage.co.nz";
