@@ -49,6 +49,7 @@
     		$upload_to = $argv[5];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
+    		echo "MedImage Server on upload:" . $upload_to;
     }
     
     sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
