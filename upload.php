@@ -33,7 +33,7 @@
 		$_REQUEST['passcode'] = $argv[4];
 	}
 	
-	if(isset($argv[5])) {      //allow for a staging flag
+	if(isset($argv[6])) {      //allow for a staging flag
 	    $staging = true;
 	}
 	include_once($start_path . 'config/db_connect.php');	
@@ -46,8 +46,8 @@
  
     sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
     
-    if(isset($arg[6])) {
-    		$upload_to = $arg[6];
+    if(isset($arg[5])) {
+    		$upload_to = $arg[5];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
     }

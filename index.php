@@ -97,7 +97,7 @@
 									$layer_name = $_REQUEST['uniqueFeedbackId'];
 								}
 				   			
-                        $command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name;
+                        $command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'];
                         global $staging;
                         if($staging == true) {
                             $command = $command . " staging";   //Ensure this works on a staging server  
