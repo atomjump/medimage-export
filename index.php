@@ -25,7 +25,8 @@
 		         //backend MedImage Server
 		         $new_message = "Switched MedImage patient to ID: '" . $message . "'";
 		         $recipient_ip_colon_id = "123.123.123.123:" . $recipient_id;
-		         $sender_email = "medimage@atomjump.com";
+		         $sender_name_str = "MedImage";
+		         $sender_email = "info@medimage.co.nz";
 		         $sender_ip = "111.111.111.111";
 		         $options = array('notification' => false, 'allow_plugins' => false);
 		      	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
