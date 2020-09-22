@@ -24,6 +24,7 @@
  				$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
 				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
  				$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
+				error_log($message);
 				preg_match_all($preg_search, $message, $matches);
 				error_log(json_encode($matches));
 				if(count($matches) > 1) {
