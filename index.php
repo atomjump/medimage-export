@@ -81,21 +81,26 @@
 				   			
 				   			 //Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
 				   			$medimage_config = get_medimage_config();
-                        $command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id;
+				   			
+				   			//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
+            				$layer_name = "";
+								if(isset($_REQUEST['passcode'])) {
+									$layer_name = $_REQUEST['passcode'];			
+								}
+		
+								if(isset($_REQUEST['uniqueFeedbackId'])) {
+									$layer_name = $_REQUEST['uniqueFeedbackId'];
+								}
+				   			
+                        $command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name;
                         global $staging;
                         if($staging == true) {
                             $command = $command . " staging";   //Ensure this works on a staging server  
                         }
+                        error_log($command);
                         $api->parallel_system_call($command, "linux");
 				   			
-				   			//TODO: After a successful receipt event
-				   			/*$new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
-				      		$recipient_ip_colon_id = "";		//No recipient, so the whole group. 
-				      		$sender_name_str = "MedImage";
-				      		$sender_email = "info@medimage.co.nz";
-				      		$sender_ip = "111.111.111.111";
-				      		$options = array('notification' => false, 'allow_plugins' => false);
-				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);*/
+				   			
 								
 							}
 						} else {
