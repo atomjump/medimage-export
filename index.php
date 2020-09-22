@@ -20,11 +20,14 @@
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
             
-            if($actual_message[1]) { 
-		         if(strpos($actual_message[1], "id ") === 0) {
+            if($actual_message[1]) {
+            	$uc_message = strtoupper($actual_message[1]);
+            	error_log($uc_message);
+		         if(strpos($uc_message, "ID ") === 0) {
 				      //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 				      //backend MedImage Server
 				      $id = strpos($actual_message[1], 3);
+				      $id = preg_replace('/\s+/', ' ', trim($id));
 				      $new_message = "Switched MedImage patient to ID: '" . $id . "'";
 				      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
 				      $sender_name_str = "MedImage";
