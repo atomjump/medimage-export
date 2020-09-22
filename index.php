@@ -159,7 +159,7 @@
 				   	
 				   	if($paired && trim($paired) !== "nomatch") {
 					  		$new_message = "You have successfully paired with your MedImage Server! [TESTING: " . $paired . " TODO complete] To unpair, enter 'unpair'.";
-					  		setcookie("medimage-server", $paired);   	
+					  		setcookie("medimage-server", trim($paired));   	
 					   
 					   } else {
 					   	$new_message = "Sorry, that was an invalid code. Please try again. [TESTING: " . $pairing_string . " TODO complete] To unpair, enter 'unpair'.";
