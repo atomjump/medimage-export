@@ -14,11 +14,15 @@
 					  if($data) {
 						   $medimage_config = json_decode($data, true);
 						   if(!isset($medimage_config)) {
-						       echo "Error: MedImage config/config.json is not valid JSON.";
+						       $msg = "Error: MedImage config/config.json is not valid JSON.";
+						       error_log($msg);
+						       echo $msg;
 						       exit(0);
 						   }
 					  } else {
-						   echo "Error: MedImage config/config.json in medimage_export plugin.";
+					  		$msg = "Error: MedImage config/config.json in medimage_export plugin.";
+					  		error_log($msg);
+						   echo $msg;
 						   exit(0);
 					  }
 				 }
