@@ -44,13 +44,15 @@
     $api = new cls_plugin_api();
 
  
-    sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
     
-    if(isset($arg[5])) {
-    		$upload_to = $arg[5];
+    if(isset($argv[5])) {
+    		$upload_to = $argv[5];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
     }
+    
+    sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
+ 
     
     if($verbose == true) error_log("About to post to the group with success transfer.");
     
