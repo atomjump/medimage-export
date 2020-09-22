@@ -39,9 +39,9 @@
 							//should set the id with 'id [patientId] [optional description tags]'
 							
 							
-							for($cnt = 0; $cnt < count($matches[0]); $cnt++) {
+							for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
 								//echo "Matched image raw: " . $matches[1][$cnt] . "\n";
-								$between_slashes = explode( "/", $matches[0][$cnt]);
+								$between_slashes = explode( "/", $matches[1][$cnt]);
 								$len = count($between_slashes) - 1;
 								$image_name = $between_slashes[$len] . ".jpg";
 								$image_hi_name = $between_slashes[$len] . "_HI.jpg";
@@ -52,8 +52,8 @@
 								//send_image($image_name, $image_folder, $preview);
 								//send_image($image_hi_name, $image_folder, $preview);
 								
-								$new_message = "Sending photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
-				      		$recipient_ip_colon_id =  "123.123.123.123:" . $recipient_id;		//Send privately to the recipient
+								$new_message = "Sending photo to the MedImage Server: 'image' DEBUG:" . $image_name;		//TODO: get the latest ID entered here
+				      		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 				      		$sender_name_str = "MedImage";
 				      		$sender_email = "info@medimage.co.nz";
 				      		$sender_ip = "111.111.111.111";
