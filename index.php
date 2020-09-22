@@ -38,7 +38,7 @@
         		}
            	</script> */
             
-           $ret_text = "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('About to run MedImage Photo Export in here. Msg ID: " . $message_id . "'); medimageExport(" . $message_id . ");\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
+           $ret_text = "<script>function medimageExport(msgId) { alert('Clicked'); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('About to run MedImage Photo Export in here. Msg ID: " . $message_id . "'); medimageExport(" . $message_id . ");\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
             return $ret_text;
             
         }
