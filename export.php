@@ -31,7 +31,6 @@
 	if($staging == 1) {
 		$staging = true;
 	}
-	echo $start_path;		//TEMP TESTING
 	include_once($start_path . 'config/db_connect.php');	
 	
     $define_classes_path = $start_path;     //This flag ensures we have access to the typical classes, before the cls.pluginapi.php is included
@@ -50,7 +49,7 @@
 	
 	}
    
-	function parse_for_image($message_id)
+	function parse_for_image($api, $message_id)
 	{
 		global $cnf;
 		
@@ -93,7 +92,7 @@
 	}
 	
 	//parse_for_image($message_id)
-	parse_for_image($_REQUEST['msg_id']);
+	parse_for_image($api, $_REQUEST['msg_id']);
 	echo "Got to the end: " . $_REQUEST['msg_id'];
 
 
