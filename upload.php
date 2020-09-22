@@ -26,12 +26,12 @@
 
 	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
 	$notify = false;
-	if(isset($argv[5])) { 		//This is the layer name
+	if(isset($argv[4])) { 		//This is the layer name
 		//Set the global layer val, so that this is the correct database to add this message on
-		$_REQUEST['passcode'] = $argv[5];
+		$_REQUEST['passcode'] = $argv[4];
 	}
 	
-	if(isset($argv[6])) {      //allow for a staging flag
+	if(isset($argv[5])) {      //allow for a staging flag
 	    $staging = true;
 	}
 	include_once($start_path . 'config/db_connect.php');	
@@ -53,7 +53,7 @@
 	 $sender_email = "info@medimage.co.nz";
 	 $sender_ip = "111.111.111.111";
 	 $options = array('allow_plugins' => false);
-	 $message_forum_id = $argv[4];
+	 $message_forum_id = $argv[3];
 	 error_log("About to post to the group:" . $message_forum_id);
 	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
     
