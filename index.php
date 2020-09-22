@@ -6,7 +6,7 @@
     
     class plugin_medimage_export
     {
-        $verbose = false;
+        private $verbose = false;
         
         private function get_medimage_config() {
 				 if(!isset($medimage_config)) {
