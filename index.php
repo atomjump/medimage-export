@@ -24,7 +24,7 @@
  				$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
 				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
  				$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
-				preg_match_all($preg_search, $row_msg['var_shouted'], $matches);
+				preg_match_all($preg_search, $message, $matches);
 				if(count($matches) > 1) {
 						//Yes we have at least one image
 						
