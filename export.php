@@ -83,8 +83,8 @@
 	
 	
 					//Send this image
-					$this->send_image($image_name, $image_folder);
-					$this->send_image($image_hi_name, $image_folder);
+					send_image($image_name, $image_folder);
+					send_image($image_hi_name, $image_folder);
 				}
 			}
 		}
