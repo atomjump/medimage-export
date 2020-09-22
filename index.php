@@ -24,7 +24,7 @@
 		         //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 		         //backend MedImage Server
 		         $new_message = "Switched MedImage patient to ID: '" . $message . "'";
-		         $recipient_ip_colon_id = "123.123.123.123:" . $recipient_id;
+		         $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
 		         $sender_name_str = "MedImage";
 		         $sender_email = "info@medimage.co.nz";
 		         $sender_ip = "111.111.111.111";
