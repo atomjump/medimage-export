@@ -25,7 +25,7 @@
         }
     }
 
-	$start_path = add_trailing_slash_local($emoticons_large_config['serverPath']);
+	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
 	$notify = true;		//this switches on notifications from this message
 	$staging = $medimage_config['staging'];
 	if($staging == 1) {
