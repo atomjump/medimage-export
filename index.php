@@ -18,7 +18,12 @@
             $api = new cls_plugin_api();
           
         
-           
+           /*
+           //Now switch back to the main screen
+        						//doSearch();
+        						//$(\"#comment-popup-content\").show(); 
+								//$(\"#comment-upload\").hide(); 
+			*/
             
             /*<script>
             	function medimageExport(msgId) {  
@@ -29,16 +34,13 @@
 							cache: false
 							}).done(function(response) {
 								alert(\"Response : \" + response);
-        						//Now switch back to the main screen
-        						//doSearch();
-        						//$(\"#comment-popup-content\").show(); 
-								//$(\"#comment-upload\").hide(); 
+        						
         					}
         			);
         		}
            	</script> */
             
-           $ret_text = "<script>function medimageExport(msgId) { alert('Clicked'); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('About to run MedImage Photo Export in here. Msg ID: " . $message_id . "'); medimageExport(" . $message_id . ");\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
+           $ret_text = "<script>function medimageExport(msgId) { alert('Clicked'); $.ajax({ url: \"" . trim_trailing_slash_local($root_server_url) . "/plugins/medimage_export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { alert(\"Response : \" + response);	}); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('About to run MedImage Photo Export in here. Msg ID: " . $message_id . "'); medimageExport(" . $message_id . ");\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
             return $ret_text;
             
         }
