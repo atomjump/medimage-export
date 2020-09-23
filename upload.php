@@ -58,7 +58,7 @@
 		  // Error happened
 		  $error_message = curl_error($ch);
 		  error_log($error_message);
-		  echo "Error:" . $error_message . "\n";
+		  print_r($error_message);
 		}
 		curl_close($ch);
     
