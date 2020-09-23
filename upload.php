@@ -149,15 +149,16 @@
     		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name);
     		
     		
-    		if($verbose == true) error_log("About to post to the group with success transfer.");
-    
+    		
     		if($resp == true) {
 			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]";		//TODO: get the latest ID entered here
 			} else {
 			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . " Error msg: " . $err . "]";		//TODO: get the latest ID entered here
-				
-			
+					
 			}
+			
+			if($verbose == true) error_log("About to post to the group with :" . $new_message);
+    
 			 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 			 $sender_name_str = "MedImage";
 			 $sender_email = "info@medimage.co.nz";
