@@ -72,7 +72,7 @@
 								$image_hi_name = $between_slashes[$len] . "_HI.jpg";
 								//echo "Image name: " . $image_name . "\n";
 					
-								$image_folder = $medimage_config['serverPath'];
+								$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
 								//TODO: Send this image to the MedImage Server
 								//send_image($image_name, $image_folder, $preview);
 								//send_image($image_hi_name, $image_folder, $preview);
