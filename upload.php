@@ -68,21 +68,25 @@
  		return $success;
  	}
         
-    
-  	if(!isset($medimage_config)) {
+	 if(!isset($medimage_config)) {
 		  //Get global plugin config - but only once
 		  $data = file_get_contents (dirname(__FILE__) . "/config/config.json");
 		  if($data) {
 			   $medimage_config = json_decode($data, true);
 			   if(!isset($medimage_config)) {
-			       echo "Error: MedImage config/config.json is not valid JSON.";
-			       exit(0);
+				   $msg = "Error: MedImage config/config.json is not valid JSON.";
+				   error_log($msg);
+				   echo $msg;
+				   exit(0);
 			   }
 		  } else {
-			   echo "Error: MedImage config/config.json in medimage_export plugin.";
+				$msg = "Error: MedImage config/config.json in medimage_export plugin.";
+				error_log($msg);
+			   echo $msg;
 			   exit(0);
 		  }
-	 }
+	 }    
+
 
 	$run_process_offset = -1;
 
