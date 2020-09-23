@@ -136,7 +136,7 @@
     		if($resp == true) {
 			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . "]";		//TODO: get the latest ID entered here
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . " Error msg: " . $err . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . " Error msg:]";		//TODO: get the latest ID entered here
 				
 			
 			}
