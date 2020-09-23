@@ -109,6 +109,8 @@
 	$staging_flag_off = 7 + $run_process_offset;
 	$upload_to_off = 6 + $run_process_offset;
 	$filename_off = 2 + $run_process_offset;
+	$forum_id_off = 4 + $run_process_offset;
+
 	
 
 	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
@@ -164,7 +166,7 @@
 			 $sender_email = "info@medimage.co.nz";
 			 $sender_ip = "111.111.111.111";
 			 $options = array('allow_plugins' => false);
-			 $message_forum_id = $argv[3 + $run_process_offset];
+			 $message_forum_id = $argv[$forum_id_off];
 			 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
 			 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 	
