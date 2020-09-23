@@ -28,7 +28,7 @@
 			#$cfile = new CURLFile('resource/test.png','image/png','testpic'); // uncomment and use if the upper procedural method is not working.
 
 			// Assign POST data
-			$imgdata = array('file1' => $cfile);		//('myimage' => $cfile)
+			$imgdata = array('file1' => $cfile);	
 
 
 			$curl = curl_init();
@@ -46,6 +46,7 @@
 			if(!curl_errno($curl))
 			{
 				$info = curl_getinfo($curl);
+				print_r($info);			//TESTING
 				if ($info['http_code'] == 200) {
 				  // Files uploaded successfully.
 				  $success = true;
@@ -104,7 +105,7 @@
  
     
     if(isset($argv[5])) {
-    		$filename = "image-mydate.jpg";		//TODO: get incoming name
+    		$filename = "#image-mydate.jpg";		//TODO: get incoming name from db query
     		$upload_to = $argv[5];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
