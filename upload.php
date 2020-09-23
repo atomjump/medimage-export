@@ -69,8 +69,8 @@
 		$err = curl_error($curl);
 		
 		
-		//echo "error";
-		//var_dump($err);
+		echo "Any error:";
+		var_dump($err);
 		error_log($err);
 		curl_close($curl);
 		return $err;
