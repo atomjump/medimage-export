@@ -2,7 +2,14 @@
     include_once("classes/cls.pluginapi.php");
     
 	
+  	function trim_trailing_slash_local($str) {
+        return rtrim($str, "/");
+    }
     
+    function add_trailing_slash_local($str) {
+        //Remove and then add
+        return rtrim($str, "/") . '/';
+    }    
     
     class plugin_medimage_export
     {
