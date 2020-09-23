@@ -13,110 +13,58 @@
     
     
     function post_data($url, $local_file_path, $filename) {
-		//See https://gist.github.com/maxivak/18fcac476a2f4ea02e5f80b303811d5f
-		// data fields for POST request
-		$fields = array("file1"=>$filename);		//"file1"
-
-		// files to upload
-		$filenames = array($local_file_path);
-
-		$files = array();
+		$success = false;
 		
-		$files[$filename] = file_get_contents($filenames[0]);
-		/*foreach ($filenames as $f){
-		   $files[$f] = file_get_contents($f);
-		   
-		   echo "Filesize: " . filesize($f);
-		}*/
-		
-		
+		// Puts files to be uploaded in this array
+		$files = array(
+		  $local_file_path
+		);
 
-		// curl
+		$postfields = array();
 
-		$curl = curl_init();
-
-		$url_data = http_build_query($data);
-
-		$boundary = uniqid();
-		$delimiter = '-------------' . $boundary;
-
-		$post_data = build_data_files($boundary, $fields, $files);
-
-		//echo $post_data . "\n";
-		
-		//return "";		//TEMPIN TESTING
-		
-		curl_setopt_array($curl, array(
-		  CURLOPT_URL => $url,
-		  CURLOPT_RETURNTRANSFER => 1,
-		  CURLOPT_MAXREDIRS => 10,
-		  CURLOPT_TIMEOUT => 30,
-		  //CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		  CURLOPT_CUSTOMREQUEST => "POST",
-		  CURLOPT_POST => 1,
-		  CURLOPT_POSTFIELDS => $post_data,
-		  CURLOPT_HTTPHEADER => array(
-			//"Authorization: Bearer $TOKEN",
-			"Content-Type: multipart/form-data; boundary=" . $delimiter,
-			"Content-Length: " . strlen($post_data)
-
-		  ),			//Peter comment: , ???
-
-  
-		));
-
-
-		//
-		$response = curl_exec($curl);
-
-		$info = curl_getinfo($curl);
-		//echo "code: ${info['http_code']}";
-
-		//print_r($info['request_header']);
-
-		var_dump($response);
-		$err = curl_error($curl);
-		
-		
-		echo "Any error:";
-		var_dump($err);
-		error_log($err);
-		curl_close($curl);
-		return $err;
-	}
-
-
-
-
-	function build_data_files($boundary, $fields, $files){
-		$data = '';
-		$eol = "\r\n";
-
-		$delimiter = '-------------' . $boundary;
-
-		foreach ($fields as $name => $content) {
-			$data .= "--" . $delimiter . $eol
-				. 'Content-Disposition: form-data; name="' . $name . "\"".$eol.$eol
-				. $content . $eol;
+		foreach ($files as $index => $file) {
+		  if (function_exists('curl_file_create')) { // For PHP 5.5+
+			$file = curl_file_create($file);
+		  } else {
+			$file = '@' . realpath($file);
+		  }
+		  $postfields["file_$index"] = $file;
 		}
 
+		// Add other post data as well.
+		$postfields['name'] = 'file1';		//Name?
+		// Need to set this head for uploading file.
+		$headers = array("Content-Type" => "multipart/form-data");
 
-		foreach ($files as $name => $content) {
-			$data .= "--" . $delimiter . $eol
-				. 'Content-Disposition: form-data; name="' . $name . '"; filename="' . $name . '"' . $eol
-				//. 'Content-Type: image/png'.$eol
-				. 'Content-Transfer-Encoding: binary'.$eol
-				;
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 
-			$data .= $eol;
-			$data .= $content . $eol;
+		$response = curl_exec($ch);
+
+		
+		if(!curl_errno($ch))
+		{
+			$info = curl_getinfo($ch);
+			if ($info['http_code'] == 200) {
+			  // Files uploaded successfully.
+			  $success = true;
+			}
 		}
-		$data .= "--" . $delimiter . "--".$eol;
-
-
-		return $data;
-	}
-
+		else
+		{
+		  // Error happened
+		  $error_message = curl_error($ch);
+		  error_log($error_message);
+		  echo "Error:" . $error_message . "\n";
+		}
+		curl_close($ch);
+    
+    
+ 		return $success;
+ 	}
         
     
   	if(!isset($medimage_config)) {
@@ -173,8 +121,13 @@
     		
     		if($verbose == true) error_log("About to post to the group with success transfer.");
     
-			//TODO: After a successful receipt event
+    		if($success == true) {
 			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
+			} else {
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
+				
+			
+			}
 			 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 			 $sender_name_str = "MedImage";
 			 $sender_email = "info@medimage.co.nz";
