@@ -23,7 +23,11 @@
 		$files = array();
 		foreach ($filenames as $f){
 		   $files[$f] = file_get_contents($f);
+		   
+		   echo "Filesize: " . filesize($f);
 		}
+		
+		return "";		//TEMPIN TESTING
 
 		// curl
 
