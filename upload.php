@@ -68,8 +68,8 @@
  		return $success;
  	}
  	
- 	echo "In here";				//TESTING
- 	error_log("In here");		//TESTING
+ 	$debug_msg = "In here";
+ 	file_put_contents(add_trailing_slash_local(__DIR__) . "temp/debug.txt", $debug_msg);
         
 	 if(!isset($medimage_config)) {
 		  //Get global plugin config - but only once
