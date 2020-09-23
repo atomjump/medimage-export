@@ -41,7 +41,7 @@
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $imgdata); // post images
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); // if any redirection after upload
 			$response = curl_exec($curl);
-			echo $response;
+			//echo $response;
 		
 			if(!curl_errno($curl))
 			{
@@ -56,7 +56,7 @@
 			  // Error happened
 			  $error_message = curl_error($curl);
 			  error_log($error_message);
-			  print_r($error_message);
+			  //print_r($error_message);
 			}
 			curl_close($curl);
 			
@@ -79,13 +79,13 @@
 			   if(!isset($medimage_config)) {
 				   $msg = "Error: MedImage config/config.json is not valid JSON.";
 				   error_log($msg);
-				   echo $msg;
+				   //echo $msg;
 				   exit(0);
 			   }
 		  } else {
 				$msg = "Error: MedImage config/config.json in medimage_export plugin.";
 				error_log($msg);
-			   echo $msg;
+			   //echo $msg;
 			   exit(0);
 		  }
 	 }    
@@ -117,16 +117,16 @@
     		$upload_to = $argv[5 + $run_process_offset];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
-    		echo "MedImage Server on upload:" . $upload_to . "\n";
+    		//echo "MedImage Server on upload:" . $upload_to . "\n";
     		$url = explode("/", $upload_to);
     		$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
     		$folder = $url[4];
-    		echo "Domain: " . $domain . "  Folder: " . $folder . "\n";
+    		//echo "Domain: " . $domain . "  Folder: " . $folder . "\n";
     		$output_post_url = $domain . "/api/photo";
     		$output_file_name = "#" . $folder . "-" . $filename;
-    		echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
+    		//echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
     		$local_file_path = $start_path . "images/im/" . $argv[1];		//ARgv1 is the actual local filename 
-    		echo "Local file path:" . $local_file_path . "\n";
+    		//echo "Local file path:" . $local_file_path . "\n";
     		$resp = post_data($output_post_url, $local_file_path,  $output_file_name);
     		
     		
