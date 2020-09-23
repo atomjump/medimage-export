@@ -55,7 +55,7 @@
 			{
 			  // Error happened
 			  $error_message = curl_error($curl);
-			  error_log($error_message);
+			  if($verbose == true) error_log($error_message);
 			  //print_r($error_message);
 			}
 			curl_close($curl);
@@ -68,8 +68,8 @@
  		return $success;
  	}
  	
- 	$debug_msg = "In here";//add_trailing_slash_local(__DIR__) . "
- 	file_put_contents("/var/www/html/atomjump_staging/api/plugins/medimage_export/temp/debug.txt", $debug_msg);
+ 	if($verbose == true) $debug_msg = "In here";//add_trailing_slash_local(__DIR__) . "
+ 	if($verbose == true) file_put_contents("/var/www/html/atomjump_staging/api/plugins/medimage_export/temp/debug.txt", $debug_msg);
         
 	 if(!isset($medimage_config)) {
 		  //Get global plugin config - but only once
@@ -78,13 +78,13 @@
 			   $medimage_config = json_decode($data, true);
 			   if(!isset($medimage_config)) {
 				   $msg = "Error: MedImage config/config.json is not valid JSON.";
-				   error_log($msg);
+				   if($verbose == true) error_log($msg);
 				   //echo $msg;
 				   exit(0);
 			   }
 		  } else {
 				$msg = "Error: MedImage config/config.json in medimage_export plugin.";
-				error_log($msg);
+				if($verbose == true) error_log($msg);
 			   //echo $msg;
 			   exit(0);
 		  }
@@ -116,7 +116,7 @@
     		$filename = "#image-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
     		$upload_to = $argv[5 + $run_process_offset];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
-    		error_log("MedImage Server on upload:" . $upload_to);
+    		if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
     		//echo "MedImage Server on upload:" . $upload_to . "\n";
     		$url = explode("/", $upload_to);
     		$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
