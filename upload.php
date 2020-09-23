@@ -36,7 +36,7 @@
 		// Need to set this head for uploading file.
 		$headers = array("Content-Type" => "multipart/form-data");
 
-		echo $postfields;		//TESTING
+		print_r($postfields);		//TESTING
 
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
