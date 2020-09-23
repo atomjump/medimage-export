@@ -92,7 +92,7 @@
 	 }    
 
 
-	$run_process_offset = 1;
+	$run_process_offset = 0;			//Should be 1 during a live process, but 0 during testing on the command line
 
 	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
 	$notify = false;
