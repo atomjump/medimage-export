@@ -27,7 +27,7 @@
 		   echo "Filesize: " . filesize($f);
 		}
 		
-		return "";		//TEMPIN TESTING
+		
 
 		// curl
 
@@ -40,7 +40,10 @@
 
 		$post_data = build_data_files($boundary, $fields, $files);
 
-
+		echo $post_data . "\n";
+		
+		return "";		//TEMPIN TESTING
+		
 		curl_setopt_array($curl, array(
 		  CURLOPT_URL => $url,
 		  CURLOPT_RETURNTRANSFER => 1,
