@@ -111,7 +111,7 @@
 								if($staging == true) {
 									$command = $command . " staging";   //Ensure this works on a staging server  
 								}
-								error_log($command);
+								if($verbose == true) error_log($command);
 								$api->parallel_system_call($command, "linux");
 				   			
 				   			
