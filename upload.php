@@ -1,6 +1,6 @@
 <?php
 
-	$verbose = true;
+	$verbose = false;
 
   	function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
@@ -130,7 +130,7 @@
 
     $api = new cls_plugin_api();
 
- 	if($verbose == true) echo json_encode($argv, JSON_PRETTY_PRINT);
+ 	if($verbose == true) error_log(json_encode($argv, JSON_PRETTY_PRINT));
 	if($verbose == true) error_log("Uploading to: " . $argv[$upload_to_off]);
     
     
