@@ -15,7 +15,7 @@
     function post_data($url, $local_file_path, $filename) {
 		//See https://gist.github.com/maxivak/18fcac476a2f4ea02e5f80b303811d5f
 		// data fields for POST request
-		$fields = array("file"=>"file1");		//"file1"
+		$fields = array("file1"=>$filename);		//"file1"
 
 		// files to upload
 		$filenames = array($local_file_path);
