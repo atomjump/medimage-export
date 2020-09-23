@@ -76,19 +76,19 @@
 								//send_image($image_hi_name, $image_folder, $preview);
 								
 								$new_message = "Sending photo to the MedImage Server: 'image' [TESTING:" . $image_hi_name . "]";		//TODO: get the latest ID entered here
-				      		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
-				      		$sender_name_str = "MedImage";
-				      		$sender_email = "info@medimage.co.nz";
-				      		$sender_ip = "111.111.111.111";
-				      		$options = array('notification' => false, 'allow_plugins' => false);
-				   			$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+								$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
+								$sender_name_str = "MedImage";
+								$sender_email = "info@medimage.co.nz";
+								$sender_ip = "111.111.111.111";
+								$options = array('notification' => false, 'allow_plugins' => false);
+								$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 				   			
 				   			
-				   			 //Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
-				   			$medimage_config = $this->get_medimage_config();
+				   			 	//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
+				   				$medimage_config = $this->get_medimage_config();
 				   			
-				   			//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
-            				$layer_name = "";
+				   				//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
+            					$layer_name = "";
 								if(isset($_REQUEST['passcode'])) {
 									$layer_name = $_REQUEST['passcode'];			
 								}
@@ -97,13 +97,13 @@
 									$layer_name = $_REQUEST['uniqueFeedbackId'];
 								}
 				   			
-                        $command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'];
-                        global $staging;
-                        if($staging == true) {
-                            $command = $command . " staging";   //Ensure this works on a staging server  
-                        }
-                        error_log($command);
-                        $api->parallel_system_call($command, "linux");
+								$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'];
+								global $staging;
+								if($staging == true) {
+									$command = $command . " staging";   //Ensure this works on a staging server  
+								}
+								error_log($command);
+								$api->parallel_system_call($command, "linux");
 				   			
 				   			
 								
@@ -111,12 +111,12 @@
 						} else {
 							//Sorry, no medimage server detected. Give the option via a return private message, and syntax for setting the MedImage Server, with 'pair aBc1' or 'pr aBc1'
 							 $new_message = "You have uploaded a photo to the group, but you haven't paired with your MedImage desktop yet. Click one of the large pairing buttons on the MedImage desktop, and then type 'pair [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you. http://medimage.co.nz/how-to/#pair";
-				     		 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
-				      	 $sender_name_str = "MedImage";
-				      	 $sender_email = "info@medimage.co.nz";
-				      	 $sender_ip = "111.111.111.111";
-				      	 $options = array('notification' => false, 'allow_plugins' => false);
-				   	 	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+							 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
+							 $sender_name_str = "MedImage";
+							 $sender_email = "info@medimage.co.nz";
+							 $sender_ip = "111.111.111.111";
+							 $options = array('notification' => false, 'allow_plugins' => false);
+							 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 						}
 				}
  
