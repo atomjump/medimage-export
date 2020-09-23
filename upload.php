@@ -46,7 +46,6 @@
 			if(!curl_errno($curl))
 			{
 				$info = curl_getinfo($curl);
-				print_r($info);			//TESTING
 				if ($info['http_code'] == 200) {
 				  // Files uploaded successfully.
 				  $success = true;
@@ -124,7 +123,7 @@
     		
     		if($verbose == true) error_log("About to post to the group with success transfer.");
     
-    		if($success == true) {
+    		if($resp == true) {
 			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
 			} else {
 			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
