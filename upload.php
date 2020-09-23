@@ -92,16 +92,33 @@
 	 }    
 
 
-	$run_process_offset =1;			//Should be 1 during a live process, but 2 during testing on the command line.
+	/* Command line inputs:
+		E.g. [
+			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/upload.php",
+			"\/var\/www\/html\/atomjump_staging\/api\/images\/im\/",
+			"upl415-37673138_HI.jpg",
+			"5299",
+			"178",
+			"test_feedback",
+			"https:\/\/medimage-nz1.atomjump.com\/write\/QY5WZRemkuadCDjY83",
+			"staging"
+		]
+	*/
+	$run_process_offset = 0;			//Should be 1 during a live process, but 0 during testing on the command line.
+	$layer_name_off = 5 + $run_process_offset;
+	$staging_flag_off = 7 + $run_process_offset;
+	$upload_to_off = 6 + $run_process_offset;
+	$filename_off = 2 + $run_process_offset;
+	
 
 	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
 	$notify = false;
-	if(isset($argv[4 + $run_process_offset])) { 		//This is the layer name
+	if(isset($argv[$layer_name_off])) { 		//This is the layer name
 		//Set the global layer val, so that this is the correct database to add this message on
-		$_REQUEST['passcode'] = $argv[4 + $run_process_offset];
+		$_REQUEST['passcode'] = $argv[$layer_name_off];
 	}
 	
-	if(isset($argv[6 + $run_process_offset])) {      //allow for a staging flag
+	if(isset($argv[$staging_flag_off])) {      //allow for a staging flag
 	    $staging = true;
 	}
 	include_once($start_path . 'config/db_connect.php');	
@@ -114,7 +131,7 @@
  	if($verbose == true) echo json_encode($argv, JSON_PRETTY_PRINT);
 
     
-    if(isset($argv[5 + $run_process_offset])) {
+    if(isset($argv[$layer_name_off])) {
     		$filename = "#image-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
     		$upload_to = $argv[5 + $run_process_offset];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
@@ -135,9 +152,9 @@
     		if($verbose == true) error_log("About to post to the group with success transfer.");
     
     		if($resp == true) {
-			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]";		//TODO: get the latest ID entered here
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . " Error msg: " . $err . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . " Error msg: " . $err . "]";		//TODO: get the latest ID entered here
 				
 			
 			}
