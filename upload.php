@@ -1,6 +1,6 @@
 <?php
 
-	$verbose = true;
+	$verbose = false;
 
   	function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
