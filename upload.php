@@ -46,14 +46,18 @@
  
     
     if(isset($argv[5])) {
+    		$filename = "image";		//TODO: get incoming name
     		$upload_to = $argv[5];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
     		echo "MedImage Server on upload:" . $upload_to . "\n";
     		$url = explode("/", $upload_to);
-    		$domain = $url[2];
+    		$domain = $url[0] . $url[1] . $url[2];
     		$folder = $url[4];
     		echo "Domain: " . $domain . "  Folder: " . $folder . "\n";
+    		$output_post_url = $domain . "/api/photo";
+    		$output_file_name = "#" . $folder . $filename;
+    		echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
     }
     
     sleep(2);		//TODO: actually upload the image to the MedImage Server, this delay is currently simulated
