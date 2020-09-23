@@ -44,7 +44,7 @@
 
 		echo $post_data . "\n";
 		
-		return "";		//TEMPIN TESTING
+		//return "";		//TEMPIN TESTING
 		
 		curl_setopt_array($curl, array(
 		  CURLOPT_URL => $url,
