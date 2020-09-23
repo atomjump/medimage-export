@@ -61,6 +61,8 @@
 							//Check if we already have an ID, and if not send a message to say we have sent the image as 'image', but you 
 							//should set the id with 'id [patientId] [optional description tags]'
 							
+							$medimage_config = $this->get_medimage_config();
+							
 							
 							for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
 								//echo "Matched image raw: " . $matches[1][$cnt] . "\n";
@@ -70,7 +72,7 @@
 								$image_hi_name = $between_slashes[$len] . "_HI.jpg";
 								//echo "Image name: " . $image_name . "\n";
 					
-					
+								$image_folder = $medimage_config['serverPath'];
 								//TODO: Send this image to the MedImage Server
 								//send_image($image_name, $image_folder, $preview);
 								//send_image($image_hi_name, $image_folder, $preview);
@@ -85,7 +87,7 @@
 				   			
 				   			
 				   			 	//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
-				   				$medimage_config = $this->get_medimage_config();
+				   				
 				   			
 				   				//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
             					$layer_name = "";
