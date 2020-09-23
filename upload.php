@@ -52,7 +52,7 @@
     		error_log("MedImage Server on upload:" . $upload_to);
     		echo "MedImage Server on upload:" . $upload_to . "\n";
     		$url = explode("/", $upload_to);
-    		$domain = $url[0] . $url[1] . $url[2];
+    		$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
     		$folder = $url[4];
     		echo "Domain: " . $domain . "  Folder: " . $folder . "\n";
     		$output_post_url = $domain . "/api/photo";
