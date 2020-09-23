@@ -15,7 +15,7 @@
     function post_data($url, $local_file_path, $filename) {
 		//See https://gist.github.com/maxivak/18fcac476a2f4ea02e5f80b303811d5f
 		// data fields for POST request
-		$fields = array("file"=>"file1", "another_field2"=>"anothervalue");
+		$fields = array("file"=>$filename);		//"file1"
 
 		// files to upload
 		$filenames = array($local_file_path);
@@ -71,6 +71,7 @@
 		
 		//echo "error";
 		//var_dump($err);
+		error_log($err);
 		curl_close($curl);
 		return $err;
 	}
@@ -164,7 +165,7 @@
     		if($verbose == true) error_log("About to post to the group with success transfer.");
     
 			//TODO: After a successful receipt event
-			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . " RESP: " . $resp .  "]";		//TODO: get the latest ID entered here
+			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
 			 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 			 $sender_name_str = "MedImage";
 			 $sender_email = "info@medimage.co.nz";
