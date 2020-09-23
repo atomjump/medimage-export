@@ -67,6 +67,9 @@
     
  		return $success;
  	}
+ 	
+ 	echo "In here";				//TESTING
+ 	error_log("In here");		//TESTING
         
 	 if(!isset($medimage_config)) {
 		  //Get global plugin config - but only once
