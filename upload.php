@@ -12,7 +12,7 @@
     }
     
     
-    function post_data($target, $local_file_path, $filename) {
+    function post_data($target, $local_file_path, $filename, $verbose) {
 		$success = false;
 		$error_message = "";
 		
@@ -146,7 +146,7 @@
     		//echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
     		$local_file_path = $start_path . "images/im/" . $argv[1];		//ARgv1 is the actual local filename 
     		//echo "Local file path:" . $local_file_path . "\n";
-    		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name);
+    		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
     		
     		
     		
