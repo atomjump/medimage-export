@@ -43,7 +43,7 @@
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 
 		$response = curl_exec($ch);
-
+		echo $response;
 		
 		if(!curl_errno($ch))
 		{
