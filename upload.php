@@ -1,6 +1,6 @@
 <?php
 
-	$verbose = false;
+	$verbose = true;
 
   	function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
@@ -93,6 +93,7 @@
 
 
 	$run_process_offset =0;			//Should be 1 during a live process, but 2 during testing on the command line
+	if($verbose == true) echo $argv[4 + $run_process_offset];
 
 	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
 	$notify = false;
@@ -112,7 +113,7 @@
     $api = new cls_plugin_api();
 
  
-    echo $argv[5 + $run_process_offset];
+    
     if(isset($argv[5 + $run_process_offset])) {
     		$filename = "#image-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
     		$upload_to = $argv[5 + $run_process_offset];
