@@ -68,8 +68,8 @@
  		return $success;
  	}
  	
- 	$debug_msg = "In here " . json_encode($argv);//add_trailing_slash_local(__DIR__) . "
- 	file_put_contents("/var/www/html/atomjump_staging/api/plugins/medimage_export/temp/debug.txt", $debug_msg);
+ 	#$debug_msg = "In here " . json_encode($argv);//add_trailing_slash_local(__DIR__) . "
+ 	#file_put_contents("/var/www/html/atomjump_staging/api/plugins/medimage_export/temp/debug.txt", $debug_msg);
         
 	 if(!isset($medimage_config)) {
 		  //Get global plugin config - but only once
