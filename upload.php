@@ -104,7 +104,7 @@
  
     
     if(isset($argv[5])) {
-    		$filename = "#image-mydate.jpg";		//TODO: get incoming name from db query
+    		$filename = "#image-" . date("Y-m-d-h-i-s") . ".jpg";		//TODO: get incoming name from db query
     		$upload_to = $argv[5];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		error_log("MedImage Server on upload:" . $upload_to);
