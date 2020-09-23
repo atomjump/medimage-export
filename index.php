@@ -158,11 +158,11 @@
 				   	$paired = file_get_contents($pairing_string);		//TODO could implement POST here for security + timeouts
 				   	
 				   	if($paired && trim($paired) !== "nomatch") {
-					  		$new_message = "You have successfully paired with your MedImage Server! [TESTING: " . $paired . " TODO complete] To unpair, enter 'unpair'.";
+					  		$new_message = "You have successfully paired with your MedImage Server! To unpair, enter 'unpair'. Now enter a patient ID with e.g. 'id NHI1234 tags' before sending a photo.";
 					  		setcookie("medimage-server", trim($paired));   	
 					   
 					   } else {
-					   	$new_message = "Sorry, that was an invalid code. Please try again. [TESTING: " . $pairing_string . " TODO complete] To unpair, enter 'unpair'.";
+					   	$new_message = "Sorry, that was an invalid pairing code. Please try again.";
 					   }
 					   
 				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
