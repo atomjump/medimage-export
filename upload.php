@@ -129,11 +129,11 @@
     $api = new cls_plugin_api();
 
  	if($verbose == true) echo json_encode($argv, JSON_PRETTY_PRINT);
-
+	if($verbose == true) echo "Uploading to: " . $argv[$upload_to_off];
     
-    if(isset($argv[$layer_name_off])) {
+    if(isset($argv[$upload_to_off])) {
     		$filename = "#image-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
-    		$upload_to = $argv[5 + $run_process_offset];
+    		$upload_to = $argv[$upload_to_off];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
     		//echo "MedImage Server on upload:" . $upload_to . "\n";
