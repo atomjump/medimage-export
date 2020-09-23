@@ -28,7 +28,7 @@
 			#$cfile = new CURLFile('resource/test.png','image/png','testpic'); // uncomment and use if the upper procedural method is not working.
 
 			// Assign POST data
-			$imgdata = array('myimage' => $cfile);
+			$imgdata = array('file1' => $cfile);		//('myimage' => $cfile)
 
 
 			$curl = curl_init();
