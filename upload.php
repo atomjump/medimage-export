@@ -14,6 +14,7 @@
     
     function post_data($target, $local_file_path, $filename) {
 		$success = false;
+		$error_message = "";
 		
 		//Copy a temporary cache into our current folder, and rename it.
 		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
@@ -65,7 +66,7 @@
 		}
     
     
- 		return $success;
+ 		return ($success, $error_message);
  	}
  	
  	#$debug_msg = "In here " . json_encode($argv);//add_trailing_slash_local(__DIR__) . "
@@ -127,7 +128,7 @@
     		//echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
     		$local_file_path = $start_path . "images/im/" . $argv[1];		//ARgv1 is the actual local filename 
     		//echo "Local file path:" . $local_file_path . "\n";
-    		$resp = post_data($output_post_url, $local_file_path,  $output_file_name);
+    		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name);
     		
     		
     		if($verbose == true) error_log("About to post to the group with success transfer.");
@@ -135,7 +136,7 @@
     		if($resp == true) {
 			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . "]";		//TODO: get the latest ID entered here
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . " Error msg: " . $err . "]";		//TODO: get the latest ID entered here
 				
 			
 			}
