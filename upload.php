@@ -91,7 +91,7 @@
 	 }    
 
 
-	$run_process_offset = 2;
+	$run_process_offset = 1;
 
 	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
 	$notify = false;
@@ -133,9 +133,9 @@
     		if($verbose == true) error_log("About to post to the group with success transfer.");
     
     		if($resp == true) {
-			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . "]";		//TODO: get the latest ID entered here
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1] . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[1 + $run_process_offset] . "]";		//TODO: get the latest ID entered here
 				
 			
 			}
