@@ -42,7 +42,7 @@
 
 		$post_data = build_data_files($boundary, $fields, $files);
 
-		echo $post_data . "\n";
+		//echo $post_data . "\n";
 		
 		//return "";		//TEMPIN TESTING
 		
