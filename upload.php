@@ -26,10 +26,6 @@
 		// Assign POST data
 		$imgdata = array('myimage' => $cfile);
 
-	
-		print_r($cfile);		//TESTING
-		exit(0);					//TESTING
-
 
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $target);
