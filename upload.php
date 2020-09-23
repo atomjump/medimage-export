@@ -28,13 +28,15 @@
 		  } else {
 			$file = '@' . realpath($file);
 		  }
-		  $postfields["file_$index"] = $file;
+		  $postfields["file$index"] = $file;		//$postfields["file_$index"] = $file;
 		}
 
 		// Add other post data as well.
 		$postfields['name'] = 'file1';		//Name?
 		// Need to set this head for uploading file.
 		$headers = array("Content-Type" => "multipart/form-data");
+
+		echo $postfields;		//TESTING
 
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
