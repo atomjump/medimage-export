@@ -15,10 +15,14 @@
     function post_data($target, $local_file_path, $filename) {
 		$success = false;
 		
+		//Copy a temporary cache into our current folder, and rename it.
+		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
+		if(copy($local_file_path, $temp_filename)) {
+		
 		# http://php.net/manual/en/curlfile.construct.php
 
 		// Create a CURLFile object / procedural method
-		$cfile = curl_file_create($local_file_path,'image/jpeg',$filename);		//Examples: 'resource/test.png','image/png','testpic'); // try adding
+		$cfile = curl_file_create($temp_filename,'image/jpeg',$filename);		//Examples: 'resource/test.png','image/png','testpic'); // try adding
 
 		// Create a CURLFile object / oop method
 		#$cfile = new CURLFile('resource/test.png','image/png','testpic'); // uncomment and use if the upper procedural method is not working.
