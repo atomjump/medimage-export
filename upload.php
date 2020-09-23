@@ -19,46 +19,50 @@
 		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
 		if(copy($local_file_path, $temp_filename)) {
 		
-		# http://php.net/manual/en/curlfile.construct.php
+			# http://php.net/manual/en/curlfile.construct.php
 
-		// Create a CURLFile object / procedural method
-		$cfile = curl_file_create($temp_filename,'image/jpeg',$filename);		//Examples: 'resource/test.png','image/png','testpic'); // try adding
+			// Create a CURLFile object / procedural method
+			$cfile = curl_file_create($temp_filename,'image/jpeg',$filename);		//Examples: 'resource/test.png','image/png','testpic'); // try adding
 
-		// Create a CURLFile object / oop method
-		#$cfile = new CURLFile('resource/test.png','image/png','testpic'); // uncomment and use if the upper procedural method is not working.
+			// Create a CURLFile object / oop method
+			#$cfile = new CURLFile('resource/test.png','image/png','testpic'); // uncomment and use if the upper procedural method is not working.
 
-		// Assign POST data
-		$imgdata = array('myimage' => $cfile);
+			// Assign POST data
+			$imgdata = array('myimage' => $cfile);
 
 
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, $target);
-		curl_setopt($curl, CURLOPT_USERAGENT,'Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.15');
-		curl_setopt($curl, CURLOPT_HTTPHEADER,array('User-Agent: Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.15','Referer: http://medimage.co.nz','Content-Type: multipart/form-data'));
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // stop verifying certificate
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_POST, true); // enable posting
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $imgdata); // post images
-		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); // if any redirection after upload
-		$response = curl_exec($curl);
-		echo $response;
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, $target);
+			curl_setopt($curl, CURLOPT_USERAGENT,'Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.15');
+			curl_setopt($curl, CURLOPT_HTTPHEADER,array('User-Agent: Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.15','Referer: http://medimage.co.nz','Content-Type: multipart/form-data'));
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // stop verifying certificate
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_POST, true); // enable posting
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $imgdata); // post images
+			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); // if any redirection after upload
+			$response = curl_exec($curl);
+			echo $response;
 		
-		if(!curl_errno($curl))
-		{
-			$info = curl_getinfo($curl);
-			if ($info['http_code'] == 200) {
-			  // Files uploaded successfully.
-			  $success = true;
+			if(!curl_errno($curl))
+			{
+				$info = curl_getinfo($curl);
+				if ($info['http_code'] == 200) {
+				  // Files uploaded successfully.
+				  $success = true;
+				}
 			}
+			else
+			{
+			  // Error happened
+			  $error_message = curl_error($curl);
+			  error_log($error_message);
+			  print_r($error_message);
+			}
+			curl_close($curl);
+			
+			//Delete the temporary file
+			unlink($temp_filename);
 		}
-		else
-		{
-		  // Error happened
-		  $error_message = curl_error($curl);
-		  error_log($error_message);
-		  print_r($error_message);
-		}
-		curl_close($curl);
     
     
  		return $success;
