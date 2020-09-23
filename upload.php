@@ -15,17 +15,19 @@
     function post_data($url, $local_file_path, $filename) {
 		//See https://gist.github.com/maxivak/18fcac476a2f4ea02e5f80b303811d5f
 		// data fields for POST request
-		$fields = array("file"=>$filename);		//"file1"
+		$fields = array("file"=>"file1");		//"file1"
 
 		// files to upload
 		$filenames = array($local_file_path);
 
 		$files = array();
-		foreach ($filenames as $f){
+		
+		$files[$filename] = file_get_contents($filenames[0]);
+		/*foreach ($filenames as $f){
 		   $files[$f] = file_get_contents($f);
 		   
 		   echo "Filesize: " . filesize($f);
-		}
+		}*/
 		
 		
 
