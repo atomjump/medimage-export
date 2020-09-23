@@ -104,7 +104,7 @@
 			"staging"
 		]
 	*/
-	$run_process_offset = 1;			//Should be 1 during a live process, but 0 during testing on the command line.
+	$run_process_offset = 2;			//Should be 1 during a live process, but 0 during testing on the command line.
 	$layer_name_off = 5 + $run_process_offset;
 	$staging_flag_off = 7 + $run_process_offset;
 	$upload_to_off = 6 + $run_process_offset;
