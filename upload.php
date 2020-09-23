@@ -66,7 +66,7 @@
 		}
     
     
- 		return ($success, $error_message);
+ 		return array($success, $error_message);
  	}
  	
  	#$debug_msg = "In here " . json_encode($argv);//add_trailing_slash_local(__DIR__) . "
