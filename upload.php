@@ -12,44 +12,40 @@
     }
     
     
-    function post_data($url, $local_file_path, $filename) {
+    function post_data($target, $local_file_path, $filename) {
 		$success = false;
 		
-		// Puts files to be uploaded in this array
-		$files = array(
-		  $local_file_path
-		);
+		# http://php.net/manual/en/curlfile.construct.php
 
-		$postfields = array();
+		// Create a CURLFile object / procedural method
+		$cfile = curl_file_create($local_file_path,'image/jpeg',$filename);		//Examples: 'resource/test.png','image/png','testpic'); // try adding
 
-		foreach ($files as $index => $file) {
-		  if (function_exists('curl_file_create')) { // For PHP 5.5+
-			$file = curl_file_create($file);
-		  } else {
-			$file = '@' . realpath($file);
-		  }
-		  $postfields["file$index"] = $file;		//$postfields["file_$index"] = $file;
-		}
+		// Create a CURLFile object / oop method
+		#$cfile = new CURLFile('resource/test.png','image/png','testpic'); // uncomment and use if the upper procedural method is not working.
 
-		// Add other post data as well.
-		$postfields['name'] = 'file1';		//Name?
-		// Need to set this head for uploading file.
-		$headers = array("Content-Type" => "multipart/form-data");
+		// Assign POST data
+		$imgdata = array('myimage' => $cfile);
 
-		print_r($postfields);		//TESTING
+	
+		print_r($cfile);		//TESTING
+		exit(0);					//TESTING
 
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postfields);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 
-		$response = curl_exec($ch);
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $target);
+		curl_setopt($curl, CURLOPT_USERAGENT,'Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.15');
+		curl_setopt($curl, CURLOPT_HTTPHEADER,array('User-Agent: Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.15','Referer: http://medimage.co.nz','Content-Type: multipart/form-data'));
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // stop verifying certificate
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_POST, true); // enable posting
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $imgdata); // post images
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); // if any redirection after upload
+		$response = curl_exec($curl);
 		echo $response;
 		
-		if(!curl_errno($ch))
+		if(!curl_errno($curl))
 		{
-			$info = curl_getinfo($ch);
+			$info = curl_getinfo($curl);
 			if ($info['http_code'] == 200) {
 			  // Files uploaded successfully.
 			  $success = true;
@@ -58,11 +54,11 @@
 		else
 		{
 		  // Error happened
-		  $error_message = curl_error($ch);
+		  $error_message = curl_error($curl);
 		  error_log($error_message);
 		  print_r($error_message);
 		}
-		curl_close($ch);
+		curl_close($curl);
     
     
  		return $success;
