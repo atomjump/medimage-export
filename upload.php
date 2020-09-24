@@ -13,14 +13,8 @@
     
     
     function post_data($target, $local_file_path, $filename, $verbose) {
-		$success = false;
-		$error_message = "";
-		
-		//Copy a temporary cache into our current folder, and rename it.
-		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
-		
-		
-		    			 //Debug in here   
+    
+    		    			 //Debug in here   
 	sleep(2);
 	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING tempfile:" . $temp_filename . "]"; 
      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
@@ -33,6 +27,15 @@
 	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
    	 exit(0);
     //To here
+    
+		$success = false;
+		$error_message = "";
+		
+		//Copy a temporary cache into our current folder, and rename it.
+		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
+		
+		
+
 		
 		
 		if(copy($local_file_path, $temp_filename)) {
