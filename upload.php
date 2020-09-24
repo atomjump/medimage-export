@@ -136,6 +136,8 @@
  	if($verbose == true) error_log(json_encode($argv, JSON_PRETTY_PRINT));
 	if($verbose == true) error_log("Uploading to: " . $argv[$upload_to_off]);
     
+    sleep(2);
+    
 	 //Debug in here   
 	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]"; 
      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
