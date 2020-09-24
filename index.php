@@ -113,7 +113,7 @@
 								}
 								if($verbose == true) error_log($command);
 								$api->parallel_system_call($command, "linux");
-				   			
+				   				$api->complete_parallel_calls();			//Not sure about this in here. TESTING
 				   			
 								
 							}
