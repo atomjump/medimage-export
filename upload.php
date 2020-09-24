@@ -28,6 +28,8 @@
 		
 		if(copy($local_file_path, $temp_filename)) {
 		
+			
+		
 			# http://php.net/manual/en/curlfile.construct.php
 
 			// Create a CURLFile object / procedural method
@@ -63,7 +65,7 @@
 		//Debug in here >>>>>>>>>>>>>.
 	$api = new cls_plugin_api();
 	sleep(2);
-	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING curl response: " . $info['http_code'] . "]"; 
+	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING info: " . $info['http_code'] . "]"; 
      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 	 $sender_name_str = "MedImage";
 	 $sender_email = "info@medimage.co.nz";
@@ -109,6 +111,9 @@
 			
 			//Delete the temporary file
 			unlink($temp_filename);
+		} else {
+			$error_message = "Temporary file not copied successfully";
+			
 		}
 		
 	//Debug in here >>>>>>>>>>>>>.
