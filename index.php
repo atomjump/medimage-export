@@ -75,8 +75,7 @@
             global $cnf;
             $api = new cls_plugin_api();
             
-            return true;		//TEMPORARY take out          
-  			
+            
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
@@ -148,7 +147,10 @@
 									$command = $command . " staging";   //Ensure this works on a staging server  
 								}
 								if($this->verbose == true) error_log($command);
-								$api->parallel_system_call($command, "linux");
+								
+								return true;
+								//TEMPOUT TESTING$api->parallel_system_call($command, "linux");
+								
 												
 							
 							}
@@ -196,12 +198,12 @@
 				   	//https://medimage-pair.atomjump.com/med-genid.php?compare=
 				   	$ids = explode(" ", $actual_message[1]);
 				   	$id = str_replace("\\r","", $ids[1]);
-				      $id = str_replace("\\n","", $id);
-				      $id = preg_replace('/\s+/', ' ', trim($id));
+				    $id = str_replace("\\n","", $id);
+				    $id = preg_replace('/\s+/', ' ', trim($id));
 				   	$pairing_string = "https://medimage-pair.atomjump.com/med-genid.php?compare=" . $id;
 				   	$paired = file_get_contents($pairing_string);		//TODO could implement POST here for security + timeouts
 				   	
-				   	if($paired && trim($paired) !== "nomatch") {
+				   	if($paired && (trim($paired) !== "nomatch")) {
 					  		$new_message = "You have successfully paired with your MedImage Server! To unpair, enter 'unpair'. Now enter a patient ID with e.g. 'id NHI1234 tags' before sending a photo.";
 					  		setcookie("medimage-server", trim($paired));   	
 					   
@@ -214,7 +216,7 @@
 				      $sender_email = "info@medimage.co.nz";
 				      $sender_ip = "111.111.111.111";
 				      $options = array('notification' => false, 'allow_plugins' => false);
-				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);			
+				   	  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);			
 				   		
 				   		
 				   }
@@ -227,8 +229,8 @@
 				      $sender_email = "info@medimage.co.nz";
 				      $sender_ip = "111.111.111.111";
 				      $options = array('notification' => false, 'allow_plugins' => false);
-				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);					
-				   	setcookie("medimage-server", "", time()-3600);	
+				   	  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);					
+				   	  setcookie("medimage-server", "", time()-3600);	
 				   }
 				   
 				}
