@@ -177,8 +177,7 @@
 				      $id = str_replace("\\n","", $id);
 				      $id = preg_replace('/\s+/', ' ', trim($id));
 				      
-				      //TODO: Set a cookie with this current ID? (Or we can check via the database in future images sent).
-				      
+				    			      
 				      $new_message = "Switched MedImage patient to ID: '" . $id . "'";
 				      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
 				      $sender_name_str = "MedImage";
