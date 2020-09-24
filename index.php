@@ -52,10 +52,7 @@
         	echo "Updating user table. SQL:" . $sql . "\n";
 			$result = $api->db_select($sql);
 			
-			if($result[0]) {
-			}
-			
-			
+						
 			$row = $api->db_fetch_array($result);
 			if($row) {
 				$message = $row['var_shouted'];
