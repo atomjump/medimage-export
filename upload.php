@@ -175,6 +175,10 @@
     		
     		if($resp == true) {
 			 $new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
+			 
+			 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
+			 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
+			 
 			} else {
 			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image'.  Error msg: " . $err . "]";		//TODO: get the latest ID entered here
 					
