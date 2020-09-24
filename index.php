@@ -106,6 +106,8 @@
 								$append_message = "";
 							}
 							
+							$tags = str_replace(" ", "-", $id_text);
+							
 							
 							$medimage_config = $this->get_medimage_config();
 						
@@ -141,7 +143,7 @@
 									$layer_name = $_REQUEST['uniqueFeedbackId'];
 								}
 						
-								$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'];
+								$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'] . " " . $tags;
 								global $staging;
 								if($staging == true) {
 									$command = $command . " staging";   //Ensure this works on a staging server  

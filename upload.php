@@ -120,6 +120,7 @@
 	$forum_id_off = $message_id_off + 1;
 	$layer_name_off = $forum_id_off + 1;
 	$upload_to_off = $layer_name_off + 1;
+	$tags_off = $upload_to_off + 1;
 	$staging_flag_off = $upload_to_off + 1;
 	
 	
@@ -156,7 +157,7 @@
     
     
     if(isset($argv[$upload_to_off])) {
-    		$filename = "#image-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
+    		$filename = "#" . $argv[$tags_off] . "-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
     		$upload_to = $argv[$upload_to_off];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
