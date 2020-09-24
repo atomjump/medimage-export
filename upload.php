@@ -1,5 +1,7 @@
 <?php
 
+	//This script should not have any output, or expect any output in the final version.
+	//It is run via index.php > run-process.php
 	$verbose = false;
 
   	function trim_trailing_slash_local($str) {
@@ -52,11 +54,6 @@
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $imgdata); // post images
 			curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); // if any redirection after upload
 			$response = curl_exec($curl);
-			//echo $response;
-			
-			
-			
-	
 			
 		
 			if(!curl_errno($curl))
@@ -87,11 +84,6 @@
  		return array($success, $error_message);
  	}
  	
- 	
- 	
- 	
- 	#$debug_msg = "In here " . json_encode($argv);//add_trailing_slash_local(__DIR__) . "
- 	#file_put_contents("/var/www/html/atomjump_staging/api/plugins/medimage_export/temp/debug.txt", $debug_msg);
         
 	 if(!isset($medimage_config)) {
 		  //Get global plugin config - but only once
@@ -101,19 +93,17 @@
 			   if(!isset($medimage_config)) {
 				   $msg = "Error: MedImage config/config.json is not valid JSON.";
 				   if($verbose == true) error_log($msg);
-				   //echo $msg;
 				   exit(0);
 			   }
 		  } else {
 				$msg = "Error: MedImage config/config.json in medimage_export plugin.";
 				if($verbose == true) error_log($msg);
-			   //echo $msg;
 			   exit(0);
 		  }
 	 }    
 
 
-	/* Command line inputs:   0 1 2 3 4 , and 4 becomes argv[3]
+	/* Command line inputs:   
 		E.g. [
 			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/upload.php",
 			"\/var\/www\/html\/atomjump_staging\/api\/images\/im\/",
@@ -125,13 +115,12 @@
 			"staging"
 		]
 	*/
-	$run_process_offset = 0;			//Should be 0 during a live process
-	$filename_off = 2 + $run_process_offset;
-	$message_id_off = 3 + $run_process_offset;
-	$forum_id_off = 4 + $run_process_offset;
-	$layer_name_off = 5 + $run_process_offset;
-	$upload_to_off = 6 + $run_process_offset;
-	$staging_flag_off = 7 + $run_process_offset;
+	$filename_off = 2;
+	$message_id_off = $filename_off + 1;
+	$forum_id_off = $message_id_off + 1;
+	$layer_name_off = $forum_id_off + 1;
+	$upload_to_off = $layer_name_off + 1;
+	$staging_flag_off = $upload_to_off + 1;
 	
 	
 	
@@ -175,26 +164,19 @@
     		$url = explode("/", $upload_to);
     		$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
     		$folder = $url[4];
-    		//echo "Domain: " . $domain . "  Folder: " . $folder . "\n";
     		$output_post_url = $domain . "/api/photo";
     		$output_file_name = "#" . $folder . "-" . $filename;
-    		//echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
     		$local_file_path = $start_path . "images/im/" . $argv[$filename_off];		//the actual local filename 
-    		//echo "Local file path:" . $local_file_path . "\n";
-    		
-    		
-
-    		
-    		
+		
     		
     		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
     		
     		
     		
     		if($resp == true) {
-			 $new_message = "Successfully sent the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . " Error msg: " . $err . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image'.  Error msg: " . $err . "]";		//TODO: get the latest ID entered here
 					
 			}
 			
