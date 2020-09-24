@@ -69,6 +69,9 @@
  		return array($success, $error_message);
  	}
  	
+ 	
+ 	
+ 	
  	#$debug_msg = "In here " . json_encode($argv);//add_trailing_slash_local(__DIR__) . "
  	#file_put_contents("/var/www/html/atomjump_staging/api/plugins/medimage_export/temp/debug.txt", $debug_msg);
         
@@ -104,7 +107,7 @@
 			"staging"
 		]
 	*/
-	$run_process_offset = -1;			//Should be -1 during a live process, but 0 during testing on the command line.
+	$run_process_offset = 0;			//Should be -1 during a live process, but 0 during testing on the command line.
 	$layer_name_off = 5 + $run_process_offset;
 	$staging_flag_off = 7 + $run_process_offset;
 	$upload_to_off = 6 + $run_process_offset;
@@ -132,6 +135,21 @@
 
  	if($verbose == true) error_log(json_encode($argv, JSON_PRETTY_PRINT));
 	if($verbose == true) error_log("Uploading to: " . $argv[$upload_to_off]);
+    
+	 //Debug in here   
+	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . " Error msg: " . $err . "]"; 
+     $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+	 $sender_name_str = "MedImage";
+	 $sender_email = "info@medimage.co.nz";
+	 $sender_ip = "111.111.111.111";
+	 $options = array('allow_plugins' => false);
+	 $message_forum_id = $argv[$forum_id_off];
+	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
+	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+   	 exit(0);
+    //To here
+    
+   
     
     
     
