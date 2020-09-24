@@ -16,7 +16,7 @@
     
     		    			 //Debug in here   
 	sleep(2);
-	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING tempfile:" . $temp_filename . "]"; 
+	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING tempfile]"; 
      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
 	 $sender_name_str = "MedImage";
 	 $sender_email = "info@medimage.co.nz";
