@@ -39,14 +39,33 @@
         }
         
         
+        
+
+        
         private function get_current_id($message_forum_id)
         {
-        	//TODO: this query will find the latest. May need some refinements.
+        	//This query will find the latest on this forum. May need some refinements e.g. around user id
         	//With var_shouted example value:
         	//MedImage: Switched MedImage patient to ID: 'nhi123 arm'
-        	$sql = "select * from tbl_ssshout where int_layer_id = " . $message_forum_id . " AND var_shouted like 'MedImage: Switched%' order by int_ssshout_id desc limit 3";
-        	
-        	//TODO: need to extract the id value from this string.
+        	$sql = "SELECT * from tbl_ssshout where int_layer_id = " . $message_forum_id . " AND var_shouted like 'MedImage: Switched%' order by int_ssshout_id desc limit 1";
+        	echo "Updating user table. SQL:" . $sql . "\n";
+			$result = $api->db_select($sql);
+			
+			if($result[0]) {
+			}
+			
+			
+			$row = $api->db_fetch_array($result);
+			if($row) {
+				$message = $row['var_shouted'];
+				$between = explode("'", $message);
+				if($between[1]) {
+					return $between[1];
+				
+				}
+			}
+			
+        	return false;
         
         }
         
@@ -59,9 +78,6 @@
             $api = new cls_plugin_api();
                       
   
-  
-            
-            //TODO: notify if there is no id when a photo is detected.
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
@@ -82,40 +98,49 @@
 						
 							//Check if we already have an ID, and if not send a message to say we have sent the image as 'image', but you 
 							//should set the id with 'id [patientId] [optional description tags]'
+							$id_text = $this->get_current_id($message_forum_id);
+							if(!$id_text) {
+								$id_text = "image";
+								$append_message = " Note: you can name your photo by entering e.g. 'id nhi1234 arm'";
+							} else {
+								$append_message = "";
+							}
+							
 							
 							$medimage_config = $this->get_medimage_config();
-							
-							
+						
+						
+						
 							for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
 								$between_slashes = explode( "/", $matches[1][$cnt]);
 								$len = count($between_slashes) - 1;
 								$image_name = $between_slashes[$len] . ".jpg";
 								$image_hi_name = $between_slashes[$len] . "_HI.jpg";
-					
+				
 								$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
-																
-								$new_message = "Sending photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
+															
+								$new_message = "Sending photo to the MedImage Server: '" .  $id_text ."'" . $append_message;		
 								$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 								$sender_name_str = "MedImage";
 								$sender_email = "info@medimage.co.nz";
 								$sender_ip = "111.111.111.111";
 								$options = array('notification' => false, 'allow_plugins' => false);
 								$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
-				   			
-				   			
-				   			 	//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
-				   				
-				   			
-				   				//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
-            					$layer_name = "";
+						
+						
+								//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
+							
+						
+								//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
+								$layer_name = "";
 								if(isset($_REQUEST['passcode'])) {
 									$layer_name = $_REQUEST['passcode'];			
 								}
-		
+	
 								if(isset($_REQUEST['uniqueFeedbackId'])) {
 									$layer_name = $_REQUEST['uniqueFeedbackId'];
 								}
-				   			
+						
 								$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'];
 								global $staging;
 								if($staging == true) {
@@ -123,9 +148,10 @@
 								}
 								if($verbose == true) error_log($command);
 								$api->parallel_system_call($command, "linux");
-				   						   			
-								
+												
+							
 							}
+							
 						} else {
 							//Sorry, no medimage server detected. Give the option via a return private message, and syntax for setting the MedImage Server, with 'pair aBc1' or 'pr aBc1'
 							 $new_message = "You have uploaded a photo to the group, but you haven't paired with your MedImage desktop yet. Click one of the large pairing buttons on the MedImage desktop, and then type 'pair [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you. http://medimage.co.nz/how-to/#pair";
