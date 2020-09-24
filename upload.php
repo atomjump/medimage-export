@@ -92,7 +92,7 @@
 	 }    
 
 
-	/* Command line inputs:
+	/* Command line inputs:   0 1 2 3 4 , and 4 becomes argv[3]
 		E.g. [
 			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/upload.php",
 			"\/var\/www\/html\/atomjump_staging\/api\/images\/im\/",
@@ -104,7 +104,7 @@
 			"staging"
 		]
 	*/
-	$run_process_offset = 0;			//Should be 1 during a live process, but 0 during testing on the command line.
+	$run_process_offset = -1;			//Should be 1 during a live process, but 0 during testing on the command line.
 	$layer_name_off = 5 + $run_process_offset;
 	$staging_flag_off = 7 + $run_process_offset;
 	$upload_to_off = 6 + $run_process_offset;
