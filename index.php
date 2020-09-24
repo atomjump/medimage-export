@@ -74,8 +74,9 @@
         {
             global $cnf;
             $api = new cls_plugin_api();
-                      
-  
+            
+            return true;		//TEMPORARY take out          
+  			
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
