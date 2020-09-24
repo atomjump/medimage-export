@@ -18,6 +18,23 @@
 		
 		//Copy a temporary cache into our current folder, and rename it.
 		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
+		
+		
+		    			 //Debug in here   
+	sleep(2);
+	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING tempfile:" . $temp_filename . "]"; 
+     $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+	 $sender_name_str = "MedImage";
+	 $sender_email = "info@medimage.co.nz";
+	 $sender_ip = "111.111.111.111";
+	 $options = array('allow_plugins' => false);
+	 $message_forum_id = $argv[$forum_id_off];
+	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
+	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+   	 exit(0);
+    //To here
+		
+		
 		if(copy($local_file_path, $temp_filename)) {
 		
 			# http://php.net/manual/en/curlfile.construct.php
@@ -165,19 +182,7 @@
     		//echo "Local file path:" . $local_file_path . "\n";
     		
     		
-    			 //Debug in here   
-	sleep(2);
-	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]"; 
-     $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
-	 $sender_name_str = "MedImage";
-	 $sender_email = "info@medimage.co.nz";
-	 $sender_ip = "111.111.111.111";
-	 $options = array('allow_plugins' => false);
-	 $message_forum_id = $argv[$forum_id_off];
-	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
-	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
-   	 exit(0);
-    //To here
+
     		
     		
     		
