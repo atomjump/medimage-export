@@ -127,6 +127,7 @@
 								$options = array('notification' => false, 'allow_plugins' => false);
 								$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 						
+								return true;		//TESTING ONLY!!
 						
 								//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
 							
@@ -148,8 +149,7 @@
 								}
 								if($this->verbose == true) error_log($command);
 								
-								return true;
-								//TEMPOUT TESTING$api->parallel_system_call($command, "linux");
+								$api->parallel_system_call($command, "linux");
 								
 												
 							
