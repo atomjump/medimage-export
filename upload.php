@@ -107,12 +107,16 @@
 			"staging"
 		]
 	*/
-	$run_process_offset = 0;			//Should be -1 during a live process, but 0 during testing on the command line.
-	$layer_name_off = 5 + $run_process_offset;
-	$staging_flag_off = 7 + $run_process_offset;
-	$upload_to_off = 6 + $run_process_offset;
+	$run_process_offset = 0;			//Should be 0 during a live process
 	$filename_off = 2 + $run_process_offset;
+	$message_id_off = 3 + $run_process_offset;
 	$forum_id_off = 4 + $run_process_offset;
+	$layer_name_off = 5 + $run_process_offset;
+	$upload_to_off = 6 + $run_process_offset;
+	$staging_flag_off = 7 + $run_process_offset;
+	
+	
+	
 
 	
 
@@ -136,20 +140,9 @@
  	if($verbose == true) error_log(json_encode($argv, JSON_PRETTY_PRINT));
 	if($verbose == true) error_log("Uploading to: " . $argv[$upload_to_off]);
     
-    sleep(2);
+
     
-	 //Debug in here   
-	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]"; 
-     $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
-	 $sender_name_str = "MedImage";
-	 $sender_email = "info@medimage.co.nz";
-	 $sender_ip = "111.111.111.111";
-	 $options = array('allow_plugins' => false);
-	 $message_forum_id = $argv[$forum_id_off];
-	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
-	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
-   	 exit(0);
-    //To here
+
     
    
     
@@ -170,6 +163,24 @@
     		//echo "POST URL: " . $output_post_url . "  Filename: " . $output_file_name . "\n";
     		$local_file_path = $start_path . "images/im/" . $argv[$filename_off];		//the actual local filename 
     		//echo "Local file path:" . $local_file_path . "\n";
+    		
+    		
+    			 //Debug in here   
+	sleep(2);
+	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING:" . $argv[$filename_off] . "]"; 
+     $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+	 $sender_name_str = "MedImage";
+	 $sender_email = "info@medimage.co.nz";
+	 $sender_ip = "111.111.111.111";
+	 $options = array('allow_plugins' => false);
+	 $message_forum_id = $argv[$forum_id_off];
+	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
+	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+   	 exit(0);
+    //To here
+    		
+    		
+    		
     		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
     		
     		
