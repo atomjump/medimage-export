@@ -81,14 +81,16 @@
             //Check for a pairing with the MedImage Server i.e 'pair aBc1' or 'pr aBc1'
             //TODO: generalise languages here
  
- 				$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
-				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
- 				$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
-				if($this->verbose == true) error_log($preg_search);
-				if($this->verbose == true) error_log($message);
-				preg_match_all($preg_search, $message, $matches);
-				if($this->verbose == true) error_log(json_encode($matches));
-				if(count($matches[0]) > 0) {
+			$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
+			if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
+			$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
+			if($this->verbose == true) error_log($preg_search);
+			if($this->verbose == true) error_log($message);
+			preg_match_all($preg_search, $message, $matches);
+			if($this->verbose == true) error_log(json_encode($matches));
+			
+			
+			if(count($matches[0]) > 0) {
 						//Yes we have at least one image
 						
 						//Check if we have a pairing
@@ -125,10 +127,9 @@
 								$sender_email = "info@medimage.co.nz";
 								$sender_ip = "111.111.111.111";
 								$options = array('notification' => false, 'allow_plugins' => false);
-								$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+								//TEMPORARY TESTING OUT$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 						
-								return true;		//TESTING ONLY!!
-						
+								
 								//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
 							
 						
@@ -165,14 +166,15 @@
 							 $options = array('notification' => false, 'allow_plugins' => false);
 							 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 						}
-				}
+			}
  
  
             $actual_message = explode(": ", $message);			//Remove name of sender         
             if($actual_message[1]) {
             	$uc_message = strtoupper($actual_message[1]);
             	if($this->verbose == true) error_log($uc_message);
-		         if(strpos($uc_message, "ID ") === 0) {
+		         	
+		        if(strpos($uc_message, "ID ") === 0) {
 				      //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 				      //backend MedImage Server
 				      $id = substr($actual_message[1], 3);
@@ -191,7 +193,7 @@
 				   }
 				   
 				   
-				   if((strpos($uc_message, "PAIR ") === 0)||
+				if((strpos($uc_message, "PAIR ") === 0)||
 				   	(strpos($uc_message, "PR ") === 0)) {
 				   	//A pairing request.
 				   	//See: http://medimage.co.nz/building-an-alternative-client-to-medimage/
@@ -203,7 +205,7 @@
 				   	$pairing_string = "https://medimage-pair.atomjump.com/med-genid.php?compare=" . $id;
 				   	$paired = file_get_contents($pairing_string);		//TODO could implement POST here for security + timeouts
 				   	
-				   	if($paired && (trim($paired) !== "nomatch")) {
+				if($paired && (trim($paired) !== "nomatch")) {
 					  		$new_message = "You have successfully paired with your MedImage Server! To unpair, enter 'unpair'. Now enter a patient ID with e.g. 'id NHI1234 tags' before sending a photo.";
 					  		setcookie("medimage-server", trim($paired));   	
 					   
@@ -219,9 +221,9 @@
 				   	  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);			
 				   		
 				   		
-				   }
+				}
 				   
-				    if(strpos($uc_message, "UNPAIR") === 0) {
+				if(strpos($uc_message, "UNPAIR") === 0) {
 				   	//An unpairing request.
 					   $new_message = "You have successfully unpaired with your MedImage Server! [TODO complete]";
 				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
@@ -231,9 +233,9 @@
 				      $options = array('notification' => false, 'allow_plugins' => false);
 				   	  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);					
 				   	  setcookie("medimage-server", "", time()-3600);	
-				   }
-				   
 				}
+				   
+			}
             
             return true;
             
