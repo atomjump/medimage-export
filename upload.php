@@ -69,6 +69,23 @@
 			{
 			  // Error happened
 			  $error_message = curl_error($curl);
+			  
+			  //Debug in here >>>>>>>>>>>>>.
+	$api = new cls_plugin_api();
+	sleep(2);
+	 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image' [TESTING curl response: " . $error_message . "]"; 
+     $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+	 $sender_name_str = "MedImage";
+	 $sender_email = "info@medimage.co.nz";
+	 $sender_ip = "111.111.111.111";
+	 $options = array('allow_plugins' => false);
+	 $message_forum_id = 178;
+	 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
+	 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+   	 exit(0);
+    //To here  <<<<<<<<<<<<
+			  
+			  
 			  if($verbose == true) error_log($error_message);
 			  //print_r($error_message);
 			}
