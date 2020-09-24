@@ -37,8 +37,23 @@
        		
         		return $medimage_config;
         }
+        
+        
+        private function get_current_id($message_forum_id)
+        {
+        	//TODO: this query will find the latest. May need some refinements.
+        	//With var_shouted example value:
+        	//MedImage: Switched MedImage patient to ID: 'nhi123 arm'
+        	$sql = "select * from tbl_ssshout where int_layer_id = " . $message_forum_id . " AND var_shouted like 'MedImage: Switched%' order by int_ssshout_id desc limit 3";
+        	
+        	//TODO: need to extract the id value from this string.
+        
+        }
+        
+        
+        
        
- 		  public function on_message($message_forum_id, $message, $message_id, $sender_id, $recipient_id, $sender_name, $sender_email, $sender_phone)
+ 		public function on_message($message_forum_id, $message, $message_id, $sender_id, $recipient_id, $sender_name, $sender_email, $sender_phone)
         {
             global $cnf;
             $api = new cls_plugin_api();
