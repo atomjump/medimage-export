@@ -157,7 +157,9 @@
     
     
     if(isset($argv[$upload_to_off])) {
-    		$filename = "#" . $argv[$tags_off] . "-" . date("d-m-Y-h-i-s") . ".jpg";		//TODO: get incoming name from db query
+    		$tags = $argv[$tags_off];
+    		$tags_visible = str_replace("-", " ", $tags);
+    		$filename = "#" . $tags . "-" . date("d-m-Y-h-i-s") . ".jpg";
     		$upload_to = $argv[$upload_to_off];
     		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
     		if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
@@ -175,13 +177,13 @@
     		
     		
     		if($resp == true) {
-			 $new_message = "Successfully sent the photo to the MedImage Server: 'image'";		//TODO: get the latest ID entered here
+			 $new_message = "Successfully sent the photo to the MedImage Server: '" . $tags_visible . "'";		
 			 
 			 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
 			 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
 			 
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: 'image'.  Error msg: " . $err . "]";		//TODO: get the latest ID entered here
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err . "]";		
 					
 			}
 			
