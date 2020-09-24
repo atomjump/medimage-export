@@ -84,10 +84,10 @@
  				$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
 				if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
  				$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
-				if($verbose == true) error_log($preg_search);
-				if($verbose == true) error_log($message);
+				if($this->verbose == true) error_log($preg_search);
+				if($this->verbose == true) error_log($message);
 				preg_match_all($preg_search, $message, $matches);
-				if($verbose == true) error_log(json_encode($matches));
+				if($this->verbose == true) error_log(json_encode($matches));
 				if(count($matches[0]) > 0) {
 						//Yes we have at least one image
 						
@@ -146,7 +146,7 @@
 								if($staging == true) {
 									$command = $command . " staging";   //Ensure this works on a staging server  
 								}
-								if($verbose == true) error_log($command);
+								if($this->verbose == true) error_log($command);
 								$api->parallel_system_call($command, "linux");
 												
 							
@@ -168,7 +168,7 @@
             $actual_message = explode(": ", $message);			//Remove name of sender         
             if($actual_message[1]) {
             	$uc_message = strtoupper($actual_message[1]);
-            	if($verbose == true) error_log($uc_message);
+            	if($this->verbose == true) error_log($uc_message);
 		         if(strpos($uc_message, "ID ") === 0) {
 				      //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
 				      //backend MedImage Server
