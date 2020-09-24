@@ -42,11 +42,12 @@
         
 
         
-        private function get_current_id($message_forum_id)
+        private function get_current_id($api, $message_forum_id)
         {
         	//This query will find the latest on this forum. May need some refinements e.g. around user id
         	//With var_shouted example value:
         	//MedImage: Switched MedImage patient to ID: 'nhi123 arm'
+        	
         	$sql = "SELECT * from tbl_ssshout where int_layer_id = " . $message_forum_id . " AND var_shouted like 'MedImage: Switched%' order by int_ssshout_id desc limit 1";
         	echo "Updating user table. SQL:" . $sql . "\n";
 			$result = $api->db_select($sql);
@@ -98,7 +99,7 @@
 						
 							//Check if we already have an ID, and if not send a message to say we have sent the image as 'image', but you 
 							//should set the id with 'id [patientId] [optional description tags]'
-							$id_text = $this->get_current_id($message_forum_id);
+							$id_text = $this->get_current_id($api, $message_forum_id);
 							if(!$id_text) {
 								$id_text = "image";
 								$append_message = " Note: you can name your photo by entering e.g. 'id nhi1234 arm'";
