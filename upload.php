@@ -2,7 +2,24 @@
 
 	//This script should not have any output, or expect any output in the final version.
 	//It is run via index.php > run-process.php
-	$verbose = false;
+	/* Command line inputs:   
+		E.g. [
+			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/upload.php",
+			"\/var\/www\/html\/atomjump_staging\/api\/images\/im\/",
+			"upl415-37673138_HI.jpg",
+			"5299",
+			"178",
+			"test_feedback",
+			"https:\/\/medimage-nz1.atomjump.com\/write\/QY5WZRemkuadCDjY83",
+			"nhi1234-arm",
+			"staging"
+		]
+		
+		/usr/bin/php /var/www/html/atomjump_staging/api/plugins/medimage_export/upload.php /var/www/html/atomjump_staging/api/images/im/ upl415-37673138_HI.jpg 5299 178 test_feedback https://medimage-nz1.atomjump.com/write/QY5WZRemkuadCDjY83 nhi1234-arm staging
+	*/
+	
+	
+	$verbose = true;
 
   	function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
@@ -183,7 +200,7 @@
 			 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
 			 
 			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err . "]";		
+			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
 					
 			}
 			
