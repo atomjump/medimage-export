@@ -23,3 +23,5 @@ We only recommend you install this software for evaluation / interest levels, an
 * See http://medimage.co.nz/building-an-alternative-client-to-medimage/ for notes on MedImage client installation when extending this app.
 
 * More careful checks are required around security of the temp folder, and whether a file can be left in there.
+
+* Because photos can be vertically oriented from this interface, some MedImage add-on tools, such as Wound Mapp, may not handle the orientation correctly, and appear to stretch photos.
