@@ -1,6 +1,6 @@
 # MedImage export capability. Alpha. 
 
-This is an alternative interface to the MedImage app, which allows you to take a photo, or select a photo, and have it sent through to a medical desktop system via the MedImage Server. It uses a textual chatbot-style interface inside AtomJump Messenger.
+This is an alternative interface to the MedImage app, which allows you to take a photo from inside AtomJump Messenger, or select a photo, and have it sent through to a medical desktop system via the MedImage Server. It uses a textual chatbot-style interface.
 
 http://medimage.co.nz
 
@@ -25,3 +25,5 @@ We only recommend you install this software for evaluation / interest levels, an
 * More careful checks are required around security of the temp folder, and whether a file can be left in there.
 
 * Because photos can be vertically oriented from this interface, some MedImage add-on tools, such as Wound Mapp, may not handle the orientation correctly, and appear to stretch photos.
+
+* A group .pdf export, and individual existing photos within the group are yet to be completed.
