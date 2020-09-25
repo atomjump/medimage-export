@@ -108,9 +108,10 @@
 							
 							$tags = str_replace(" ", "-", $id_text);
 							
+							if($this->verbose == true) error_log("Tags:" . $tags);
 							
 							$medimage_config = $this->get_medimage_config();
-						
+							
 						
 						
 							for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
