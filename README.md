@@ -1,9 +1,23 @@
-# MedImage export capability. 
+# MedImage export capability. Alpha. 
 
-This emulates the MedImage app, but through a textual interface.
-
-
-Important install note: you must "sudo chmod 777 temp" the temporary folder /temp/, at present.
+This is an alternative interface to the MedImage app, which allows you to take a photo, or select a photo, and have it sent through to a medical desktop system via the MedImage Server. It uses a textual chatbot-style interface inside AtomJump Messenger.
 
 
-See http://medimage.co.nz/building-an-alternative-client-to-medimage/ for notes on MedImage client installation.
+Important install note: you must "sudo chmod 777 temp" the temporary folder plugins/medimage_export/temp/, at present.
+
+We only recommend you install this software for evaluation / interest levels, and not in a production environment, at this stage. More careful checks are required around security of the 'temp' folder, and whether a file can be left in there under unusual circumstances.
+
+
+# Future work
+
+* The plugin does not currently allow full-size photos (they are around 1200 pixels). You can, however, extend the size of the hi-res photos in your AtomJump Messenger config.json file. In future, we would likely want to run this as a secondary background process.
+
+* Feedback on a successful upload only goes so far as telling you it is on the proxy server, and doesn't tell you if it has reached your target destination. See the upload.php file for further things to do here.
+
+* It probably needs better reminders about changing the patient id when you first come back into the app.
+
+* Multi-language support and a language file.
+
+* See http://medimage.co.nz/building-an-alternative-client-to-medimage/ for notes on MedImage client installation when extending this app.
+
+* More careful checks are required around security of the temp folder, and whether a file can be left in there.
