@@ -98,7 +98,7 @@
 						
 							//Check if we already have an ID, and if not send a message to say we have sent the image as 'image', but you 
 							//should set the id with 'id [patientId] [optional description tags]'
-							$id_text = $this->get_current_id($api, $message_forum_id);
+							$id_text = "image";		//TESTINGOUT $this->get_current_id($api, $message_forum_id);
 							if(!$id_text) {
 								$id_text = "image";
 								$append_message = " Note: you can name your photo by entering e.g. 'id nhi1234 arm'";
@@ -122,7 +122,7 @@
 				
 								$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
 															
-								$new_message = "Sending photo to the MedImage Server: '" .  $id_text ."'" . $append_message;		
+								$new_message = "Sending photo to the MedImage Server: '" . $id_text . "'" . $append_message;		
 								$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 								$sender_name_str = "MedImage";
 								$sender_email = "info@medimage.co.nz";
@@ -144,12 +144,12 @@
 									$layer_name = $_REQUEST['uniqueFeedbackId'];
 								}
 						
-								$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " .$image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'] . " " . $tags;
+								$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'] . " " . $tags;
 								global $staging;
 								if($staging == true) {
 									$command = $command . " staging";   //Ensure this works on a staging server  
 								}
-								if($this->verbose == true) error_log($command);
+								if($this->verbose == true) error_log("Running: " . $command);
 								
 								$api->parallel_system_call($command, "linux");
 								
