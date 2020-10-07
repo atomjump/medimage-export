@@ -36,11 +36,13 @@ sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_exp
 sudo nano /jet/www/default/vendor/atomjump/loop-server/config/config.json
 ```
 
-and enter the entry in the 1st group of two groups.
+and enter the entry in the 1st "plugins" group (of the two plugin groups in the file).
 
 ```
 "plugins" : [
+"emoticons_basic",
 ....
+"emoticons_large",
 "medimage_export"
 ]
 ```
