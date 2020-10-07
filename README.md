@@ -69,3 +69,5 @@ and enter the "medimage_export" entry in the 1st "plugins" group (of the two plu
 * Because photos can be vertically oriented from this interface, some MedImage add-on tools, such as Wound Mapp, may not handle the orientation correctly, and appear to stretch photos.
 
 * A group .pdf export, and individual existing photos within the group are yet to be completed.
+
+* This pairs on an individual browser basis, but we could support a system-wide pairing.
