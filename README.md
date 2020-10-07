@@ -32,6 +32,17 @@ and edit, and then save these using Ctrl-O, and push enter.
 
 ```
 sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp
+
+sudo nano /jet/www/default/vendor/atomjump/loop-server/config/config.json
+```
+
+and enter the entry in the 1st group of two groups.
+
+```
+"plugins" : [
+....
+"medimage_export"
+]
 ```
 
 
