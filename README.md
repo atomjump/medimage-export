@@ -10,6 +10,33 @@ Important install note: you must "sudo chmod 777 temp" the temporary folder plug
 We only recommend you install this software for evaluation / interest levels, and __not in a production environment__, at this stage. More careful checks are required around security of the 'temp' folder, and whether a file can be left in there under unusual circumstances.
 
 
+## Installation with the AtomJump Appliance
+
+See the AtomJump Messaging Appliance at: http://atomjump.org/wp/atomjump-messaging-appliance/
+
+```
+sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
+
+sudo nano /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
+```
+
+and edit, and then save these using Ctrl-O, and push enter.
+
+```
+{
+"serverPath": "/jet/www/default/vendor/atomjump/loop-server/",
+"staging": true,
+"phpPath": "/jet/bin/php"
+}
+```
+
+```
+sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp
+```
+
+
+
+
 ## Future work
 
 * The plugin does not currently allow full-size photos (they are around 1200 pixels). You can, however, extend the size of the hi-res photos in your AtomJump Messenger config.json file. In future, we would likely want to run this as a secondary background process.
