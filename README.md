@@ -14,9 +14,11 @@ We only recommend you install this software for evaluation / interest levels, an
 
 See the AtomJump Messaging Appliance at: http://atomjump.org/wp/atomjump-messaging-appliance/
 
-```
-sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
+From the command-line, after having logged in, enter:
 
+```
+sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
+sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
 sudo nano /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
 ```
 
