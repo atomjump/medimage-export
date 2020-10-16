@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#Run with:
+#eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/medimage_export/master/install)"
