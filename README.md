@@ -17,7 +17,7 @@ See the AtomJump Messaging Appliance at: http://atomjump.org/wp/atomjump-messagi
 From the command-line, after having logged in, enter:
 
 ```
-sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
+eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/medimage_export/master/install)"
 ```
 
 Then, click the following link to run a one-time update of your database:
@@ -26,7 +26,6 @@ Then, click the following link to run a one-time update of your database:
 
 
 ```
-sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
 sudo nano /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
 ```
 
@@ -41,8 +40,6 @@ and edit, and then save these using Ctrl-O, and push enter.
 ```
 
 ```
-sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp
-
 sudo nano /jet/www/default/vendor/atomjump/loop-server/config/config.json
 ```
 
