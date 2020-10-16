@@ -22,7 +22,7 @@ eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.co
 
 Then, click the following link to run a one-time update of your database:
 * http://127.0.0.1:5100/vendor/atomjump/loop-server/update-indexes.php
-* [or using your own IP address at http://myipaddress:5100/vendor/atomjump/loop-server/update-indexes.php]
+* [or using your own IP address at http://__myipaddress__:5100/vendor/atomjump/loop-server/update-indexes.php]
 
 
 ```
