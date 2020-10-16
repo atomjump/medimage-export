@@ -18,6 +18,14 @@ From the command-line, after having logged in, enter:
 
 ```
 sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
+```
+
+Then, click the following link to run a one-time update of your database:
+* http://127.0.0.1:5100/vendor/atomjump/loop-server/update-indexes.php
+* [or using your own IP address at http://myipaddress:5100/vendor/atomjump/loop-server/update-indexes.php]
+
+
+```
 sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
 sudo nano /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
 ```
