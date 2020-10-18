@@ -5,7 +5,7 @@ This is an alternative interface to the MedImage app, which allows you to take a
 http://medimage.co.nz
 
 
-For a simple installation, we recommend using the AtomJump Appliance. See "Installation with the AtomJump Appliance" below. Otherwise, please follow these steps:
+For a simple installation, we recommend using the AtomJump Appliance. See __"Installation with the AtomJump Appliance"__ below. Otherwise, please follow these steps:
 
 1. Get the project into your plugins folder
 
@@ -49,8 +49,6 @@ eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.co
 Then, click the following link to run a one-time update of your database:
 * http://127.0.0.1:5100/vendor/atomjump/loop-server/update-indexes.php
 * [or using your own IP address at http://__myipaddress__:5100/vendor/atomjump/loop-server/update-indexes.php]
-
-
 
 
 
