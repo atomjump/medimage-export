@@ -44,7 +44,7 @@ See the AtomJump Messaging Appliance at: http://atomjump.org/wp/atomjump-messagi
 
 From the command-line, after having logged in, enter:
 
-```eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/medimage_export/master/install)"```
+``eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/medimage_export/master/install)"``
 
 Then, click the following link to run a one-time update of your database:
 * http://127.0.0.1:5100/vendor/atomjump/loop-server/update-indexes.php
