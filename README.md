@@ -25,34 +25,8 @@ Then, click the following link to run a one-time update of your database:
 * [or using your own IP address at http://__myipaddress__:5100/vendor/atomjump/loop-server/update-indexes.php]
 
 
-```
-sudo nano /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
-```
 
-and edit, and then save these using Ctrl-O, and push enter.
 
-```
-{
-"serverPath": "/jet/www/default/vendor/atomjump/loop-server/",
-"staging": true,
-"phpPath": "/jet/bin/php"
-}
-```
-
-```
-sudo nano /jet/www/default/vendor/atomjump/loop-server/config/config.json
-```
-
-and enter the "medimage_export" entry in the 1st "plugins" group (of the two plugin groups in the file).
-
-```
-"plugins" : [
-"emoticons_basic",
-....
-"emoticons_large",
-"medimage_export"
-]
-```
 
 
 

@@ -12,3 +12,11 @@ sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://
 #Permissions
 sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp
 
+
+#Create a config file for the new plugin
+echo "{ \"serverPath\": \"/jet/www/default/vendor/atomjump/loop-server/\", \"staging\": true, \"phpPath\": \"/jet/bin/php\" }" > /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
+
+
+#Insert the medimage_export plugin into the plugins array 
+sed -ie 's/\"emoticons_basic\",/\"emoticons_basic\",\n\t\"medimage_export\",/g' /jet/www/default/vendor/atomjump/loop-server/config/config.json
+ 
