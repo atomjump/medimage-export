@@ -19,7 +19,7 @@ sudo cp medimage_config.json /jet/www/default/vendor/atomjump/loop-server/plugin
 
 
 #Insert the medimage_export plugin into the plugins array 
-mkdir ~/medimage_export
+sudo mkdir ~/medimage_export
 sudo cp /jet/www/default/vendor/atomjump/loop-server/config/config.json ~/medimage_export/
 sudo sed -ie 's/\"emoticons_basic\",/\"emoticons_basic\",\n\t\t\"medimage_export\",/g' ~/medimage_export/config.json
 sudo cp ~/medimage_export/config.json /jet/www/default/vendor/atomjump/loop-server/config/config.json
