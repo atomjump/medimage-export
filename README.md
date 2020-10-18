@@ -9,7 +9,7 @@ http://medimage.co.nz
 
 Otherwise, please follow these steps:
 
-1. Get the project into your plugins folder
+1. Get the project into your AtomJump Messaging plugins folder
 
 ```
 cd plugins
