@@ -46,7 +46,7 @@ From the command-line, after having logged in, type (on one line with no linebre
 
 ``eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/medimage_export/master/install)"``
 
-and push 'Return;.
+and push 'Return'.
 
 Then, click the following link to run a one-time update of your database:
 * http://127.0.0.1:5100/vendor/atomjump/loop-server/update-indexes.php
