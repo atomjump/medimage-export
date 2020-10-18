@@ -5,7 +5,33 @@ This is an alternative interface to the MedImage app, which allows you to take a
 http://medimage.co.nz
 
 
-Important install note: you must "sudo chmod 777 temp" the temporary folder plugins/medimage_export/temp/, at present.
+For a simple installation, we recommend using the AtomJump Appliance. See "Installation with the AtomJump Appliance" below. Otherwise, please follow these steps:
+
+1. Get the project into your plugins folder
+
+```
+cd plugins
+git clone https://github.com/atomjump/medimage_export.git
+```
+
+2. You should copy the config/configORIGINAL.json to plugins/medimage_export/config/config.json, and edit the entries with your own server paths.
+
+3. You must open up the temporary folder plugins/medimage_export/temp/, at present.
+
+```
+sudo chmod 777 plugins/medimage_export/temp
+``` 
+
+4. Add "medimage_export" to your loop-server config/config.json file's plugins array. e.g.
+
+```
+"plugins" : [
+	...
+	"otherplugin",
+	"medimages_export"
+]
+```
+
 
 We only recommend you install this software for evaluation / interest levels, and __not in a production environment__, at this stage. More careful checks are required around security of the 'temp' folder, and whether a file can be left in there under unusual circumstances.
 
