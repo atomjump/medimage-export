@@ -5,7 +5,7 @@ This is an alternative interface to the MedImage app, which allows you to take a
 http://medimage.co.nz
 
 
-For a simple installation, we recommend using the AtomJump Appliance. See __"Installation with the AtomJump Appliance"__ below. Otherwise, please follow these steps:
+For a __simple installation__, we recommend using the AtomJump Appliance. See __"Installation with the AtomJump Appliance"__ below. Otherwise, please follow these steps:
 
 1. Get the project into your plugins folder
 
