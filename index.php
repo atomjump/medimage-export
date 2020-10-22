@@ -2,18 +2,23 @@
     include_once("classes/cls.pluginapi.php");
     
 	
-  	function trim_trailing_slash_local($str) {
-        return rtrim($str, "/");
-    }
     
-    function add_trailing_slash_local($str) {
-        //Remove and then add
-        return rtrim($str, "/") . '/';
-    }    
     
     class plugin_medimage_export
     {
         public $verbose = true;
+     	
+     	private function trim_trailing_slash_local($str) {
+        	return rtrim($str, "/");
+    	}
+    
+    	private function add_trailing_slash_local($str) {
+        	//Remove and then add
+        	return rtrim($str, "/") . '/';
+   		}  
+     
+     
+     
         
         private function get_medimage_config() {
 				 if(!isset($medimage_config)) {
@@ -119,7 +124,7 @@
 								$image_name = $between_slashes[$len] . ".jpg";
 								$image_hi_name = $between_slashes[$len] . "_HI.jpg";
 				
-								$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
+								$image_folder = $this->add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
 															
 								$new_message = "Sending photo to the MedImage Server: '" . $id_text . "'" . $append_message;		
 								$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
