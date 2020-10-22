@@ -225,7 +225,7 @@
 				   
 				if(strpos($uc_message, "UNPAIR") === 0) {
 				   	//An unpairing request.
-					   $new_message = "You have successfully unpaired with your MedImage Server! [TODO complete]";
+					   $new_message = "You have successfully unpaired with your MedImage Server!";
 				      $recipient_ip_colon_id = "123.123.123.123:" . $sender_id;		//Private to the sender of the original message
 				      $sender_name_str = "MedImage";
 				      $sender_email = "info@medimage.co.nz";
