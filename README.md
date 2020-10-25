@@ -21,6 +21,7 @@ git clone https://github.com/atomjump/medimage_export.git
 3. You must open up the temporary folder plugins/medimage_export/temp/, at present.
 
 ```
+sudo mkdir plugins/medimage_export/temp
 sudo chmod 777 plugins/medimage_export/temp
 ``` 
 

@@ -10,6 +10,7 @@ eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.co
 sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
 
 #Permissions
+sudo mkdir /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp
 sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp
 
 
