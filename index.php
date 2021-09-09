@@ -107,7 +107,7 @@
             global $cnf;
             $api = new cls_plugin_api();
             
-            if($this->check_switched_on() == false) return;		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on() == false) return true;		//Early out of here, if we aren't switch on.
             
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
@@ -325,7 +325,7 @@
             //Do your thing in here. Here is a sample.
             $api = new cls_plugin_api();
           
-            if($this->check_switched_on() == false) return;		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on() == false) return "";		//Early out of here, if we aren't switch on.
 
           
         
@@ -357,7 +357,7 @@
             //Do your thing in here. Here is a sample.
             $api = new cls_plugin_api();
           
-            if($this->check_switched_on() == false) return;		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on() == false) return true;		//Early out of here, if we aren't switch on.
 
            
             ?>
