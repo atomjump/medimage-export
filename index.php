@@ -86,16 +86,18 @@
         		$medimage_config = $this->get_medimage_config();
         		if(isset($medimage_config['startSwitchedOn'])) {
         			if($medimage_config['startSwitchedOn'] == true) {
-        				setcookie("medimage-switched-on", "true");   	
+        				setcookie("medimage-switched-on", "true");   
+        				return true;	
         			} else {
         				setcookie("medimage-switched-on", "false");   
+        				return false;
         			}
         		
         		} else {
         			//No start switched on option. Assume not switched on on starting.
         			setcookie("medimage-switched-on", "false");
+        			return false;
         		}
-        	
         	}
         }
         
