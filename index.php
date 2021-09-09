@@ -84,7 +84,7 @@
         	} else {
         		//Not even registered yet. Set the cookie to the default status in the config file
         		$medimage_config = $this->get_medimage_config();
-        		if(isset($medimage_config['startSwitchedOn']) {
+        		if(isset($medimage_config['startSwitchedOn'])) {
         			if($medimage_config['startSwitchedOn'] == true) {
         				setcookie("medimage-switched-on", "true");   	
         			} else {
