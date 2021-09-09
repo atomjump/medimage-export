@@ -129,31 +129,31 @@
 						(strpos($uc_message, "MEDIMAGE ON") === 0)) {
 						
 						
-					  //Check for messages starting like 'start medimage', which will enable the service on this browser
-					  $id = substr($actual_message[1], 3);
-					  $id = str_replace("\\r","", $id);
-					  $id = str_replace("\\n","", $id);
-					  $id = preg_replace('/\s+/', ' ', trim($id));
+						  //Check for messages starting like 'start medimage', which will enable the service on this browser
+						  $id = substr($actual_message[1], 3);
+						  $id = str_replace("\\r","", $id);
+						  $id = str_replace("\\n","", $id);
+						  $id = preg_replace('/\s+/', ' ', trim($id));
 				  
-					  setcookie("medimage-switched-on", "true");
+						  setcookie("medimage-switched-on", "true");
 								  
-					  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested. To switch off the service enter 'stop medimage'";
-					  $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
-					  $sender_name_str = "MedImage";
-					  $sender_email = "info@medimage.co.nz";
-					  $sender_ip = "111.111.111.111";
-					  $options = array('notification' => false, 'allow_plugins' => false);
-						$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested. To switch off the service enter 'stop medimage'";
+						  $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
+						  $sender_name_str = "MedImage";
+						  $sender_email = "info@medimage.co.nz";
+						  $sender_ip = "111.111.111.111";
+						  $options = array('notification' => false, 'allow_plugins' => false);
+						  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 					
 						return true;	
 					
+					
 					} else {
-						//No message
-						return true;		//Early out of here, if we aren't switch on.
-					} else {
+						//Not a start message
 						return true;		//Early out of here, if we aren't switch on.
 					}
 				} else {
+					//No message, so not a start message
 					return true;		//Early out of here, if we aren't switch on.
 				}
             }
