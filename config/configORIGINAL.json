@@ -1,5 +1,6 @@
 {
     "serverPath": "your_path/loop-server/",
     "staging": true,
-    "phpPath": "/usr/bin/php"
+    "phpPath": "/usr/bin/php",
+    "startSwitchedOn": true
 }
