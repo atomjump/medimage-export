@@ -137,8 +137,8 @@
 				  
 						  setcookie("medimage-switched-on", "true");
 								  
-						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested. To switch off the service enter 'stop medimage'";
-						  $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
+						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested. You may need to refresh this window to get all functionality. To switch off the service enter 'stop medimage'";
+						  $recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 						  $sender_name_str = "MedImage";
 						  $sender_email = "info@medimage.co.nz";
 						  $sender_ip = "111.111.111.111";
@@ -291,7 +291,7 @@
 				      setcookie("medimage-switched-on", "false"); 
 				    			      
 				      $new_message = "You have stopped the MedImage service in this browser. Uploaded photos will no longer be sent to your desktop MedImage software. To switch this on again, enter 'start medimage'";
-				      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
+				      $recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 				      $sender_name_str = "MedImage";
 				      $sender_email = "info@medimage.co.nz";
 				      $sender_ip = "111.111.111.111";
