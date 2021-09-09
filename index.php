@@ -75,6 +75,7 @@
         
         public function check_switched_on($initiate)
         {
+        	error_log("Check switched on:" . $_COOKIE['medimage-switched-on'] . "  initiate:" . $initiate);
         	if(isset($_COOKIE['medimage-switched-on'])) {
         		if($_COOKIE['medimage-switched-on'] == "true") {
         			return true;
@@ -116,7 +117,38 @@
             global $cnf;
             $api = new cls_plugin_api();
             
-            if($this->check_switched_on(true) == false) return true;		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on(true) == false) {
+            	//We're not switch on - so check if we are being switched on
+            	
+            	$actual_message = explode(": ", $message);			//Remove name of sender
+            	
+				if($actual_message[1]) {
+						$uc_message = strtoupper($actual_message[1]);
+						if((strpos($uc_message, "START MEDIMAGE") === 0)||
+						(strpos($uc_message, "ENABLE MEDIMAGE") === 0)||
+						(strpos($uc_message, "MEDIMAGE ON") === 0)) {
+						  //Check for messages starting like 'start medimage', which will enable the service on this browser
+						  $id = substr($actual_message[1], 3);
+						  $id = str_replace("\\r","", $id);
+						  $id = str_replace("\\n","", $id);
+						  $id = preg_replace('/\s+/', ' ', trim($id));
+					  
+						  setcookie("medimage-switched-on", "true");
+									  
+						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested. To switch off the service enter 'stop medimage'";
+						  $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
+						  $sender_name_str = "MedImage";
+						  $sender_email = "info@medimage.co.nz";
+						  $sender_ip = "111.111.111.111";
+						  $options = array('notification' => false, 'allow_plugins' => false);
+						$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+					
+            		return true;	
+            	} else {
+            		return true;		//Early out of here, if we aren't switch on.
+            	}
+            }
+            
             
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
@@ -235,25 +267,7 @@
 				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 				   }
 				   
-				if((strpos($uc_message, "START MEDIMAGE") === 0)||
-					(strpos($uc_message, "ENABLE MEDIMAGE") === 0)||
-					(strpos($uc_message, "MEDIMAGE ON") === 0)) {
-				      //Check for messages starting like 'start medimage', which will enable the service on this browser
-				      $id = substr($actual_message[1], 3);
-				      $id = str_replace("\\r","", $id);
-				      $id = str_replace("\\n","", $id);
-				      $id = preg_replace('/\s+/', ' ', trim($id));
-				      
-				      setcookie("medimage-switched-on", "true");
-				    			      
-				      $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested. To switch off the service enter 'stop medimage'";
-				      $recipient_ip_colon_id = "";		//No recipient, so the whole group. 123.123.123.123:" . $recipient_id;
-				      $sender_name_str = "MedImage";
-				      $sender_email = "info@medimage.co.nz";
-				      $sender_ip = "111.111.111.111";
-				      $options = array('notification' => false, 'allow_plugins' => false);
-				   	$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
-				}
+				
 				
 				
 				if((strpos($uc_message, "STOP MEDIMAGE") === 0)||
