@@ -137,7 +137,7 @@
 				  
 						  setcookie("medimage-switched-on", "true");
 								  
-						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested, and is not complete. You may need to refresh this window to get all functionality. To switch off the service enter 'stop medimage'";
+						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested, or is not complete. You may need to refresh this window to get all functionality. To switch off the service enter 'stop medimage'";
 						  $recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 						  $sender_name_str = "MedImage";
 						  $sender_email = "info@medimage.co.nz";
