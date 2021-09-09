@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #Run with:
-#eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/medimage_export/master/install)"
+#eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/medimage_export.git/install)"
 
 #Update the main loop-server - for vertical images
-eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update)"
+eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update)"
 
 #Get the plugin installed
-sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://github.com/atomjump/medimage_export.git
+sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/ clone https://git.atomjump.com/medimage_export.git
 
 #Permissions
 sudo mkdir /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/temp

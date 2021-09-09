@@ -13,7 +13,7 @@ Otherwise, please follow these steps:
 
 ```
 cd plugins
-git clone https://github.com/atomjump/medimage_export.git
+git clone https://git.atomjump.com/medimage_export.git
 ```
 
 2. You should copy the config/configORIGINAL.json to plugins/medimage_export/config/config.json, and edit the entries with your own server paths.
