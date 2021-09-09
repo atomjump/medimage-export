@@ -73,7 +73,7 @@
         
         
         
-        public function check_switched_on()
+        public function check_switched_on($initiate)
         {
         	if(isset($_COOKIE['medimage-switched-on'])) {
         		if($_COOKIE['medimage-switched-on'] == "true") {
@@ -86,16 +86,22 @@
         		$medimage_config = $this->get_medimage_config();
         		if(isset($medimage_config['startSwitchedOn'])) {
         			if($medimage_config['startSwitchedOn'] == true) {
-        				setcookie("medimage-switched-on", "true");   
+        				if($initiate == true) {
+        					setcookie("medimage-switched-on", "true");
+        				}   
         				return true;	
         			} else {
-        				setcookie("medimage-switched-on", "false");   
+        				if($initiate == true) {
+        					setcookie("medimage-switched-on", "false");
+        				}  
         				return false;
         			}
         		
         		} else {
         			//No start switched on option. Assume not switched on on starting.
-        			setcookie("medimage-switched-on", "false");
+        			if($initiate == true) {
+        				setcookie("medimage-switched-on", "false");
+        			}
         			return false;
         		}
         	}
@@ -109,7 +115,7 @@
             global $cnf;
             $api = new cls_plugin_api();
             
-            if($this->check_switched_on() == false) return true;		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on(true) == false) return true;		//Early out of here, if we aren't switch on.
             
             //Check for existence of photo in message and initiate a sending process for that photo
             //Check if we don't have a paired MedImage Server stored, and warn user with a message
@@ -327,7 +333,7 @@
             //Do your thing in here. Here is a sample.
             $api = new cls_plugin_api();
           
-            if($this->check_switched_on() == false) return "";		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on(false) == false) return "";		//Early out of here, if we aren't switch on.
 
           
         
@@ -359,7 +365,7 @@
             //Do your thing in here. Here is a sample.
             $api = new cls_plugin_api();
           
-            if($this->check_switched_on() == false) return true;		//Early out of here, if we aren't switch on.
+            if($this->check_switched_on(false) == false) return true;		//Early out of here, if we aren't switch on.
 
            
             ?>
