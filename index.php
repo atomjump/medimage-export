@@ -145,14 +145,17 @@
 					  $options = array('notification' => false, 'allow_plugins' => false);
 						$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 					
-					return true;	
+						return true;	
 					
+					} else {
+						//No message
+						return true;		//Early out of here, if we aren't switch on.
+					} else {
+						return true;		//Early out of here, if we aren't switch on.
+					}
 				} else {
-					//No message
 					return true;		//Early out of here, if we aren't switch on.
 				}
-            } else {
-            	return true;		//Early out of here, if we aren't switch on.
             }
             
             
