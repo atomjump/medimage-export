@@ -31,7 +31,7 @@ sudo chmod 777 plugins/medimage_export/temp
 "plugins" : [
 	...
 	"otherplugin",
-	"medimages_export"
+	"medimage_export"
 ]
 ```
 
