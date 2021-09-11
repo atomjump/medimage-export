@@ -72,7 +72,7 @@
 	{
 		$verbose = true;   //usually false, unless you want to debug
 		
-		$image_folder = $this->add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
+		$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
 		
 		
 		//Send a message to the forum
