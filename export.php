@@ -96,9 +96,9 @@
 		
 		echo "sender_name_str:" . $sender_name_str . "  new_message:" . $new_message . "  recipient_ip_colon_id:" . $recipient_ip_colon_id . "  sender_email:" .  $sender_email . "  sender_ip:" .  $sender_ip . "  message_forum_id:" .  $message_forum_id ."\n";  //TESTING
 		
-		$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+		$new_message_id = $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 		
-		
+		echo "New message id:" . $new_message_id . "\n";
 		//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
 		
 	
