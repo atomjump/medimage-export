@@ -155,9 +155,14 @@
 					$message_id = $row_msg['int_ssshout_id'];
 	
 					//Send this image - TODO check the hi version exists and send that, but otherwise, send the smaller version.
+					error_log("Path: " . $image_folder . $image_hi_name . "\n");		//TESTING
+					if(file_exists($image_folder . $image_hi_name)) {
 					
-					//TEMPOUTsend_image($api, $message_id, $image_name, $image_folder, $message_forum_id, $layer_name, $medimage_config);
-					send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config);
+						send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config);
+					} else {
+						//Send the small image
+						send_image($api, $message_id, $image_name, $image_folder, $message_forum_id, $layer_name, $medimage_config);
+					}
 				}
 			}
 		}
