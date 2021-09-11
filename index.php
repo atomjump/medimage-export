@@ -137,12 +137,15 @@
 				  
 						  setcookie("medimage-switched-on", "true");
 								  
-						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested, or is not complete. You may need to refresh this window to get all functionality. To switch off the service enter 'stop medimage'";
+						  $new_message = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested, or is not complete. To switch off the service enter 'stop medimage'";
 						  $recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 						  $sender_name_str = "MedImage";
 						  $sender_email = "info@medimage.co.nz";
 						  $sender_ip = "111.111.111.111";
 						  $options = array('notification' => false, 'allow_plugins' => false);
+						  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+					
+					 	$new_message = "You should now pair with your MedImage desktop. Click one of the large pairing buttons on the MedImage desktop, and then type 'pair [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you. http://medimage.co.nz/how-to/#pair";
 						  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 					
 						return true;	
