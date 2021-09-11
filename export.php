@@ -124,7 +124,7 @@
 	
 	}
    
-	function parse_for_image($api, $message_id)
+	function parse_for_image($api, $message_id, $medimage_config)
 	{
 		global $cnf;
 		
@@ -171,7 +171,7 @@
 	}
 	
 	//parse_for_image($message_id)
-	parse_for_image($api, $_REQUEST['msg_id']);
+	parse_for_image($api, $_REQUEST['msg_id'], $medimage_config);
 	echo "Got to the end: " . $_REQUEST['msg_id'];
 
 
