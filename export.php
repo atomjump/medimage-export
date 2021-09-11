@@ -101,15 +101,6 @@
 	
 						
 		//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
-		$layer_name = "";
-		if(isset($_REQUEST['passcode'])) {
-			$layer_name = $_REQUEST['passcode'];			
-		}
-
-		if(isset($_REQUEST['uniqueFeedbackId'])) {
-			$layer_name = $_REQUEST['uniqueFeedbackId'];
-		}
-
 		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'] . " " . $tags;
 		global $staging;
 		if($staging == true) {
