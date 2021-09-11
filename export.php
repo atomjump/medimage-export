@@ -172,7 +172,7 @@
 	
 	//parse_for_image($message_id)
 	parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $medimage_config);
-	echo "Got to the end: " . $_REQUEST['msg_id'];
+	echo "Got to the end: " . $_REQUEST['msg_id'] . "  Layer:" . $_REQUEST['layer_name'];
 
 
 ?>
