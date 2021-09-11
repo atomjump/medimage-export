@@ -68,7 +68,7 @@
 	}
 
 
-	function send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $medimage_config)
+	function send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $medimage_config)
 	{
 		$verbose = true;   //usually false, unless you want to debug
 		
@@ -120,11 +120,11 @@
 		$api->parallel_system_call($command, "linux");
 		echo "Running: " . $command . "\n";		//TESTING					
 												
-		
+		///usr/bin/php /var/www/html/atomjump_staging/api/plugins/medimage_export/upload.php /var/www/html/atomjump_staging/api/images/im/ upl682-37825023_HI.jpg 7061 178
 	
 	}
    
-	function parse_for_image($api, $message_id, $medimage_config)
+	function parse_for_image($api, $message_id, $layer_name, $medimage_config)
 	{
 		global $cnf;
 		
@@ -162,8 +162,8 @@
 	
 					//Send this image - TODO check the hi version exists and send that, but otherwise, send the smaller version.
 					
-					//TEMPOUTsend_image($api, $message_id, $image_name, $image_folder, $message_forum_id, $medimage_config);
-					send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $medimage_config);
+					//TEMPOUTsend_image($api, $message_id, $image_name, $image_folder, $message_forum_id, $layer_name, $medimage_config);
+					send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $medimage_config);
 				}
 			}
 		}
@@ -171,7 +171,7 @@
 	}
 	
 	//parse_for_image($message_id)
-	parse_for_image($api, $_REQUEST['msg_id'], $medimage_config);
+	parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $medimage_config);
 	echo "Got to the end: " . $_REQUEST['msg_id'];
 
 
