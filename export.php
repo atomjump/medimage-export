@@ -93,6 +93,9 @@
 		$sender_email = "info@medimage.co.nz";
 		$sender_ip = "111.111.111.111";
 		$options = array('notification' => false, 'allow_plugins' => false);
+		
+		echo "$sender_name_str:" . $sender_name_str . "  $new_message:" . $new_message . "  $recipient_ip_colon_id:" . $recipient_ip_colon_id . "  $sender_email:" .  $sender_email . "  $sender_ip:" .  $sender_ip . "  $message_forum_id:" .  $message_forum_id ."\n";  //TESTING
+		
 		$api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 		
 		
@@ -109,7 +112,7 @@
 		if($verbose == true) error_log("Running: " . $command);
 		
 		$api->parallel_system_call($command, "linux");
-		echo "Running: " . $command . "\n";		//TESTING					
+		//echo "Running: " . $command . "\n";					
 		$api->complete_parallel_calls();										
 		///usr/bin/php /var/www/html/atomjump_staging/api/plugins/medimage_export/upload.php /var/www/html/atomjump_staging/api/images/im/ upl682-37825023_HI.jpg 7061 178
 	
