@@ -68,7 +68,7 @@
 	}
 
 
-	function send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $medimage_config)
+	function send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 	{
 		$verbose = true;   //usually false, unless you want to debug
 		
@@ -118,7 +118,7 @@
 	
 	}
    
-	function parse_for_image($api, $message_id, $layer_name, $medimage_config)
+	function parse_for_image($api, $message_id, $layer_name, $sender_id, $medimage_config)
 	{
 		global $cnf;
 		
@@ -157,7 +157,7 @@
 					//Send this image - TODO check the hi version exists and send that, but otherwise, send the smaller version.
 					
 					//TEMPOUTsend_image($api, $message_id, $image_name, $image_folder, $message_forum_id, $layer_name, $medimage_config);
-					send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $medimage_config);
+					send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config);
 				}
 			}
 		}
@@ -165,7 +165,7 @@
 	}
 	
 	//parse_for_image($message_id)
-	parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $medimage_config);
+	parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $_REQUEST['sender_id'], $medimage_config);
 	echo "Got to the end: " . $_REQUEST['msg_id'] . "  Layer:" . $_REQUEST['layer_name'];
 
 
