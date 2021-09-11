@@ -377,7 +377,7 @@
         		}
            	</script> */
             
-           $layer_name = "testchangeme";
+           $layer_name = "";
 			if(isset($_REQUEST['passcode'])) {
 				$layer_name = $_REQUEST['passcode'];			
 			}

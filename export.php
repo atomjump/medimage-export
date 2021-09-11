@@ -110,7 +110,7 @@
 		
 		$api->parallel_system_call($command, "linux");
 		echo "Running: " . $command . "\n";		//TESTING					
-												
+		$api->complete_parallel_calls();										
 		///usr/bin/php /var/www/html/atomjump_staging/api/plugins/medimage_export/upload.php /var/www/html/atomjump_staging/api/images/im/ upl682-37825023_HI.jpg 7061 178
 	
 	}
