@@ -117,7 +117,7 @@
 		}
 		if($verbose == true) error_log("Running: " . $command);
 		
-		//TESTING OUT $api->parallel_system_call($command, "linux");
+		$api->parallel_system_call($command, "linux");
 		echo "Running: " . $command . "\n";		//TESTING					
 												
 		
