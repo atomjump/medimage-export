@@ -104,8 +104,7 @@
 
 
    function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records) {
-  	   //$lines = json_decode($json);
- 	  
+  	  
  	  
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();	
  	  
@@ -129,8 +128,8 @@
 	   $pdf->MultiCell(0,8,$user_date_time . $records);
  	   $pdf->SetFont('Arial','',9);
  	   
- 	   $hi_res_image_countdown = 10;//10;		//About 400KB*10 = 4MB
- 	   $low_res_image_countdown = 20;//20;		//About 100KB*20 = 2MB
+ 	   $hi_res_image_countdown = 10;		//About 400KB*10 = 4MB
+ 	   $low_res_image_countdown = 20;		//About 100KB*20 = 2MB
  	   
 
  	
@@ -148,8 +147,6 @@
  	  
  		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($parsable_text, $web_api_url, $api_file_path);
  		   
- 		   
- 		   //$urls = $parsable_text . "," . $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
  		   
  		   if($image_url != false) {
  		   	  //So, it is at least an image from another website
@@ -193,9 +190,7 @@
  		   	  
  		   }
  		   
- 		   //$timestamp = str_replace("T", "  ", $lines->res[$cnt]->timestamp);
- 		   //$timestamp = str_replace("Z", "", $timestamp);
- 		   $ago =  $lines->res[$cnt]->ago;
+  		   $ago =  $lines->res[$cnt]->ago;
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str);
@@ -206,8 +201,12 @@
 
    	    $table->endTable();
  
- 		return $pdf->Output('S');
-   
+ 
+ 		$dt_coms = explode($user_date_time, " ");
+ 		$filename = $forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4];		//Leave off GMT etc.
+ 		$filename = str_replace(" ", "-", $filename);
+ 		$pdf->Output('F', "../temp/" . $filename);
+   		return;
    }
 
 
@@ -264,20 +263,18 @@
 	  $max_records = 2000;
   
   	  ob_start();
-	  $se->process(NULL, NULL, $max_records,  false, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
+	  $se->process(NULL, NULL, $max_records,  false, $from, $db_timezone, $format, $duration);		
  	  $jsonp = ob_get_clean();
  
- 	  //Remove JSONP starting up till "(", and remove end ")"	  
-      //$jsonp = substr($jsonp, 0, strpos($jsonp, '('));
-      //$json = substr($jsonp, 0, strpos($jsonp, ')', -1));
  	  $json = jsonp_decode($jsonp);
  	  
  	  $forum_title = get_title($layer_info);		
  	  
  	  
  	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records);
- 	  $pdfBase64 = base64_encode($pdfString);
-	  echo 'data:application/pdf;base64,' . $pdfBase64;
+ 	  //$pdfBase64 = base64_encode($pdfString);
+	  //echo 'data:application/pdf;base64,' . $pdfBase64;
+ 	  
  
 	} else {
 	 //wrong username
