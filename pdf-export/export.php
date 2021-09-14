@@ -98,9 +98,9 @@
  
  	  //echo $json;
  	  $lines = json_decode($json);
- 	  print_r($lines->res[0]);
- 	  echo "Text: " . $lines->res[0]->text;
- 	  echo "Time: " . $lines->res[0]->timestamp;
+ 	  //print_r($lines->res[0]);
+ 	  //echo "Text: " . $lines->res[0]->text;
+ 	  //echo "Time: " . $lines->res[0]->timestamp;
  	  
  	  echo parse_json_into_easytable($json);
  
