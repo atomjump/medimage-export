@@ -158,7 +158,7 @@
  		   	  
  		   }
  		   
- 		   $timestamp = str_replace("T", "", $lines->res[$cnt]->timestamp);
+ 		   $timestamp = str_replace("T", "  ", $lines->res[$cnt]->timestamp);
  		   $timestamp = str_replace("Z", "", $timestamp);
  		   
  		   
