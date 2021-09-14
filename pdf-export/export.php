@@ -294,7 +294,7 @@
 		$tags = str_replace(" ", "-", $id_text);
 							
 		
-		$new_message = "Sending .pdf to the MedImage Server: '" . $id_text . "'" . $append_message;		
+		$new_message = "Sending the whole forum PDF file to the MedImage Server: '" . $id_text . "'" . $append_message;		
 		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 		$sender_name_str = "MedImage";
 		$sender_email = "info@medimage.co.nz";
