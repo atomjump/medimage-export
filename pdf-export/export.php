@@ -36,12 +36,15 @@
  	
 	   $table=new easyTable($pdf, '%{70, 30}', 'align:L;');
  
+ 	   $colours = array('#ddd', '#eee');
  	   
  	   for($cnt = 0; $cnt < count($lines->res); $cnt++) {
  	  
+ 	  	   $background_colour = $colours($cnt %2);
+ 	  
  
-		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:#aaa; valign:T;'); //,w700,h1280  response
-		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:#aaa; valign:T;');
+		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;'); //,w700,h1280  response
+		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
