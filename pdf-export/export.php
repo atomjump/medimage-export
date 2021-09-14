@@ -68,7 +68,7 @@
 					if($verbose == true) echo "Image name: " . $image_name . "\n";
 				
 					$abs_image_path = str_replace($web_api_url, $api_file_path, $raw_image_url);
-					$abs_image_dir = dirname($abs_image_path);
+					$abs_image_dir = add_trailing_slash(dirname($abs_image_path));
 				
 					if(!file_exists($abs_image_dir . $image_name)) $image_name = false;		//Don't use this version if
 					if(!file_exists($abs_image_dir . $image_hi_name)) $image_hi_name = false;										//it doesn't exist locally
