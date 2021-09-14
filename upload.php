@@ -132,6 +132,7 @@
 			"staging"
 		]
 	*/
+	$folder_off = 1;
 	$filename_off = 2;
 	$message_id_off = $filename_off + 1;
 	$forum_id_off = $message_id_off + 1;
@@ -174,46 +175,92 @@
     
     
     if(isset($argv[$upload_to_off])) {
-    		$tags = $argv[$tags_off];
-    		$tags_visible = str_replace("-", " ", $tags);
-    		$filename = "#" . $tags . "-" . date("d-m-Y-h-i-s") . ".jpg";
-    		$upload_to = $argv[$upload_to_off];
-    		//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
-    		if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
-    		//echo "MedImage Server on upload:" . $upload_to . "\n";
-    		$url = explode("/", $upload_to);
-    		$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
-    		$folder = $url[4];
-    		$output_post_url = $domain . "/api/photo";
-    		$output_file_name = "#" . $folder . "-" . $filename;
-    		$local_file_path = $start_path . "images/im/" . $argv[$filename_off];		//the actual local filename 
-		
-    		
-    		list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
-    		
-    		
-    		
-    		if($resp == true) {
-			 $new_message = "Successfully sent the photo to the MedImage Server: '" . $tags_visible . "'";		
-			 
-			 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
-			 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
-			 
-			} else {
-			 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
-					
-			}
+    		if($argv[$message_id_off] == 0) {
+    			//This is a .pdf upload
+    			$filename = $argv[$filename_id_off];		//E.g. Unknown-Forum-Title-Wed-Sep-15-2021-10-56-18.pdf
+    			$upload_to = $argv[$upload_to_off];
+    			//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
+				if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
+				//echo "MedImage Server on upload:" . $upload_to . "\n";
+				$url = explode("/", $upload_to);
+				$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
+				$folder = $url[4];
+				$output_post_url = $domain . "/api/photo";		//MedImage constant
+				$output_file_name = "#" . $folder . "-" . $filename;
+					//E.g.  /var/www/html/atomjump_staging/api/plugins/medimage_export/pdf-export/../temp/
+				$local_file_path = $argv[$folder_off] . $argv[$filename_off];		//the actual local filename 
+				
+				
+				list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
 			
-			if($verbose == true) error_log("About to post to the group with :" . $new_message);
-    
-			 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
-			 $sender_name_str = "MedImage";
-			 $sender_email = "info@medimage.co.nz";
-			 $sender_ip = "111.111.111.111";
-			 $options = array('allow_plugins' => false);
-			 $message_forum_id = $argv[$forum_id_off];
-			 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
-			 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+			
+			
+				if($resp == true) {
+				 $new_message = "Successfully sent the .pdf to the MedImage Server: '" . $filename . "'";		
+			 
+				 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
+				 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
+			 
+				} else {
+				 $new_message = "Sorry there was a problem sending the .pdf to the MedImage Server: '" . $filename . "'.  Error msg: " . $err;		
+					
+				}
+			
+				if($verbose == true) error_log("About to post to the group with :" . $new_message);
+	
+				 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+				 $sender_name_str = "MedImage";
+				 $sender_email = "info@medimage.co.nz";
+				 $sender_ip = "111.111.111.111";
+				 $options = array('allow_plugins' => false);
+				 $message_forum_id = $argv[$forum_id_off];
+				 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
+				 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+						
+				
+    		} else {
+    			//This is an image upload
+				$tags = $argv[$tags_off];
+				$tags_visible = str_replace("-", " ", $tags);
+				$filename = "#" . $tags . "-" . date("d-m-Y-h-i-s") . ".jpg";
+				$upload_to = $argv[$upload_to_off];
+				//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
+				if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
+				//echo "MedImage Server on upload:" . $upload_to . "\n";
+				$url = explode("/", $upload_to);
+				$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
+				$folder = $url[4];
+				$output_post_url = $domain . "/api/photo";
+				$output_file_name = "#" . $folder . "-" . $filename;
+				$local_file_path = $start_path . "images/im/" . $argv[$filename_off];		//the actual local filename 
+		
+			
+				list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
+			
+			
+			
+				if($resp == true) {
+				 $new_message = "Successfully sent the photo to the MedImage Server: '" . $tags_visible . "'";		
+			 
+				 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
+				 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
+			 
+				} else {
+				 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
+					
+				}
+			
+				if($verbose == true) error_log("About to post to the group with :" . $new_message);
+	
+				 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+				 $sender_name_str = "MedImage";
+				 $sender_email = "info@medimage.co.nz";
+				 $sender_ip = "111.111.111.111";
+				 $options = array('allow_plugins' => false);
+				 $message_forum_id = $argv[$forum_id_off];
+				 if($verbose == true) error_log("About to post to the group:" . $message_forum_id);
+				 $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+			}
 	
     }
     
