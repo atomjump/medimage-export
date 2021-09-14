@@ -33,7 +33,7 @@
  	
 	   $table=new easyTable($pdf, '%{70, 30}', 'align:L;');
  
-	   $table->easyCell('Peter: Says this', 'width:70%; align:L; bgcolor:#aaa; valign:T; img:images/test.jpg;'); //,w700,h1280
+	   $table->easyCell('Peter: Says this', 'width:70%; align:L; bgcolor:#aaa; valign:T;'); //,w700,h1280  response
 
    	    $table->endTable();
  
