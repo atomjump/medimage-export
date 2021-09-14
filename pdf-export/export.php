@@ -115,9 +115,9 @@
  	   require('exfpdf.php');
  	
  	   if($max_records > count($lines->res)) {
- 	   		$records = "  [All records]";
+ 	   		$records = "  [All messages]";
  	   } else {
- 	   		$records = "  [Most recent " . count($lines->res) ." records]";
+ 	   		$records = "  [Most recent " . count($lines->res) ." messages]";
  	   }
  	
  	
