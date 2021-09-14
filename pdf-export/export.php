@@ -11,6 +11,15 @@
 	require("../../../classes/cls.basic_geosearch.php");
 	require("../../../classes/cls.layer.php");
 	require("../../../classes/cls.ssshout.php");*/
+	
+	function trim_trailing_slash_local($str) {
+        return rtrim($str, "/");
+    }
+    
+    function add_trailing_slash_local($str) {
+        //Remove and then add
+        return rtrim($str, "/") . '/';
+    }
 
 	if(!isset($medimage_config)) {
         //Get global plugin config - but only once
