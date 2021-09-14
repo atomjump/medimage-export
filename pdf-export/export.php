@@ -114,8 +114,11 @@
  	   $pdf = require('fpdf181/fpdf.php');
  	   require('exfpdf.php');
  	
- 	   
- 	   
+ 	   if($max_records > count($lines->res)) {
+ 	   		$records = "  [All records]";
+ 	   } else {
+ 	   		$records = "  [Most recent " . count($lines->res) ." records]";
+ 	   }
  	
  	
  	   $pdf=new exFPDF();
@@ -123,7 +126,7 @@
  	   $pdf->SetFont('Arial','B',12);
 	   $pdf->MultiCell(0,6,'AtomJump Forum Export "' . $forum_title . '"');
 	   $pdf->SetFont('Arial','',8);
-	   $pdf->MultiCell(0,8,$user_date_time .  "  [Most recent " . count($lines->res) ." records]");
+	   $pdf->MultiCell(0,8,$user_date_time . $records);
  	   $pdf->SetFont('Arial','',9);
  	   
  	   $hi_res_image_countdown = 10;//10;		//About 400KB*10 = 4MB
