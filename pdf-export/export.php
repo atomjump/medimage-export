@@ -69,9 +69,9 @@
  
  	  //echo $json;
  	  $lines = json_decode($json);
- 	  print_r($lines);
+ 	  //print_r($lines);
  	  //echo "With arrow: " . $lines['res'][0]->text;
- 	  //echo "With array: " . $lines['res'][0]['text'];
+ 	  echo "With array: " . $lines['res'][0]['text'];
  	  
  
 	} else {
