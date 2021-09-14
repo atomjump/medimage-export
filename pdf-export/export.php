@@ -109,8 +109,8 @@
  	   $pdf->AddPage(); 
  	   $pdf->SetFont('helvetica','',10);
  	   
- 	   $hi_res_image_countdown = 10;		//About 400KB*10 = 4MB
- 	   $low_res_image_countdown = 20;		//About 100KB*20 = 2MB
+ 	   $hi_res_image_countdown = 1;//10;		//About 400KB*10 = 4MB
+ 	   $low_res_image_countdown = 1;//20;		//About 100KB*20 = 2MB
  	   
 
  	
