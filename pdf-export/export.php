@@ -284,9 +284,10 @@
 			$command = $command . " staging";   //Ensure this works on a staging server  
 		}
 		if($verbose == true) error_log("Running: " . $command);
+		echo $command;		//TEMP TESTING
 		
-		$api->parallel_system_call($command, "linux");
-		$api->complete_parallel_calls();										
+		//TEMPOUT TESTING$api->parallel_system_call($command, "linux");
+		//TEMPOUT TESTING$api->complete_parallel_calls();										
 	
 	}
 
@@ -360,7 +361,7 @@
  	  
  	  
  	  
- 	  send_pdf_to_medimage($api, null, $pdf_file_name, $output_folder, 0, $layer_info['int_layer_id'], $_REQUEST['sender_id'], $medimage_config)
+ 	  send_pdf_to_medimage($api, null, $pdf_file_name, $output_folder, 0, $layer_info['int_layer_id'], $_REQUEST['sender_id'], $medimage_config);
  
 	} else {
 	 //wrong username
