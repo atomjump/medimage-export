@@ -395,8 +395,8 @@
  	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder);
  	  
  	  
- 	  
- 	  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $_REQUEST['sender_id'], $medimage_config);
+ 	  //($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
+ 	  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
  
 	} else {
 	 //wrong username
