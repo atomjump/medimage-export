@@ -128,6 +128,8 @@
 	  } else {
 		$from = 0;
 	  }
+	  
+	  $from = 7047;		//TESTING
   
 	  if($_REQUEST['format']) {
 		 $format = $_REQUEST['format'];
