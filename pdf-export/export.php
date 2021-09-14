@@ -259,7 +259,7 @@
 	  }
   
   	  ob_start();
-	  $se->process(NULL, NULL, 500,  false, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
+	  $se->process(NULL, NULL, 2000,  false, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
  	  $jsonp = ob_get_clean();
  
  	  //Remove JSONP starting up till "(", and remove end ")"	  
