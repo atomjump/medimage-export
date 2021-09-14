@@ -37,9 +37,9 @@
 				$image_hi_name = $between_slashes[$len] . "_HI.jpg";
 				if($verbose == true) echo "Image name: " . $image_name . "\n";
 			}
-			return $image_hi_name;
+			return array($matches[1][$cnt], $image_hi_name);
 		} else {
-			return false;
+			return array(false, false);
 		
 		}
     
@@ -72,11 +72,11 @@
  	  	   $background_colour = $colours[$cnt%2];
  	  	   $line_text = $lines->res[$cnt]->text;
  	  
- 		   $image =	parse_for_image($lines->res[$cnt]->text);
- 		   if($image != false) {
- 		   	  $filename = basename($image);
- 		   	  $image_str = " img:../../../images/im/" . $filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
- 		   	  $line_text = str_replace($image, "",$line_text);		//Remove the textual version of image
+ 		   list($image_url, $image_filename = parse_for_image($lines->res[$cnt]->text);
+ 		   if($image_url != false) {
+ 		   	  //$filename = basename($image);
+ 		   	  $image_str = " img:../../../images/im/" . $image_filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
+ 		   	  $line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
  		   } else {
  		   	  $image_str = "";
  		   	  
@@ -86,7 +86,7 @@
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str); //,w700,h1280 
-		   $table->easyCell($lines->res[$cnt]->timestamp . " " . $image, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($lines->res[$cnt]->timestamp . " " . $image_url, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
