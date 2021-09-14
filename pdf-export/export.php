@@ -129,7 +129,7 @@
  		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($parsable_text, $web_api_url, $api_file_path);
  		   
  		   
- 		   $urls = $parsable_text . "," . $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
+ 		   //$urls = $parsable_text . "," . $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
  		   
  		   if($image_url != false) {
  		   	  //So, it is at least an image from another website
@@ -176,7 +176,7 @@
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str);
-		   $table->easyCell($ago . " " . $urls, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($ago, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
