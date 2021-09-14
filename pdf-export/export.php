@@ -55,13 +55,14 @@
 			$raw_image_url = "";
 			
 			for($cnt = 0; $cnt < count($matches[0]); $cnt++) {
-				$info = pathinfo($matches[0][$cnt]);
+				$match = trim($matches[0][$cnt], "\"");
+				$info = pathinfo($match);
 				$ext = $info['extension'];
 				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
 					//Yes it's an image
 				
-					if($verbose == true) echo "Matched image raw: " . $matches[0][$cnt] . "\n";
-					$raw_image_url = $matches[0][$cnt];
+					if($verbose == true) echo "Matched image raw: " . $match . "\n";
+					$raw_image_url = $match;
 					$image_name = $info['filename'] . ".jpg";
 					$image_hi_name = $info['filename'] . "_HI.jpg";
 					if($verbose == true) echo "Image name: " . $image_name . "\n";
