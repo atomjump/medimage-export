@@ -72,7 +72,32 @@
 		$api_file_path = add_trailing_slash($cnf['fileRoot']);
 		
 		return array($web_api_url, $api_file_path);
-	}	
+	}
+	
+	function get_current_id($api, $message_forum_id)
+	{
+		//This query will find the latest on this forum. May need some refinements e.g. around user id
+		//With var_shouted example value:
+		//MedImage: Switched MedImage patient to ID: 'nhi123 arm'
+		
+		$sql = "SELECT * from tbl_ssshout where int_layer_id = " . $message_forum_id . " AND var_shouted like 'MedImage: Switched%' order by int_ssshout_id desc limit 1";
+		$result = $api->db_select($sql);
+		
+					
+		$row = $api->db_fetch_array($result);
+		if($row) {
+			$message = $row['var_shouted'];
+			$between = explode("'", $message);
+			if($between[1]) {
+				return $between[1];
+			
+			}
+		}
+		
+		return false;
+	
+	}
+	
 	
 
 
