@@ -17,6 +17,35 @@
 	$lg = new cls_login();
 
 
+    function parse_for_image($line_text) {
+    	global $cnf;
+    	
+    	$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
+		if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
+		$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
+		preg_match_all($preg_search, $line_text, $matches);
+			
+				
+					
+		if(count($matches[0]) > 0) {
+			//Yes we have at least one image
+			for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
+				if($verbose == true) echo "Matched image raw: " . $matches[1][$cnt] . "\n";
+				$between_slashes = explode( "/", $matches[1][$cnt]);
+				$len = count($between_slashes) - 1;
+				$image_name = $between_slashes[$len] . ".jpg";
+				$image_hi_name = $between_slashes[$len] . "_HI.jpg";
+				if($verbose == true) echo "Image name: " . $image_name . "\n";
+			}
+			return $image_hi_name;
+		} else {
+			return false;
+		
+		}
+    
+    
+    }
+
 
    function parse_json_into_easytable($json) {
   	   $lines = json_decode($json);
@@ -42,9 +71,15 @@
  	  
  	  	   $background_colour = $colours[$cnt%2];
  	  
+ 		   $image =	parse_for_image($lines->res[$cnt]->text);
+ 		   if($image != false) {
+ 		   	  $image_str = "YES";
+ 		   } else {
+ 		   	  $image_str = "";
+ 		   }
  
 		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;'); //,w700,h1280  response
-		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($lines->res[$cnt]->timestamp . " " $image_str, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
