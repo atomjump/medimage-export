@@ -103,7 +103,7 @@
 	}
 
 
-   function parse_json_into_easytable($lines, $user_date_time, $forum_title) {
+   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records) {
   	   //$lines = json_decode($json);
  	  
  	  
@@ -123,7 +123,7 @@
  	   $pdf->SetFont('Arial','B',12);
 	   $pdf->MultiCell(0,6,'AtomJump Forum Export "' . $forum_title . '"');
 	   $pdf->SetFont('Arial','',8);
-	   $pdf->MultiCell(0,8,$user_date_time);
+	   $pdf->MultiCell(0,8,$user_date_time .  "  [Most recent " . $max_records ." records]");
  	   $pdf->SetFont('Arial','',9);
  	   
  	   $hi_res_image_countdown = 10;//10;		//About 400KB*10 = 4MB
@@ -257,9 +257,11 @@
 	  } else {
 		$duration = 900;
 	  }
+	  
+	  $max_records = 2000;
   
   	  ob_start();
-	  $se->process(NULL, NULL, 2000,  false, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
+	  $se->process(NULL, NULL, $max_records,  false, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
  	  $jsonp = ob_get_clean();
  
  	  //Remove JSONP starting up till "(", and remove end ")"	  
@@ -270,7 +272,7 @@
  	  $forum_title = get_title($layer_info);		
  	  
  	  
- 	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title);
+ 	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records);
  	  $pdfBase64 = base64_encode($pdfString);
 	  echo 'data:application/pdf;base64,' . $pdfBase64;
  
