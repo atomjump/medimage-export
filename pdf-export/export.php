@@ -126,8 +126,8 @@
 	   $pdf->MultiCell(0,8,$user_date_time);
  	   $pdf->SetFont('Arial','',9);
  	   
- 	   $hi_res_image_countdown = 1;//10;		//About 400KB*10 = 4MB
- 	   $low_res_image_countdown = 1;//20;		//About 100KB*20 = 2MB
+ 	   $hi_res_image_countdown = 10;//10;		//About 400KB*10 = 4MB
+ 	   $low_res_image_countdown = 20;//20;		//About 100KB*20 = 2MB
  	   
 
  	
