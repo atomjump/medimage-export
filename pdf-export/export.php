@@ -70,13 +70,13 @@
  	   for($cnt = 0; $cnt < count($lines->res); $cnt++) {
  	  
  	  	   $background_colour = $colours[$cnt%2];
- 	  	   $text = $lines->res[$cnt]->text;
+ 	  	   $line_text = $lines->res[$cnt]->text;
  	  
  		   $image =	parse_for_image($lines->res[$cnt]->text);
  		   if($image != false) {
  		   	  $filename = basename($image);
  		   	  $image_str = " img:../../../images/im/" . $filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
- 		   	  $text = str_replace($image, "",$text);		//Remove the textual version of image
+ 		   	  $line_text = str_replace($image, "",$line_text);		//Remove the textual version of image
  		   } else {
  		   	  $image_str = "";
  		   	  
@@ -85,8 +85,8 @@
  		   
  		   
  
-		   $table->easyCell($text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;'); //,w700,h1280 
-		   $table->easyCell($lines->res[$cnt]->timestamp . " " . $image_str, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;'); //,w700,h1280 
+		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
