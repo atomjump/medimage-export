@@ -203,7 +203,7 @@
 			
 			
 				if($resp == true) {
-				 $new_message = "Successfully sent the .pdf to the MedImage Server: '" . $tags_visible . "'";		
+				 $new_message = "Successfully sent the whole forum .pdf to the MedImage Server: '" . $tags_visible . "'";		
 			 
 				 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
 				 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
