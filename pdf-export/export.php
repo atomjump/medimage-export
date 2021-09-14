@@ -73,7 +73,8 @@
  	  
  		   $image =	parse_for_image($lines->res[$cnt]->text);
  		   if($image != false) {
- 		   	  $image_str = " img:../../../images/im/upl682-39859669.jpg;";  //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
+ 		   	  $filename = basename($image);
+ 		   	  $image_str = " img:../../../images/im/" . $filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
  		   } else {
  		   	  $image_str = "";
  		   }
