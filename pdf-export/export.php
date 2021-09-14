@@ -122,6 +122,7 @@
  	  	   $background_colour = $colours[$cnt%2];
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
+ 	  	   $parsable_text = strip_tags($lines->res[$cnt]->text, "<img>");
  	  	   $parsable_text = str_replace("&nbsp;", " ", $lines->res[$cnt]->text);
  	  
  		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($parsable_text, $web_api_url, $api_file_path);
