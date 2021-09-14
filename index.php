@@ -406,6 +406,15 @@
           
             if($this->check_switched_on(false) == false) return true;		//Early out of here, if we aren't switch on.
 
+			$layer_name = "";
+			if(isset($_REQUEST['passcode'])) {
+				$layer_name = $_REQUEST['passcode'];			
+			}
+
+			if(isset($_REQUEST['uniqueFeedbackId'])) {
+				$layer_name = $_REQUEST['uniqueFeedbackId'];
+			} 
+
            
             ?>
             	<br/>
@@ -413,8 +422,9 @@
             
             <?php
            
-            $ret_text = "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "'); \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";
-            
+           
+            $ret_text = "<script>function medimagePDFExport(msgId) { data = { layer_name: '" . $layer_name . "' };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) {  alert(\"Response : \" + response); }); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";  //alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "
+            //https://staging.atomjump.com/api/download.php?format=json&uniqueFeedbackId=test_feedback
             
             echo $ret_text;
             
