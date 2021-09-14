@@ -43,33 +43,36 @@
     function parse_for_image($line_text, $web_api_url, $api_file_path) {
     	global $cnf;
     	
-    	$url_matching = "atomjump";		//Works with based jpgs on atomjump which include e.g. 'atomjump' in their strings.
-		//if($cnf['uploads']['replaceHiResURLMatch']) $url_matching = $cnf['uploads']['replaceHiResURLMatch'];			
-		//$preg_search = "/.*?" . $url_matching ."(.*?)\.jpg/i";
-		//$preg_search = "/^|\s(.*?)\.jpg/i";
-		$preg_search = '/\.(?:jpe?g|png|gif)(?:$|[?#])/';
+    	//General URL gathering
+ 		$preg_search = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 		preg_match_all($preg_search, $line_text, $matches);
 			
 				
 					
 		if(count($matches[0]) > 0) {
-			//Yes we have at least one image
+			
+			//Yes we have at least one url
 			$raw_image_url = "";
 			
 			for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
-				if($verbose == true) echo "Matched image raw: " . $matches[1][$cnt] . "\n";
-				$raw_image_url = $matches[1][$cnt];
-				$between_slashes = explode( "/", $matches[1][$cnt]);
-				$len = count($between_slashes) - 1;
-				$image_name = $between_slashes[$len] . ".jpg";
-				$image_hi_name = $between_slashes[$len] . "_HI.jpg";
-				if($verbose == true) echo "Image name: " . $image_name . "\n";
+				$ext = pathinfo($matches[0][$cnt], PATHINFO_EXTENSION);
+				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
+					//Yes it's an image
 				
-				$abs_image_path = str_replace($web_api_url, $api_file_path, $raw_image_url);
-				$abs_image_dir = dirname($abs_image_path);
+					if($verbose == true) echo "Matched image raw: " . $matches[0][$cnt] . "\n";
+					$raw_image_url = $matches[0][$cnt];
+					$between_slashes = explode( "/", $matches[0][$cnt]);
+					$len = count($between_slashes) - 1;
+					$image_name = $between_slashes[$len] . ".jpg";
+					$image_hi_name = $between_slashes[$len] . "_HI.jpg";
+					if($verbose == true) echo "Image name: " . $image_name . "\n";
 				
-				if(!file_exists($abs_image_dir . $image_name)) $image_name = false;		//Don't use this version if
-				if(!file_exists($abs_image_dir . $image_hi_name)) $image_hi_name = false;										//it doesn't exist locally
+					$abs_image_path = str_replace($web_api_url, $api_file_path, $raw_image_url);
+					$abs_image_dir = dirname($abs_image_path);
+				
+					if(!file_exists($abs_image_dir . $image_name)) $image_name = false;		//Don't use this version if
+					if(!file_exists($abs_image_dir . $image_hi_name)) $image_hi_name = false;										//it doesn't exist locally
+				}
 																						
 			}
 			return array($raw_image_url, $image_name, $image_hi_name, $abs_image_dir);
