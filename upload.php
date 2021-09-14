@@ -177,8 +177,15 @@
     if(isset($argv[$upload_to_off])) {
     		if($argv[$message_id_off] == 0) {
     			//This is a .pdf upload
-    			$filename = $argv[$filename_off];		//E.g. Unknown-Forum-Title-Wed-Sep-15-2021-10-56-18.pdf
+    			
+    			$basic_filename = $argv[$filename_off];		//E.g. Unknown-Forum-Title-Wed-Sep-15-2021-10-56-18.pdf
     			$upload_to = $argv[$upload_to_off];
+    			
+    			$tags = $argv[$tags_off];
+    			$tags_visible = $tags . " " . $basic_filename;
+				$tags_visible = str_replace("-", " ", $tags);
+				
+				$filename = "#" . $tags . "-" . $basic_filename;
     			//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
 				if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
 				//echo "MedImage Server on upload:" . $upload_to . "\n";
@@ -196,13 +203,13 @@
 			
 			
 				if($resp == true) {
-				 $new_message = "Successfully sent the .pdf to the MedImage Server: '" . $filename . "'";		
+				 $new_message = "Successfully sent the .pdf to the MedImage Server: '" . $tags_visible . "'";		
 			 
 				 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
 				 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
 			 
 				} else {
-				 $new_message = "Sorry there was a problem sending the .pdf to the MedImage Server: '" . $filename . "'.  Error msg: " . $err;		
+				 $new_message = "Sorry there was a problem sending the .pdf to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
 					
 				}
 			
