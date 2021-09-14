@@ -37,12 +37,12 @@
 	   $table=new easyTable($pdf, '%{70, 30}', 'align:L;');
  
  	   
- 	   for($cnt = 0; $cnt < count($lines); $cnt++) {
+ 	   for($cnt = 0; $cnt < count($lines->res); $cnt++) {
  	  
  
 		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:#aaa; valign:T;'); //,w700,h1280  response
 		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:#aaa; valign:T;');
-			$table->printRow();
+		   $table->printRow();
  
  	   }
 
