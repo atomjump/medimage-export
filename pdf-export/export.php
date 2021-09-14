@@ -76,7 +76,7 @@
  		   if($image != false) {
  		   	  $filename = basename($image);
  		   	  $image_str = " img:../../../images/im/" . $filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
- 		   	  $line_text = str_replace($image, "",$line_text);		//Remove the textual version of image
+ 		   	  //$line_text = str_replace($image, "",$line_text);		//Remove the textual version of image
  		   } else {
  		   	  $image_str = "";
  		   	  
