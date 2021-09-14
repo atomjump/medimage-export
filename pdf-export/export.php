@@ -37,7 +37,7 @@
 
    	    $table->endTable();
  
- 		$pdf->Output('D');
+ 		return $pdf->Output('S');
    
    }
 
@@ -102,7 +102,9 @@
  	  //echo "Text: " . $lines->res[0]->text;
  	  //echo "Time: " . $lines->res[0]->timestamp;
  	  
- 	  parse_json_into_easytable($json);
+ 	  $pdfString = parse_json_into_easytable($json);
+ 	  $pdfBase64 = base64_encode($pdfString);
+	  echo 'data:application/pdf;base64,' . $pdfBase64;
  
 	} else {
 	 //wrong username
