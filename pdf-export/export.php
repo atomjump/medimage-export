@@ -29,15 +29,18 @@
 					
 		if(count($matches[0]) > 0) {
 			//Yes we have at least one image
+			$raw = "";
+			
 			for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
 				if($verbose == true) echo "Matched image raw: " . $matches[1][$cnt] . "\n";
+				$raw = $matches[1][$cnt];
 				$between_slashes = explode( "/", $matches[1][$cnt]);
 				$len = count($between_slashes) - 1;
 				$image_name = $between_slashes[$len] . ".jpg";
 				$image_hi_name = $between_slashes[$len] . "_HI.jpg";
 				if($verbose == true) echo "Image name: " . $image_name . "\n";
 			}
-			return array($matches[1][$cnt], $image_hi_name);
+			return array($raw, $image_hi_name);
 		} else {
 			return array(false, false);
 		
