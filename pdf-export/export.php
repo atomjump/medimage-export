@@ -158,10 +158,13 @@
  		   	  
  		   }
  		   
+ 		   $timestamp = str_replace("T", "", $lines->res[$cnt]->timestamp);
+ 		   $timestamp = str_replace("Z", "", $timestamp);
+ 		   
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str);
-		   $table->easyCell($lines->res[$cnt]->timestamp . " " . $urls, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($timestamp, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
