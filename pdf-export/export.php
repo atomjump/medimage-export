@@ -142,7 +142,7 @@
 	  }
   
   	  ob_start();
-	  $se->process(NULL, NULL, 2000,  true, $from, $db_timezone, $format, $duration);
+	  $se->process(NULL, NULL, 100,  true, $from, $db_timezone, $format, $duration);		//100 should be 2000 or so. TESTING
  	  $json = ob_get_clean();
  
  	  //echo $json;
