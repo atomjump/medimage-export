@@ -12,8 +12,37 @@
 	require("../../../classes/cls.layer.php");
 	require("../../../classes/cls.ssshout.php");
 
+
 	$sh = new cls_ssshout();
 	$lg = new cls_login();
+
+
+
+   function parse_json_into_easytable($json) {
+   
+   
+       require('easyTable.php');
+ 	   $pdf = require('fpdf181/fpdf.php');
+ 	   require('exfpdf.php');
+ 	
+ 	
+ 	   $pdf=new exFPDF();
+ 	   $pdf->AddPage(); 
+ 	   $pdf->SetFont('helvetica','',10);
+
+ 	
+	   $table=new easyTable($pdf, '%{70, 30}', 'align:L;');
+ 
+	   $table->easyCell('Peter: Says this', 'width:70%; align:L; bgcolor:#aaa; valign:T; img:images/test.jpg;'); //,w700,h1280
+
+   	    $table->endTable();
+ 
+ 		return $pdf->Output();
+   
+   }
+
+
+
 
 	$logged = false;
 	if(($_SESSION['logged-user'] != '')&&(isset($_SESSION['logged-user']))) {
@@ -73,6 +102,7 @@
  	  echo "Text: " . $lines->res[0]->text;
  	  echo "Time: " . $lines->res[0]->timestamp;
  	  
+ 	  echo parse_json_into_easytable($json);
  
 	} else {
 	 //wrong username
