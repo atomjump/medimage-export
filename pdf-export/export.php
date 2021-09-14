@@ -72,7 +72,7 @@
  	  	   $background_colour = $colours[$cnt%2];
  	  	   $line_text = $lines->res[$cnt]->text;
  	  
- 		   list($image_url, $image_filename = parse_for_image($lines->res[$cnt]->text);
+ 		   list($image_url, $image_filename) = parse_for_image($lines->res[$cnt]->text);
  		   if($image_url != false) {
  		   	  //$filename = basename($image);
  		   	  $image_str = " img:../../../images/im/" . $image_filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
