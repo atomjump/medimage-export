@@ -93,7 +93,7 @@
 	}
 
 
-   function parse_json_into_easytable($lines, $user_date_time) {
+   function parse_json_into_easytable($lines, $user_date_time, $forum_title) {
   	   //$lines = json_decode($json);
  	  
  	  
@@ -111,7 +111,9 @@
  	   $pdf=new exFPDF();
  	   $pdf->AddPage(); 
  	   $pdf->SetFont('Arial','B',12);
-	   $pdf->MultiCell(0,20,'AtomJump Forum Export ' . $user_date_time);
+	   $pdf->MultiCell(0,20,'AtomJump Forum Export ' . $forum_title);
+	   $pdf->SetFont('Arial','',8);
+	   $pdf->MultiCell(0,24,$user_date_time);
  	   $pdf->SetFont('Arial','',9);
  	   
  	   $hi_res_image_countdown = 1;//10;		//About 400KB*10 = 4MB
@@ -255,8 +257,10 @@
       //$json = substr($jsonp, 0, strpos($jsonp, ')', -1));
  	  $json = jsonp_decode($jsonp);
  	  
+ 	  $forum_title = $_REQUEST['uniqueFeedbackId'];		//TODO: change this to the human readable title of the forum
  	  
- 	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime']);
+ 	  
+ 	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title);
  	  $pdfBase64 = base64_encode($pdfString);
 	  echo 'data:application/pdf;base64,' . $pdfBase64;
  
