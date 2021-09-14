@@ -6,12 +6,39 @@
 	$db_read_only = false;				//Ensure we can palm this off to RDS replicas - we are only reading here, never writing
 										//except where we write because of the sessions vars.  Have added a test to reconnect with the
 										//master in that case.
-	require('../../../config/db_connect.php');
+	/*require('../../../config/db_connect.php');
 
 	require("../../../classes/cls.basic_geosearch.php");
 	require("../../../classes/cls.layer.php");
-	require("../../../classes/cls.ssshout.php");
+	require("../../../classes/cls.ssshout.php");*/
 
+	if(!isset($medimage_config)) {
+        //Get global plugin config - but only once
+        $data = file_get_contents (dirname(__FILE__) . "/config/config.json");
+        if($data) {
+            $medimage_config = json_decode($data, true);
+            if(!isset($medimage_config)) {
+                echo "Error: MedImage config/config.json is not valid JSON.";
+                exit(0);
+            }
+        } else {
+            echo "Error: MedImage config/config.json in medimage_export plugin.";
+            exit(0);
+        }
+    }
+
+	$start_path = add_trailing_slash_local($medimage_config['serverPath']);
+	$notify = true;		//this switches on notifications from this message
+	$staging = $medimage_config['staging'];
+	if($staging == 1) {
+		$staging = true;
+	}
+	include_once($start_path . 'config/db_connect.php');	
+	
+    $define_classes_path = $start_path;     //This flag ensures we have access to the typical classes, before the cls.pluginapi.php is included
+	require($start_path . "classes/cls.pluginapi.php");
+
+    $api = new cls_plugin_api();
 
 	$sh = new cls_ssshout();
 	$lg = new cls_login();
@@ -103,7 +130,7 @@
 	}
 
 
-   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records) {
+   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder) {
   	  
  	  
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();	
@@ -208,9 +235,62 @@
  		$filename = str_replace(":", "-", $filename);
  		$filename = str_replace("[", "", $filename);
  		$filename = str_replace("]", "", $filename);
- 		$pdf->Output('F', "../temp/" . $filename);
-   		return;
+ 		$pdf->Output('F', $output_folder . $filename);
+   		return $filename;
    }
+
+
+
+	function send_pdf_to_medimage($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
+	{
+		$verbose = false;   //usually false, unless you want to debug
+		
+		
+		
+		//Send a message to the forum
+		$id_text = get_current_id($api, $message_forum_id);
+		if(!$id_text) {
+			$id_text = "pdf";
+			$append_message = " Note: you can name your export folder by entering e.g. 'id nhi1234'";
+		} else {
+			$append_message = "";
+		}
+		
+		$tags = str_replace(" ", "-", $id_text);
+							
+		
+		$new_message = "Sending .pdf to the MedImage Server: '" . $id_text . "'" . $append_message;		
+		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
+		$sender_name_str = "MedImage";
+		$sender_email = "info@medimage.co.nz";
+		$sender_ip = "111.111.111.111";
+		$options = array('notification' => false, 'allow_plugins' => false);
+		
+		if($verbose == true) {
+			echo "sender_name_str:" . $sender_name_str . "  new_message:" . $new_message . "  recipient_ip_colon_id:" . $recipient_ip_colon_id . "  sender_email:" .  $sender_email . "  sender_ip:" .  $sender_ip . "  message_forum_id:" .  $message_forum_id ."\n";
+		}
+		
+		$new_message_id = $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+		
+		if($verbose == true) echo "New message id:" . $new_message_id . "\n";
+		//Now start a parallel process, that waits until the photo has been sent, before sending a confirmation message.       
+		
+	
+						
+		//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
+		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $pdf_file_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'] . " " . $tags;
+		global $staging;
+		if($staging == true) {
+			$command = $command . " staging";   //Ensure this works on a staging server  
+		}
+		if($verbose == true) error_log("Running: " . $command);
+		
+		$api->parallel_system_call($command, "linux");
+		$api->complete_parallel_calls();										
+	
+	}
+
+
 
 
 
@@ -274,10 +354,13 @@
  	  $forum_title = get_title($layer_info);		
  	  
  	  
- 	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records);
- 	  //$pdfBase64 = base64_encode($pdfString);
-	  //echo 'data:application/pdf;base64,' . $pdfBase64;
+ 	  $output_folder = add_trailing_slash(dirname(__FILE__)) . "../temp/";
  	  
+ 	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder);
+ 	  
+ 	  
+ 	  
+ 	  send_pdf_to_medimage($api, null, $pdf_file_name, $output_folder, 0, $layer_info['int_layer_id'], $_REQUEST['sender_id'], $medimage_config)
  
 	} else {
 	 //wrong username
