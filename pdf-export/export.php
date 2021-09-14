@@ -320,8 +320,8 @@
 		if($verbose == true) error_log("Running: " . $command);
 		echo $command;		//TEMP TESTING
 		
-		//TEMPOUT TESTING$api->parallel_system_call($command, "linux");
-		//TEMPOUT TESTING$api->complete_parallel_calls();										
+		$api->parallel_system_call($command, "linux");
+		$api->complete_parallel_calls();										
 	
 	}
 
