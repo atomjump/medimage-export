@@ -120,9 +120,9 @@
  	   for($cnt = 0; $cnt < count($lines->res); $cnt++) {
  	  
  	  	   $background_colour = $colours[$cnt%2];
- 	  	   $line_text = strip_tags($lines->res[$cnt]->text, 'img');
+ 	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  
- 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($line_text, $web_api_url, $api_file_path);
+ 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($lines->res[$cnt]->text, $web_api_url, $api_file_path);
  		   
  		   
  		   //$urls = $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
