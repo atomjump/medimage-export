@@ -152,6 +152,9 @@
 							//We've gone past the max number of images in this single .pdf file. Give the URL and add
 							//a warning to manually export the photo.
 							$image_str = "";  
+							if($image_hi_filename) {
+								$image_url = str_replace($image_filename, $image_hi_filename, $image_url);
+							}
 							$line_text = $line_text . " " . $image_url . " [Maximum images in this .pdf exceeded. Please manually export this photo]";
 					
 						}
