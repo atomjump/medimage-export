@@ -107,7 +107,9 @@
  	
  	   $pdf=new exFPDF();
  	   $pdf->AddPage(); 
- 	   $pdf->SetFont('helvetica','',10);
+ 	   $pdf->SetFont('Arial','B',12);
+	   $pdf->MultiCell(0,20,'AtomJump Forum Export');
+ 	   $pdf->SetFont('Arial','',9);
  	   
  	   $hi_res_image_countdown = 1;//10;		//About 400KB*10 = 4MB
  	   $low_res_image_countdown = 1;//20;		//About 100KB*20 = 2MB
