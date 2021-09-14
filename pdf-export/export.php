@@ -18,6 +18,7 @@
 
 
 	function get_image_url_remote_local()
+	{
 		global $cnf;
 		
 		$subdomain = check_subdomain();
@@ -35,8 +36,8 @@
 		$api_file_path = add_trailing_slash($cnf['fileRoot']);
 		
 		return ($web_api_url, $api_file_path);
-		
-	}
+	}	
+	
 
 
     function parse_for_image($line_text, $web_api_url, $api_file_path) {
