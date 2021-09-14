@@ -177,7 +177,7 @@
     if(isset($argv[$upload_to_off])) {
     		if($argv[$message_id_off] == 0) {
     			//This is a .pdf upload
-    			$filename = $argv[$filename_id_off];		//E.g. Unknown-Forum-Title-Wed-Sep-15-2021-10-56-18.pdf
+    			$filename = $argv[$filename_off];		//E.g. Unknown-Forum-Title-Wed-Sep-15-2021-10-56-18.pdf
     			$upload_to = $argv[$upload_to_off];
     			//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
 				if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
