@@ -104,11 +104,14 @@
  	   $pdf = require('fpdf181/fpdf.php');
  	   require('exfpdf.php');
  	
+ 	   
+ 	   
+ 	
  	
  	   $pdf=new exFPDF();
  	   $pdf->AddPage(); 
  	   $pdf->SetFont('Arial','B',12);
-	   $pdf->MultiCell(0,20,'AtomJump Forum Export');
+	   $pdf->MultiCell(0,20,'AtomJump Forum Export ' . $_REQUEST['userDateTime']);
  	   $pdf->SetFont('Arial','',9);
  	   
  	   $hi_res_image_countdown = 1;//10;		//About 400KB*10 = 4MB
