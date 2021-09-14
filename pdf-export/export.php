@@ -54,8 +54,8 @@
 			//Yes we have at least one url
 			$raw_image_url = "";
 			
-			for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
-				$info = pathinfo($matches[0][$cnt], PATHINFO_EXTENSION);
+			for($cnt = 0; $cnt < count($matches[0]); $cnt++) {
+				$info = pathinfo($matches[0][$cnt]);
 				$ext = $info['extension'];
 				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
 					//Yes it's an image
