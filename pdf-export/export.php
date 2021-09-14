@@ -79,7 +79,7 @@
  		   }
  
 		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;'); //,w700,h1280  response
-		   $table->easyCell($lines->res[$cnt]->timestamp . " " $image_str, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($lines->res[$cnt]->timestamp . " " . $image_str, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
