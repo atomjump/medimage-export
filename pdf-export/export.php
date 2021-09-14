@@ -82,6 +82,14 @@
     
     
     }
+    
+    function jsonp_decode($jsonp, $assoc = false) { // PHP 5.3 adds depth as third parameter to json_decode
+    	//With thanks to https://stackoverflow.com/questions/5081557/extract-jsonp-resultset-in-php
+		if($jsonp[0] !== '[' && $jsonp[0] !== '{') { // we have JSONP
+		   $jsonp = substr($jsonp, strpos($jsonp, '('));
+		}
+		return json_decode(trim($jsonp,'();'), $assoc);
+	}
 
 
    function parse_json_into_easytable($json) {
@@ -214,8 +222,6 @@
 		$from = 0;
 	  }
 	  
-	  $from = 7047;		//TESTING
-  
 	  if($_REQUEST['format']) {
 		 $format = $_REQUEST['format'];
 	  } else {
@@ -229,12 +235,13 @@
 	  }
   
   	  ob_start();
-	  $se->process(NULL, NULL, 200,  true, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
- 	  $json = ob_get_clean();
+	  $se->process(NULL, NULL, 200,  false, $from, $db_timezone, $format, $duration);		//50 should be 2000 or so. TESTING
+ 	  $jsonp = ob_get_clean();
  
- 	  //echo $json;
- 	  //print_r($lines->res[0]);
- 	
+ 	  //Remove JSONP starting up till "(", and remove end ")"	  
+      //$jsonp = substr($jsonp, 0, strpos($jsonp, '('));
+      //$json = substr($jsonp, 0, strpos($jsonp, ')', -1));
+ 	  $json = jsonp_decode($jsonp);
  	  
  	  $pdfString = parse_json_into_easytable($json);
  	  $pdfBase64 = base64_encode($pdfString);
