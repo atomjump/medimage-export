@@ -278,7 +278,7 @@
 
 	function send_pdf_to_medimage($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 	{
-		$verbose = false;   //usually false, unless you want to debug
+		$verbose = true;   //usually false, unless you want to debug
 		
 		
 		
