@@ -1,9 +1,5 @@
 <?php
 
-	echo "Inside export. Layer:" . $_REQUEST['layer_name'];
-	//Sample URL: https://staging.atomjump.com/api/download.php?format=json&uniqueFeedbackId=test_feedback
-
-
 	//Note: this is very similar to the code in the main loop-server project in download.php
 
 	//Note, we will need read only capability later on
@@ -71,7 +67,11 @@
 	  $se->process(NULL, NULL, 2000,  true, $from, $db_timezone, $format, $duration);
  	  $json = ob_get_clean();
  
- 	  echo $json;
+ 	  //echo $json;
+ 	  $lines = json_decode($json);
+ 	  echo "With arrow: " . $lines['res'][0]->text;
+ 	  echo "With array: " . $lines['res'][0]['text'];
+ 	  
  
 	} else {
 	 //wrong username
