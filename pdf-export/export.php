@@ -120,12 +120,12 @@
  	   for($cnt = 0; $cnt < count($lines->res); $cnt++) {
  	  
  	  	   $background_colour = $colours[$cnt%2];
- 	  	   $line_text = $lines->res[$cnt]->text;
+ 	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  
- 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($lines->res[$cnt]->text, $web_api_url, $api_file_path);
+ 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($line_text, $web_api_url, $api_file_path);
  		   
  		   
- 		   $urls = $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
+ 		   //$urls = $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
  		   
  		   if($image_url != false) {
  		   	  //So, it is at least an image from another website
@@ -166,9 +166,9 @@
  		   	  
  		   }
  		   
- 		   $timestamp = str_replace("T", "  ", $lines->res[$cnt]->timestamp);
- 		   $timestamp = str_replace("Z", "", $timestamp);
- 		   
+ 		   //$timestamp = str_replace("T", "  ", $lines->res[$cnt]->timestamp);
+ 		   //$timestamp = str_replace("Z", "", $timestamp);
+ 		   $ago =  $lines->res[$cnt]->ago;
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str);
