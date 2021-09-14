@@ -35,7 +35,7 @@
 		
 		$api_file_path = add_trailing_slash($cnf['fileRoot']);
 		
-		return ($web_api_url, $api_file_path);
+		return array($web_api_url, $api_file_path);
 	}	
 	
 
