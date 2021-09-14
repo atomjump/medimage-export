@@ -80,6 +80,7 @@
  		   	  //$filename = basename($image);
  		   	  $image_str = " img:../../../images/im/" . $image_filename . ";"; 		//upl682-39859669.jpg //https://staging.atomjump.com/api/images/im/upl682-39859669.jpg
  		   	  $line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
+ 		   	  $line_text = str_replace("https://staging.atomjump.jpg", "", $line_text);		//TODO: testing here only
  		   } else {
  		   	  $image_str = "";
  		   	  
@@ -89,7 +90,7 @@
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str); //,w700,h1280 
-		   $table->easyCell($lines->res[$cnt]->timestamp . " " . $image_url, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
+		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:' . $background_colour . '; valign:T;');
 		   $table->printRow();
  
  	   }
