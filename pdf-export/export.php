@@ -35,6 +35,8 @@
  
 	   $table->easyCell('Peter: Says this', 'width:70%; align:L; bgcolor:#aaa; valign:T;'); //,w700,h1280  response
 	   $table->easyCell('21-Sep-2021  10:10am', 'width:30%; align:L; bgcolor:#aaa; valign:T;');
+		$table->printRow();
+ 
 
    	    $table->endTable();
  
