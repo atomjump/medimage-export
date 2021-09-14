@@ -19,7 +19,10 @@
 
 
    function parse_json_into_easytable($json) {
-   
+  	   $lines = json_decode($json);
+ 	  
+ 	  //echo "Text: " . $lines->res[0]->text;
+ 	  //echo "Time: " . $lines->res[0]->timestamp;   
    
        require('easyTable.php');
  	   $pdf = require('fpdf181/fpdf.php');
@@ -33,10 +36,15 @@
  	
 	   $table=new easyTable($pdf, '%{70, 30}', 'align:L;');
  
-	   $table->easyCell('Peter: Says this', 'width:70%; align:L; bgcolor:#aaa; valign:T;'); //,w700,h1280  response
-	   $table->easyCell('21-Sep-2021  10:10am', 'width:30%; align:L; bgcolor:#aaa; valign:T;');
-		$table->printRow();
+ 	   
+ 	   for($cnt = 0; $cnt < count($lines); $cnt++) {
+ 	  
  
+		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:#aaa; valign:T;'); //,w700,h1280  response
+		   $table->easyCell($lines->res[$cnt]->timestamp, 'width:30%; align:L; bgcolor:#aaa; valign:T;');
+			$table->printRow();
+ 
+ 	   }
 
    	    $table->endTable();
  
@@ -100,10 +108,8 @@
  	  $json = ob_get_clean();
  
  	  //echo $json;
- 	  $lines = json_decode($json);
  	  //print_r($lines->res[0]);
- 	  //echo "Text: " . $lines->res[0]->text;
- 	  //echo "Time: " . $lines->res[0]->timestamp;
+ 	
  	  
  	  $pdfString = parse_json_into_easytable($json);
  	  $pdfBase64 = base64_encode($pdfString);
