@@ -92,8 +92,8 @@
 	}
 
 
-   function parse_json_into_easytable($json) {
-  	   $lines = json_decode($json);
+   function parse_json_into_easytable($lines) {
+  	   //$lines = json_decode($json);
  	  
  	  
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();	
@@ -242,6 +242,7 @@
       //$jsonp = substr($jsonp, 0, strpos($jsonp, '('));
       //$json = substr($jsonp, 0, strpos($jsonp, ')', -1));
  	  $json = jsonp_decode($jsonp);
+ 	  
  	  
  	  $pdfString = parse_json_into_easytable($json);
  	  $pdfBase64 = base64_encode($pdfString);
