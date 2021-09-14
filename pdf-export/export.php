@@ -55,16 +55,15 @@
 			$raw_image_url = "";
 			
 			for($cnt = 0; $cnt < count($matches[1]); $cnt++) {
-				$ext = pathinfo($matches[0][$cnt], PATHINFO_EXTENSION);
+				$info = pathinfo($matches[0][$cnt], PATHINFO_EXTENSION);
+				$ext = $info['extension'];
 				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
 					//Yes it's an image
 				
 					if($verbose == true) echo "Matched image raw: " . $matches[0][$cnt] . "\n";
 					$raw_image_url = $matches[0][$cnt];
-					$between_slashes = explode( "/", $matches[0][$cnt]);
-					$len = count($between_slashes) - 1;
-					$image_name = $between_slashes[$len] . ".jpg";
-					$image_hi_name = $between_slashes[$len] . "_HI.jpg";
+					$image_name = $info['filename'] . ".jpg";
+					$image_hi_name = $info['filename'] . "_HI.jpg";
 					if($verbose == true) echo "Image name: " . $image_name . "\n";
 				
 					$abs_image_path = str_replace($web_api_url, $api_file_path, $raw_image_url);
