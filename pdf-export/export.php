@@ -40,7 +40,7 @@
  	   
  	   for($cnt = 0; $cnt < count($lines->res); $cnt++) {
  	  
- 	  	   $background_colour = $colours($cnt %2);
+ 	  	   $background_colour = $colours[$cnt%2];
  	  
  
 		   $table->easyCell($lines->res[$cnt]->text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;'); //,w700,h1280  response
