@@ -116,32 +116,36 @@
  		   	  //So, it is at least an image from another website
  		   	  
  		   	  if($image_filename) {
- 		   		  //It is a local file
+ 		   		  	//It is a local file
  		   		  
- 		   		  if(($hi_res_image_countdown > 0) && ($image_hi_filename)) {
- 		   		  	//Use the hi-res version in the .pdf
- 		   		    $image_str = " img:" . $abs_image_dir . $image_hi_filename . ";";
- 		   		    $line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
- 		   		    $hi_res_image_countdown --;
- 		   		  } else {
- 		   		   	if(($low_res_image_countdown > 0) && ($image_filename)) {
- 		   		   		//Use the low-res version in the .pdf
- 		   		   		 $image_str = " img:" . $abs_image_dir . $image_filename . ";";
- 		   		    	 $line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
- 		   		    	 $low_res_image_countdown --;
- 		   		    } else {
- 		   		    	//We've gone past the max number of images in this single .pdf file. Give the URL and add
- 		   		    	//a warning to manually export the photo.
- 		   		    	$image_str = "";  
- 		   		    	$line_text = $line_text . " [Maximum images in this .pdf exceeded. Please manually export this photo]";
- 		   		    
- 		   		    }
+					if(($hi_res_image_countdown > 0) && ($image_hi_filename)) {
+						//Use the hi-res version in the .pdf
+						$image_str = " img:" . $abs_image_dir . $image_hi_filename . ";";
+						$line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
+						$hi_res_image_countdown --;
+					} else {
+						if(($low_res_image_countdown > 0) && ($image_filename)) {
+							//Use the low-res version in the .pdf
+							 $image_str = " img:" . $abs_image_dir . $image_filename . ";";
+							 $line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
+							 $low_res_image_countdown --;
+						} else {
+							//We've gone past the max number of images in this single .pdf file. Give the URL and add
+							//a warning to manually export the photo.
+							$image_str = "";  
+							$line_text = $line_text . " [Maximum images in this .pdf exceeded. Please manually export this photo]";
+					
+						}
+ 		   		
  		   		  	
-				} else {
-					//It is a remote image - just include the URL visually		
-					$image_str = "";		
-				}
-			} else {
+					}
+					
+			 } else {
+				//It is a remote image - just include the URL visually		
+				$image_str = "";
+			 }	
+				
+		   } else {
 				//No images
       			$image_str = "";  
  		   	  
