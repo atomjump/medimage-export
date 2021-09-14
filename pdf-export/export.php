@@ -121,11 +121,13 @@
  	  
  	  	   $background_colour = $colours[$cnt%2];
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
+ 	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
+ 	  	   $parsable_text = str_replace("&nbsp;", " ", $lines->res[$cnt]->text);
  	  
- 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($lines->res[$cnt]->text, $web_api_url, $api_file_path);
+ 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($parsable_text, $web_api_url, $api_file_path);
  		   
  		   
- 		   $urls = $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
+ 		   $urls = $parsable_text . "," . $image_url . "," . $image_filename . "," . $image_hi_filename . "," . $abs_image_dir;		//TEMP DEBUGGING
  		   
  		   if($image_url != false) {
  		   	  //So, it is at least an image from another website
