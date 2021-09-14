@@ -423,8 +423,8 @@
             <?php
            
            
-            $ret_text = "<script>function medimagePDFExport(msgId) { data = { layer_name: '" . $layer_name . "' };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) {  alert(\"Response : \" + response); }); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";  //alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "
-            //https://staging.atomjump.com/api/download.php?format=json&uniqueFeedbackId=test_feedback
+            $ret_text = "<script>function medimagePDFExport(msgId) { data = { uniqueFeedbackId: '" . $layer_name . "' };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) {  alert(\"Response : \" + response); }); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";  //alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "
+            
             
             echo $ret_text;
             
