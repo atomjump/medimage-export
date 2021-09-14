@@ -269,6 +269,7 @@
  		$filename = str_replace(":", "-", $filename);
  		$filename = str_replace("[", "", $filename);
  		$filename = str_replace("]", "", $filename);
+ 		$filename = trim($filename);
  		$pdf->Output('F', $output_folder . $filename);
    		return $filename;
    }
