@@ -91,6 +91,16 @@
 		}
 		return json_decode(trim($jsonp,'();'), $assoc);
 	}
+	
+	function get_title($layer_info) {
+		
+		$title = "[Unknown Forum Title]";		
+		if($layer_info['var_title']) {			
+			$title = $layer_info['var_title'];		
+		}
+		
+		return $title;
+	}
 
 
    function parse_json_into_easytable($lines, $user_date_time, $forum_title) {
@@ -257,7 +267,7 @@
       //$json = substr($jsonp, 0, strpos($jsonp, ')', -1));
  	  $json = jsonp_decode($jsonp);
  	  
- 	  $forum_title = $_REQUEST['uniqueFeedbackId'];		//TODO: change this to the human readable title of the forum
+ 	  $forum_title = get_title($layer_info);		
  	  
  	  
  	  $pdfString = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title);
