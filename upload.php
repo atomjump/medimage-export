@@ -19,7 +19,7 @@
 	*/
 	
 	
-	$verbose = true;
+	$verbose = false;
 
   	function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
@@ -223,6 +223,7 @@
 				
 				//Send a private message
 				$sender_id = $argv[$sender_id_off];
+				echo "Sender ID:" . $sender_id;		//TESTING
 				
 				//Delete the PDF file
 				$basic_filename = str_replace("..","", $basic_filename);		//Prevent any cross path scripting
