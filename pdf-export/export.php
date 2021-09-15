@@ -353,11 +353,11 @@
 
 
 	
-	function wait_and_remove_pdf($api, $full_pdf_file, $medimage_config) {
+	function wait_and_remove_pdf($api, $pdf_file, $medimage_config) {
 	
 		$verbose = true;
 			
-		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $full_pdf_file;
+		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $pdf_file;
 		global $staging;
 		if($staging == true) {
 			$command = $command . " staging";   //Ensure this works on a staging server  
@@ -470,7 +470,7 @@
  	   } else {
  	   	  chmod($output_folder . $pdf_file_name, "777");
  	   	  echo $web_path . $pdf_file_name;
- 	   	  wait_and_remove_pdf($api, $output_folder . $pdf_file_name, $medimage_config);
+ 	   	  wait_and_remove_pdf($api, $pdf_file_name, $medimage_config);
  	   }
  	   
  	  

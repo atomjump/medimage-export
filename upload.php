@@ -39,6 +39,7 @@
 		$error_message = "";
 		
 		//Copy a temporary cache into our current folder, and rename it.
+		$filename = str_replace("..","", $filename);		//Prevent any cross path scripting
 		$temp_filename = add_trailing_slash_local(__DIR__) . "temp/" . $filename;
 		//WARNING: the temporary folder must have 777 permissions.
 		
@@ -220,6 +221,7 @@
 				}
 				
 				//Delete the PDF file
+				$basic_filename = str_replace("..","", $basic_filename);		//Prevent any cross path scripting
 				unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $basic_filename);
 			
 				if($verbose == true) error_log("About to post to the group with :" . $new_message);

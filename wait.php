@@ -80,7 +80,7 @@
 
     $api = new cls_plugin_api();
 
- 	$basic_filename = $argv[$file_offset];
+ 	$core_filename = $argv[$file_offset];
  	
  	//TODO: wait 10 minutes, and then delete the input file   
 	echo "Will delete " . $basic_filename . " in 10 minutes.";
@@ -88,8 +88,9 @@
     sleep(15);		//TODO: change to 10 minute = 60secx10min  = 600
 
     //Delete the PDF file
+    $core_filename = str_replace("..","", $core_filename);		//Prevent any cross path scripting
     
-	unlink(add_trailing_slash_local(dirname(__FILE__)) . $basic_filename);
+	unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $core_filename);
    
 
 ?>
