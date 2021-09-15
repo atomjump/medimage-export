@@ -355,6 +355,7 @@
 	
 	function wait_and_remove_pdf($api, $full_pdf_file) {
 	
+		$verbose = true;
 			
 		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $full_pdf_file;
 		global $staging;
