@@ -141,7 +141,7 @@
 	$upload_to_off = $layer_name_off + 1;
 	$tags_off = $upload_to_off + 1;
 	$sender_id_off = $tags_off + 1;
-	$staging_flag_off = $staging_flag_off + 1;
+	$staging_flag_off = $sender_id_off + 1;
 	
 	
 	
@@ -156,7 +156,7 @@
 	}
 	
 	if(isset($argv[$staging_flag_off])) {      //allow for a staging flag
-	   //TEMPOUT $staging = true;
+	   $staging = true;
 	}
 	include_once($start_path . 'config/db_connect.php');	
 	
