@@ -245,6 +245,10 @@
 				$tags = $argv[$tags_off];
 				$tags_visible = str_replace("-", " ", $tags);
 				$filename = "#" . $tags . "-" . date("d-m-Y-h-i-s") . ".jpg";
+				
+				$sender_id = $argv[$sender_id_off];
+				echo "Sender ID:" . $sender_id;		//TESTING
+				
 				$upload_to = $argv[$upload_to_off];
 				if($upload_to == "null") {
 					//There is no MedImage Server paired
