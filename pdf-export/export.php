@@ -332,7 +332,7 @@
 	
 	}
 
-	function make_pdf_visible($output_folder, $pdf_file_name, $web_path) {
+	function make_pdf_visible($api, $output_folder, $pdf_file_name, $web_path) {
 	
 			
 		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $output_folder . " " . $pdf_file_name . " " . $web_path;
@@ -426,11 +426,11 @@
 		  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
  	   } else {
  	   	  chmod($output_folder . $pdf_file_name, "777");
- 	   	  make_pdf_visible($output_folder, $pdf_file_name, $web_path);
+ 	   	  //TEMPOUT TESTINGmake_pdf_visible($output_folder, $pdf_file_name, $web_path);
  	   }
  	   
  	  
- 	   echo "Final export:" . $web_path . $pdf_file_name;
+ 	   echo $web_path . $pdf_file_name;
  	    
 	} else {
 	 //wrong username
