@@ -2,21 +2,7 @@
 
 	//This script should not have any output, or expect any output in the final version.
 	//It is run via index.php > run-process.php
-	/* Command line inputs:   
-		E.g. [
-			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/upload.php",
-			"\/var\/www\/html\/atomjump_staging\/api\/images\/im\/",
-			"upl415-37673138_HI.jpg",
-			"5299",
-			"178",
-			"test_feedback",
-			"https:\/\/medimage-nz1.atomjump.com\/write\/QY5WZRemkuadCDjY83",
-			"nhi1234-arm",
-			"staging"
-		]
-		
-		/usr/bin/php /var/www/html/atomjump_staging/api/plugins/medimage_export/upload.php /var/www/html/atomjump_staging/api/images/im/ upl415-37673138_HI.jpg 5299 178 test_feedback https://medimage-nz1.atomjump.com/write/QY5WZRemkuadCDjY83 nhi1234-arm staging
-	*/
+	//It waits ten minutes before deleting a user-generated pdf
 	
 	
 	$verbose = false;
@@ -82,10 +68,10 @@
 
  	$core_filename = $argv[$file_offset];
  	
- 	//TODO: wait 10 minutes, and then delete the input file   
-	echo "Will delete " . $basic_filename . " in 10 minutes.";
+ 	//Wait 10 minutes, and then delete the input file   
+	if($verbose == true) echo "Will delete " . $basic_filename . " in 10 minutes.";
 
-    sleep(15);		//TODO: change to 10 minute = 60secx10min  = 600
+    sleep(600);	
 
     //Delete the PDF file
     $core_filename = str_replace("..","", $core_filename);		//Prevent any cross path scripting
