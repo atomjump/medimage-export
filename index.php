@@ -453,7 +453,7 @@
             echo $ret_text;
             
             //General pdf export
-             $ret_text = "<script>function PDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch(); alert(response); window.open(response);  }); }</script>";
+             $ret_text = "<script>function PDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch(); window.open(response);  }); }</script>";
             echo $ret_text;
             
             //Visible buttons
