@@ -50,6 +50,7 @@
 
 	/* Command line inputs:   
 		E.g. [
+			"/usr/bin/php",
 			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/wait.php",
 			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/plugins\/temp\/mypdf.pdf",
 			
@@ -79,15 +80,16 @@
 
     $api = new cls_plugin_api();
 
- 	
+ 	$basic_filename = $argv[$file_offset];
  	
  	//TODO: wait 10 minutes, and then delete the input file   
+	echo "Will delete " . $basic_filename . " in 10 minutes.";
 
     sleep(15);		//TODO: change to 10 minute = 60secx10min  = 600
 
     //Delete the PDF file
-    $basic_filename = $argv[$file_offset];
-	unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $basic_filename);
+    
+	unlink(add_trailing_slash_local(dirname(__FILE__)) . $basic_filename);
    
 
 ?>
