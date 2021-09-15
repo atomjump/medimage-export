@@ -70,7 +70,7 @@
 
 	function send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 	{
-		$verbose = false;   //usually false, unless you want to debug
+		$verbose = true;   //usually false, unless you want to debug
 		
 		$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
 		
