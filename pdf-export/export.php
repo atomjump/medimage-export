@@ -351,10 +351,12 @@
 	
 	}
 
-	function make_pdf_visible($api, $output_folder, $pdf_file_name, $web_path) {
+
+	
+	function wait_and_remove_pdf($api, $full_pdf_file) {
 	
 			
-		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $output_folder . " " . $pdf_file_name . " " . $web_path;
+		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $full_pdf_file;
 		global $staging;
 		if($staging == true) {
 			$command = $command . " staging";   //Ensure this works on a staging server  
@@ -466,7 +468,7 @@
 		  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
  	   } else {
  	   	  chmod($output_folder . $pdf_file_name, "777");
- 	   	  //TEMPOUT TESTINGmake_pdf_visible($output_folder, $pdf_file_name, $web_path);
+ 	   	  wait_and_remove_pdf($api, $output_folder . $pdf_file_name);
  	   }
  	   
  	  

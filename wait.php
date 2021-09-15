@@ -50,24 +50,12 @@
 
 	/* Command line inputs:   
 		E.g. [
-			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/upload.php",
-			"\/var\/www\/html\/atomjump_staging\/api\/images\/im\/",
-			"upl415-37673138_HI.jpg",
-			"5299",
-			"178",
-			"test_feedback",
-			"https:\/\/medimage-nz1.atomjump.com\/write\/QY5WZRemkuadCDjY83",
-			"staging"
+			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/wait.php",
+			"\/var\/www\/html\/atomjump_staging\/api\/plugins\/medimage_export\/plugins\/temp\/mypdf.pdf",
+			
 		]
 	*/
-	$folder_off = 1;
-	$filename_off = 2;
-	$message_id_off = $filename_off + 1;
-	$forum_id_off = $message_id_off + 1;
-	$layer_name_off = $forum_id_off + 1;
-	$upload_to_off = $layer_name_off + 1;
-	$tags_off = $upload_to_off + 1;
-	$staging_flag_off = $upload_to_off + 1;
+	$file_offset = 1;
 	
 	
 	
@@ -95,15 +83,11 @@
  	
  	//TODO: wait 10 minutes, and then delete the input file   
 
-    
+    sleep(15);		//TODO: change to 10 minute = 60secx10min  = 600
 
-    
+    //Delete the PDF file
+    $basic_filename = $argv[$file_offset];
+	unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $basic_filename);
    
-    
-    
-    
-
-    
-      
 
 ?>
