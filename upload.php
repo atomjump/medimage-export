@@ -200,7 +200,8 @@
 				
 				list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
 			
-			
+				//Delete the PDF file
+				unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $basic_filename);
 			
 				if($resp == true) {
 				 $new_message = "Successfully sent the whole forum PDF file to the MedImage Server: '" . $tags_visible . "'";		
