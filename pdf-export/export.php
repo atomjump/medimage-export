@@ -412,12 +412,12 @@
 				//$api, $message_id, $web_path, $pdf_file_name, $message_forum_id, $layer_name, $sender_id, $medimage_config
 				medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
 				exit(0);
+    		}    	
+      } else {
+			//Not even registered yet.
+			medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
+			exit(0);
         	
-        	} else {
-        		//Not even registered yet.
-        		medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
-        		exit(0);
-        	}
       }
 
 
