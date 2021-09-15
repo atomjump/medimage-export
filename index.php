@@ -425,7 +425,7 @@
             <?php
            
            
-            $ret_text = "<script>function medimagePDFExport(msgId) { var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#comment-upload').hide(); doSearch();  }); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";  //alert(\"Response : \" + response); alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "
+            $ret_text = "<script>function medimagePDFExport(msgId) { var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch();  }); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";  //alert(\"Response : \" + response); alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "
             
             
             echo $ret_text;
