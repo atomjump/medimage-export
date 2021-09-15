@@ -106,7 +106,13 @@
 	
 						
 		//Get the layer name, if available. Used to ensure we have selected the correct database in our process child.
-		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $_COOKIE['medimage-server'] . " " . $tags;
+		if(!$_COOKIE['medimage-server']) {
+			$medimage_server = "null";
+		} else {
+			$medimage_server = $_COOKIE['medimage-server'];
+		}
+		
+		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $medimage_server . " " . $tags;
 		global $staging;
 		if($staging == true) {
 			$command = $command . " staging";   //Ensure this works on a staging server  

@@ -181,38 +181,46 @@
     			$basic_filename = $argv[$filename_off];		//E.g. Unknown-Forum-Title-Wed-Sep-15-2021-10-56-18.pdf
     			$upload_to = $argv[$upload_to_off];
     			
-    			$tags = $argv[$tags_off];
-    			$tags_visible = $tags . " " . $basic_filename;
-				$tags_visible = str_replace("-", " ", $tags);
+    			if($upload_to == "null") {
+					//There is no MedImage Server paired
+					$new_message =  "You have not yet paired with MedImage on your desktop. Click one of the large pairing buttons on the MedImage desktop, and then type 'pair [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you. http://medimage.co.nz/how-to/#pair";
+				} else {
+    			
+					$tags = $argv[$tags_off];
+					$tags_visible = $tags . " " . $basic_filename;
+					$tags_visible = str_replace("-", " ", $tags);
 				
-				$filename = "#" . $tags . "-" . $basic_filename;
-    			//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
-				if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
-				//echo "MedImage Server on upload:" . $upload_to . "\n";
-				$url = explode("/", $upload_to);
-				$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
-				$folder = $url[4];
-				$output_post_url = $domain . "/api/photo";		//MedImage constant
-				$output_file_name = "#" . $folder . "-" . $filename;
-					//E.g.  /var/www/html/atomjump_staging/api/plugins/medimage_export/pdf-export/../temp/
-				$local_file_path = $argv[$folder_off] . $argv[$filename_off];		//the actual local filename 
+					$filename = "#" . $tags . "-" . $basic_filename;
+					//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
+					if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
+					//echo "MedImage Server on upload:" . $upload_to . "\n";
+					$url = explode("/", $upload_to);
+					$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
+					$folder = $url[4];
+					$output_post_url = $domain . "/api/photo";		//MedImage constant
+					$output_file_name = "#" . $folder . "-" . $filename;
+						//E.g.  /var/www/html/atomjump_staging/api/plugins/medimage_export/pdf-export/../temp/
+					$local_file_path = $argv[$folder_off] . $argv[$filename_off];		//the actual local filename 
 				
 				
-				list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
+					list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
 			
+				
+			
+					if($resp == true) {
+					 $new_message = "Successfully sent the whole forum PDF file to the MedImage Server: '" . $tags_visible . "'";		
+			 
+					 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
+					 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
+			 
+					} else {
+					 $new_message = "Sorry there was a problem sending the PDF to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
+					
+					}
+				}
+				
 				//Delete the PDF file
 				unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $basic_filename);
-			
-				if($resp == true) {
-				 $new_message = "Successfully sent the whole forum PDF file to the MedImage Server: '" . $tags_visible . "'";		
-			 
-				 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
-				 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
-			 
-				} else {
-				 $new_message = "Sorry there was a problem sending the PDF to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
-					
-				}
 			
 				if($verbose == true) error_log("About to post to the group with :" . $new_message);
 	
@@ -232,30 +240,34 @@
 				$tags_visible = str_replace("-", " ", $tags);
 				$filename = "#" . $tags . "-" . date("d-m-Y-h-i-s") . ".jpg";
 				$upload_to = $argv[$upload_to_off];
-				//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
-				if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
-				//echo "MedImage Server on upload:" . $upload_to . "\n";
-				$url = explode("/", $upload_to);
-				$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
-				$folder = $url[4];
-				$output_post_url = $domain . "/api/photo";
-				$output_file_name = "#" . $folder . "-" . $filename;
-				$local_file_path = $start_path . "images/im/" . $argv[$filename_off];		//the actual local filename 
+				if($upload_to == "null") {
+					//There is no MedImage Server paired
+					$new_message =  "You have not yet paired with MedImage on your desktop. Click one of the large pairing buttons on the MedImage desktop, and then type 'pair [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you. http://medimage.co.nz/how-to/#pair";
+				} else {
+					//Split up the medimage-server value e.g. https://medimage-nz1.atomjump.com/write/uPSE4UWHmJ8XqFUqvf
+					if($verbose == true) error_log("MedImage Server on upload:" . $upload_to);
+					//echo "MedImage Server on upload:" . $upload_to . "\n";
+					$url = explode("/", $upload_to);
+					$domain = $url[0] . "/" . $url[1] . "/" . $url[2];
+					$folder = $url[4];
+					$output_post_url = $domain . "/api/photo";
+					$output_file_name = "#" . $folder . "-" . $filename;
+					$local_file_path = $start_path . "images/im/" . $argv[$filename_off];		//the actual local filename 
 		
 			
-				list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
+					list($resp, $err) = post_data($output_post_url, $local_file_path,  $output_file_name, $verbose);
 			
-			
-			
-				if($resp == true) {
-				 $new_message = "Successfully sent the photo to the MedImage Server: '" . $tags_visible . "'";		
+					if($resp == true) {
+					 $new_message = "Successfully sent the photo to the MedImage Server: '" . $tags_visible . "'";		
 			 
-				 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
-				 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
+					 //TODO: See check if a file exists section of http://medimage.co.nz/building-an-alternative-client-to-medimage/
+					 //We should keep pinging the server until the photo disappears here, ideally, in order to show a full run through.
 			 
-				} else {
-				 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
+					} else {
+					 $new_message = "Sorry there was a problem sending the photo to the MedImage Server: '" . $tags_visible . "'.  Error msg: " . $err;		
 					
+					}
+				
 				}
 			
 				if($verbose == true) error_log("About to post to the group with :" . $new_message);
