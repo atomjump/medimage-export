@@ -275,6 +275,25 @@
    }
 
 
+	function medimage_intro_message($api, $message_id, $web_path, $pdf_file_name, $message_forum_id, $layer_name, $sender_id, $medimage_config)
+	{
+		//Send an intro message
+		$new_message = "You need to enable MedImage exports first, please enter 'start medimage'. Once paired, this will export this forum's contents as a PDF directly onto your desktop system. You can find more information at http://medimage.co.nz";
+		
+		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
+		$sender_name_str = "MedImage";
+		$sender_email = "info@medimage.co.nz";
+		$sender_ip = "111.111.111.111";
+		$options = array('notification' => false, 'allow_plugins' => false);
+		
+		if($verbose == true) {
+			echo "sender_name_str:" . $sender_name_str . "  new_message:" . $new_message . "  recipient_ip_colon_id:" . $recipient_ip_colon_id . "  sender_email:" .  $sender_email . "  sender_ip:" .  $sender_ip . "  message_forum_id:" .  $message_forum_id ."\n";
+		}
+		
+		$new_message_id = $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+		
+	}
+
 
 	function send_pdf_to_medimage($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 	{
@@ -380,6 +399,28 @@
 
 	if($logged == true) {
 
+
+	  //Return the .pdf file as a URL
+ 	  list($web_api_url, $api_file_path) = get_image_url_remote_local();
+ 	  $web_path = $web_api_url . "plugins/medimage_export/temp/";
+
+	  if(isset($_COOKIE['medimage-switched-on'])) {
+        		if($_COOKIE['medimage-switched-on'] == "true") {
+        			//All good. Carry on below.
+        		} else {
+        			//Not switched on
+        			//$api, $message_id, $web_path, $pdf_file_name, $message_forum_id, $layer_name, $sender_id, $medimage_config
+        			medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
+        			exit(0);
+        		}
+        	} else {
+        		//Not even registered yet.
+        		medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
+        		exit(0);
+        	}
+      }
+
+
 	  $se = new cls_search();
  
 	  if($_REQUEST['from_id']) {
@@ -416,9 +457,7 @@
  	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder);
  	  
  	  
- 	   //Return the .pdf file as a URL
- 	   list($web_api_url, $api_file_path) = get_image_url_remote_local();
- 	   $web_path = $web_api_url . "plugins/medimage_export/temp/";
+ 	  
  	  
  	  
  	  if(isset($_REQUEST['send_medimage'])) {

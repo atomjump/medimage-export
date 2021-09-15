@@ -429,9 +429,7 @@
             //Do your thing in here. Here is a sample.
             $api = new cls_plugin_api();
           
-            //if($this->check_switched_on(false) == false) return true;		//Early out of here, if we aren't switch on.
-
-			$layer_name = "";
+            $layer_name = "";
 			if(isset($_REQUEST['passcode'])) {
 				$layer_name = $_REQUEST['passcode'];			
 			}
