@@ -112,7 +112,7 @@
 			$medimage_server = $_COOKIE['medimage-server'];
 		}
 		
-		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $medimage_server . " " . $tags;
+		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/upload.php " . $image_folder . " " . $image_hi_name . " " . $message_id . " " . $message_forum_id . " " . $layer_name . " " . $medimage_server . " " . $tags . " " . $sender_id;
 		global $staging;
 		if($staging == true) {
 			$command = $command . " staging";   //Ensure this works on a staging server  

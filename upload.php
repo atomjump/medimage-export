@@ -140,7 +140,8 @@
 	$layer_name_off = $forum_id_off + 1;
 	$upload_to_off = $layer_name_off + 1;
 	$tags_off = $upload_to_off + 1;
-	$staging_flag_off = $upload_to_off + 1;
+	$sender_id_off = $tags_off + 1;
+	$staging_flag_off = $staging_flag_off + 1;
 	
 	
 	
@@ -220,13 +221,15 @@
 					}
 				}
 				
+				//Send a private message
+				$sender_id = $argv[$sender_id_off];
+				
 				//Delete the PDF file
 				$basic_filename = str_replace("..","", $basic_filename);		//Prevent any cross path scripting
 				unlink(add_trailing_slash_local(dirname(__FILE__)) . "temp/" . $basic_filename);
 			
 				if($verbose == true) error_log("About to post to the group with :" . $new_message);
-	
-				 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+				 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id; //A private message just to ourself 
 				 $sender_name_str = "MedImage";
 				 $sender_email = "info@medimage.co.nz";
 				 $sender_ip = "111.111.111.111";
@@ -274,7 +277,7 @@
 			
 				if($verbose == true) error_log("About to post to the group with :" . $new_message);
 	
-				 $recipient_ip_colon_id = "";		//No recipient, so the whole group. 
+				 $recipient_ip_colon_id = "123.123.123.123:" . $sender_id; //A private message just to ourself 
 				 $sender_name_str = "MedImage";
 				 $sender_email = "info@medimage.co.nz";
 				 $sender_ip = "111.111.111.111";
