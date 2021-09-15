@@ -163,14 +163,19 @@
 		return $title;
 	}
 
-	function security_code() {
-		$rand = rand(1,10000);
-		return "-gid" . $rand;
+	function security_code($security_gid) {
+		if($security_gid == true) {
+			//Need a unique security code on a publicly exported pdf
+			$rand = rand(1,100000);
+			return "-gid" . $rand;
+		} else {
+			return "";
+		}
 		
 	}
 
 
-   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder) {
+   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder, $security_gid = true) {
   	  
  	  
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();	
@@ -270,7 +275,7 @@
  
  
  		$dt_coms = explode(" ", $user_date_time);
- 		$filename = $forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4] . security_code() . ".pdf";		//Leave off GMT etc.
+ 		$filename = $forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4] . security_code($security_gid) . ".pdf";		//Leave off GMT etc.
  		$filename = str_replace(" ", "-", $filename);
  		$filename = str_replace(":", "-", $filename);
  		$filename = str_replace("[", "", $filename);
@@ -464,7 +469,16 @@
  	  
  	  $output_folder = add_trailing_slash(dirname(__FILE__)) . "../temp/";
  	  
- 	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder);
+ 	  if(isset($_REQUEST['send_medimage'])) {
+ 	  	$security_gid = false;		//If sending directly, this file will never be made
+ 	  								//publicly accessible, so no Globally unique id needed
+ 	  } else {
+ 	  	$security_gid = true;		//A publicly available (albiet time limited) pdf
+ 	  								//will be created - append a GID, so that it cannot
+ 	  								//be guessed.
+ 	  }
+ 	  
+ 	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder, $security_gid);
  	  
  	  
  	  
