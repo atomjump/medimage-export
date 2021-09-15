@@ -400,10 +400,18 @@
  	  
  	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder);
  	  
- 	  
- 	  //($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
- 	  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
- 
+ 	  if(isset($_REQUEST['send-medimage'])) {
+		  //($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
+		  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
+ 	   } else {
+ 	   	  //TODO We want to delete the .pdf after 10 minutes here
+ 	   
+ 	   }
+ 	   
+ 	   //Return the .pdf file as a URL
+ 	   list($web_api_url, $api_file_path) = get_image_url_remote_local();
+ 	   echo "Final export:" . $web_api_url . $pdf_file_name;		//TODO append 
+ 	    
 	} else {
 	 //wrong username
 	  echo "{ 'Error' : 'Wrong credentials.' }";

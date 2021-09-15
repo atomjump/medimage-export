@@ -448,11 +448,16 @@
             	            
             <?php
            
-           
+           	//MedImage pdf export
             $ret_text = "<script>function medimagePDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch();  }); }</script>";
             echo $ret_text;
             
-            $ret_text = "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/pdf128.png'></a><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a><img id='pdf-waiting' src='images/ajax-loader.gif' width='16' height='16' style='display: none;'>";  //alert(\"Response : \" + response); alert('TODO: MedImage Forum .pdf export in here. Forum ID: " . $_REQUEST['uniqueFeedbackId'] . "
+            //General pdf export
+             $ret_text = "<script>function PDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch(); alert(response); window.open(response);  }); }</script>";
+            echo $ret_text;
+            
+            //Visible buttons
+            $ret_text = "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return PDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/pdf128.png'></a><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\" \"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a><img id='pdf-waiting' src='images/ajax-loader.gif' width='16' height='16' style='display: none;'>";
             
             
             echo $ret_text;
