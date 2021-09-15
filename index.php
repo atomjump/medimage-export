@@ -110,7 +110,7 @@
         }
         
         
-        public function start_medimage($uc_message, $actual_message, $sender_id, 
+        public function check_and_start_medimage($uc_message, $actual_message, $sender_id, 
         					$sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options, $api) 
         {
         	if((strpos($uc_message, "START MEDIMAGE") === 0)||
@@ -138,7 +138,7 @@
 				  $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
 			} else {
 				//Not a start message
-				return true;		
+				return false;		
 			}
 			
 			return true;
@@ -159,7 +159,7 @@
 				if($actual_message[1]) {
 					$uc_message = strtoupper($actual_message[1]);
 					
-					return $this->start_medimage($uc_message, $actual_message, $sender_id, 
+					return $this->check_and_start_medimage($uc_message, $actual_message, $sender_id, 
         					$sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options, $api);
         			//We exit this process, either way - if we were off, and 'start' was entered we are now on, but awaiting new commands. If we were off and 'start' was not entered, we don't want to process anything below.
         			
@@ -302,6 +302,10 @@
             if($actual_message[1]) {
             	$uc_message = strtoupper($actual_message[1]);
             	if($this->verbose == true) error_log($uc_message);
+		         
+		        $this->check_and_start_medimage($uc_message, $actual_message, $sender_id, 
+        					$sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options, $api); 
+		         
 		         	
 		        if(strpos($uc_message, "ID ") === 0) {
 				      //Check for messages starting with 'id [patientid] [keywords]', which switch the id to send this to on the
