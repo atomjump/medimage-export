@@ -163,6 +163,12 @@
 		return $title;
 	}
 
+	function security_code() {
+		$rand = rand(1,10000);
+		return "-gid" . $rand;
+		
+	}
+
 
    function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder) {
   	  
@@ -264,7 +270,7 @@
  
  
  		$dt_coms = explode(" ", $user_date_time);
- 		$filename = $forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4] . ".pdf";		//Leave off GMT etc.
+ 		$filename = $forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4] . security_code() . ".pdf";		//Leave off GMT etc.
  		$filename = str_replace(" ", "-", $filename);
  		$filename = str_replace(":", "-", $filename);
  		$filename = str_replace("[", "", $filename);
@@ -403,7 +409,7 @@
 	if($logged == true) {
 
 
-	  //Return the .pdf file as a URL
+	  //Get the URLs
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();
  	  $web_path = $web_api_url . "plugins/medimage_export/temp/";
 
