@@ -278,7 +278,7 @@
 	function medimage_intro_message($api, $message_id, $web_path, $pdf_file_name, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 	{
 		//Send an intro message
-		$new_message = "You need to enable MedImage exports first, please enter 'start medimage'. Once paired, this will export this forum's contents as a PDF directly onto your desktop system. You can find more information at http://medimage.co.nz";
+		$new_message = "You need to enable MedImage exports first, please enter 'start medimage'. Once paired, this will export this forum's contents as a PDF, or a single image, directly onto your desktop system. You can find more information at http://medimage.co.nz";
 		
 		$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 		$sender_name_str = "MedImage";
@@ -405,6 +405,7 @@
  	  $web_path = $web_api_url . "plugins/medimage_export/temp/";
 
 	  if(isset($_COOKIE['medimage-switched-on'])) {
+	  
         	if($_COOKIE['medimage-switched-on'] == "true") {
         		//All good. Carry on below.
         	} else {
