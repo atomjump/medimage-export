@@ -156,7 +156,7 @@
 	}
 	
 	if(isset($argv[$staging_flag_off])) {      //allow for a staging flag
-	    $staging = true;
+	   //TEMPOUT $staging = true;
 	}
 	include_once($start_path . 'config/db_connect.php');	
 	
