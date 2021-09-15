@@ -175,7 +175,7 @@
 	}
 
 
-   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder, $security_gid = true) {
+   function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder, $security_gid = true, $file_based = false) {
   	  
  	  
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();	
@@ -281,7 +281,11 @@
  		$filename = str_replace("[", "", $filename);
  		$filename = str_replace("]", "", $filename);
  		$filename = trim($filename);
- 		$pdf->Output('F', $output_folder . $filename);
+ 		if($file_based == true) {
+ 			$pdf->Output('F', $output_folder . $filename);
+ 		} else {
+ 			$pdf->Output('I', $output_folder . $filename);
+ 		}
    		return $filename;
    }
 
@@ -470,15 +474,17 @@
  	  $output_folder = add_trailing_slash(dirname(__FILE__)) . "../temp/";
  	  
  	  if(isset($_REQUEST['send_medimage'])) {
- 	  	$security_gid = false;		//If sending directly, this file will never be made
+ 	  	$security_gid = false;		//If sending directly to MedImage, this file will never be made
  	  								//publicly accessible, so no Globally unique id needed
+ 	  	$file_based = true;			//Yes create a local pdf file
  	  } else {
  	  	$security_gid = true;		//A publicly available (albiet time limited) pdf
  	  								//will be created - append a GID, so that it cannot
  	  								//be guessed.
+ 	  	$file_based = false;		//Pipe directly into the browser
  	  }
  	  
- 	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder, $security_gid);
+ 	  $pdf_file_name = parse_json_into_easytable($json, $_REQUEST['userDateTime'], $forum_title, $max_records, $output_folder, $security_gid, $file_based);
  	  
  	  
  	  
