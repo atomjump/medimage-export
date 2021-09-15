@@ -223,7 +223,6 @@
 				
 				//Send a private message
 				$sender_id = $argv[$sender_id_off];
-				echo "Sender ID:" . $sender_id;		//TESTING
 				
 				//Delete the PDF file
 				$basic_filename = str_replace("..","", $basic_filename);		//Prevent any cross path scripting
@@ -247,7 +246,6 @@
 				$filename = "#" . $tags . "-" . date("d-m-Y-h-i-s") . ".jpg";
 				
 				$sender_id = $argv[$sender_id_off];
-				echo "Sender ID:" . $sender_id;		//TESTING
 				
 				$upload_to = $argv[$upload_to_off];
 				if($upload_to == "null") {
