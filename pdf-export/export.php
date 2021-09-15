@@ -353,7 +353,7 @@
 
 
 	
-	function wait_and_remove_pdf($api, $full_pdf_file) {
+	function wait_and_remove_pdf($api, $full_pdf_file, $medimage_config) {
 	
 		$verbose = true;
 			
@@ -470,7 +470,7 @@
  	   } else {
  	   	  chmod($output_folder . $pdf_file_name, "777");
  	   	  echo $web_path . $pdf_file_name;
- 	   	  wait_and_remove_pdf($api, $output_folder . $pdf_file_name);
+ 	   	  wait_and_remove_pdf($api, $output_folder . $pdf_file_name, $medimage_config);
  	   }
  	   
  	  
