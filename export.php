@@ -178,7 +178,7 @@
 				$message_forum_id = $layer_info['int_layer_id'];
 				
 				//No matching image. Warn the user
-				$new_message = "Sorry there was no image in this message. This feature exports an image in a message to the connected MedImage Server on your desktop.";		
+				$new_message = "Sorry there was no image in this message. This feature exports an image to the connected MedImage Server on your desktop.";		
 				$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
 				$sender_name_str = "MedImage";
 				$sender_email = "info@medimage.co.nz";
