@@ -1,5 +1,6 @@
 <?php
 
+	//Exporting an image.
 
     function trim_trailing_slash_local($str) {
         return rtrim($str, "/");
@@ -169,6 +170,21 @@
 						send_image($api, $message_id, $image_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config);
 					}
 				}
+			} else {
+				//No matching image. Warn the user
+				$new_message = "Sorry there was no image in this message. This feature exports an image in a message to the connected MedImage Server on your desktop.";		
+				$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
+				$sender_name_str = "MedImage";
+				$sender_email = "info@medimage.co.nz";
+				$sender_ip = "111.111.111.111";
+				$options = array('notification' => false, 'allow_plugins' => false);
+		
+				if($verbose == true) {
+					echo "sender_name_str:" . $sender_name_str . "  new_message:" . $new_message . "  recipient_ip_colon_id:" . $recipient_ip_colon_id . "  sender_email:" .  $sender_email . "  sender_ip:" .  $sender_ip . "  message_forum_id:" .  $message_forum_id ."\n";
+				}
+		
+				$new_message_id = $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+				
 			}
 		}
 
