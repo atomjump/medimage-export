@@ -172,6 +172,11 @@
 				}
 			} else {
 				$verbose = true;	//TESTING
+				//With the layer name get the layer id
+				$ly = new cls_layer();
+				$layer_info = $ly->get_layer_id($layer_name, null);
+				$message_forum_id = $layer_info['int_layer_id'];
+				
 				//No matching image. Warn the user
 				$new_message = "Sorry there was no image in this message. This feature exports an image in a message to the connected MedImage Server on your desktop.";		
 				$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
