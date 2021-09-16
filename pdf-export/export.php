@@ -370,7 +370,7 @@
 	
 	function wait_and_remove_pdf($api, $pdf_file, $medimage_config) {
 	
-		$verbose = true;
+		$verbose = false;
 			
 		$command = $medimage_config['phpPath'] . " " . dirname(__FILE__) . "/../wait.php " . $pdf_file;
 		global $staging;

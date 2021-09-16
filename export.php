@@ -71,7 +71,7 @@
 
 	function send_image($api, $message_id, $image_hi_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 	{
-		$verbose = true;   //usually false, unless you want to debug
+		$verbose = false;   //usually false, unless you want to debug
 		
 		$image_folder = add_trailing_slash_local($medimage_config['serverPath']) . "images/im/";
 		
@@ -171,7 +171,7 @@
 					}
 				}
 			} else {
-				$verbose = true;	//TESTING
+				
 				//With the layer name get the layer id
 				$ly = new cls_layer();
 				$layer_info = $ly->get_layer_id($layer_name, null);
