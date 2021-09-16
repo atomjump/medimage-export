@@ -451,8 +451,8 @@
             
             //General pdf export
              //$ret_text .= "function PDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch(); window.open(response);  }); }</script>";
-             
-             $ret_text .= "function PDFExport(msgId) { var userDate = new Date(); var strUserDate = userDate.toString(); var pdfForm = document.getElementById('pdfexport');
+             //window.frames[1].document.
+             $ret_text .= "function PDFExport(msgId) { var userDate = new Date(); var strUserDate = userDate.toString(); alert(JSON.stringify(window.frames));var pdfForm = window.frames[1].document.pdfExportForm;
              pdfForm.target = 'myActionWin'; 
 window.open('','myActionWin','width=500,height=300,toolbar=0'); pdfForm.submit(); }</script> ";
             
