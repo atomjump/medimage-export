@@ -363,7 +363,6 @@
 			$command = $command . " staging";   //Ensure this works on a staging server  
 		}
 		if($verbose == true) error_log("Running: " . $command);
-		//echo $command;		//TEMP TESTING
 		
 		$api->parallel_system_call($command, "linux");
 		$api->complete_parallel_calls();										
@@ -382,7 +381,6 @@
 			$command = $command . " staging";   //Ensure this works on a staging server  
 		}
 		if($verbose == true) error_log("Running: " . $command);
-		//echo $command;		//TEMP TESTING
 		
 		$api->parallel_system_call($command, "linux");
 		$api->complete_parallel_calls();	
