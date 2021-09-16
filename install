@@ -16,7 +16,7 @@ sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_exp
 
 #Create a config file for the new plugin
 sudo mkdir ~/medimage_export
-sudo echo "{ \"serverPath\": \"/jet/www/default/vendor/atomjump/loop-server/\", \"staging\": true, \"phpPath\": \"/jet/bin/php\" }" > ~/medimage_config.json
+sudo echo "{ \"serverPath\": \"/jet/www/default/vendor/atomjump/loop-server/\", \"staging\": true, \"phpPath\": \"/jet/bin/php\", \"startSwitchedOn\": \"false\" }" > ~/medimage_config.json
 sudo cp ~/medimage_config.json ~/medimage_export/
 sudo cp ~/medimage_config.json /jet/www/default/vendor/atomjump/loop-server/plugins/medimage_export/config/config.json
 sudo mv ~/medimage_config.json ~/medimage_export/medimage_config.json
