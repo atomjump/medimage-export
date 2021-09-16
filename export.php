@@ -171,6 +171,7 @@
 					}
 				}
 			} else {
+				$verbose = true;	//TESTING
 				//No matching image. Warn the user
 				$new_message = "Sorry there was no image in this message. This feature exports an image in a message to the connected MedImage Server on your desktop.";		
 				$recipient_ip_colon_id =  "123.123.123.123:" . $sender_id;		//Send privately to the original sender
