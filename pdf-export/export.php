@@ -284,7 +284,7 @@
  		if($file_based == true) {
  			$pdf->Output('F', $output_folder . $filename);
  		} else {
- 			$pdf->Output('I', $output_folder . $filename);
+ 			$pdf->Output('I', $filename);
  		}
    		return $filename;
    }

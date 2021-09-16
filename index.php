@@ -450,8 +450,6 @@
             $ret_text = "<script>function medimagePDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . ", send_medimage: true };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch();  }); }; ";
             
             //General pdf export
-             //$ret_text .= "function PDFExport(msgId) { jQuery('#pdf-waiting').show(); var userDate = new Date(); var strUserDate = userDate.toString(); data = { uniqueFeedbackId: '" . $layer_name . "', userDateTime: strUserDate, sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) { jQuery('#pdf-waiting').hide(); jQuery('#comment-popup-content').show(); jQuery('#comment-upload').hide(); doSearch(); window.open(response);  }); }</script>";
-             //window.frames[1].document.
              $ret_text .= "function PDFExport(msgId) { var userDate = new Date(); var strUserDate = encodeURIComponent(userDate.toString()); var url=\"" . $root_server_url . "/plugins/medimage_export/pdf-export/export.php?uniqueFeedbackId=" . $layer_name . "&userDateTime=\" + strUserDate + \"&sender_id=" . $sender_id . "\"; alert(url); window.open(url); }</script>";
              
             
