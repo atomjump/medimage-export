@@ -214,7 +214,7 @@
  	  	   $background_colour = $colours[$cnt%2];
  	  	   if($lines->res[$cnt]->whisper == true) {
  	  	   		//A private message - show as light blue
- 	  	   		$background_colour = '#01a2dd';
+ 	  	   		$background_colour = '#e5f3f4';
  	  	   }
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
