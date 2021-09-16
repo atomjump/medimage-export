@@ -493,10 +493,6 @@
  	  if(isset($_REQUEST['send_medimage'])) {
 		  //($api, $message_id, $pdf_file_name, $image_folder, $message_forum_id, $layer_name, $sender_id, $medimage_config)
 		  send_pdf_to_medimage($api, 0, $pdf_file_name, $output_folder, $layer_info['int_layer_id'], $layer_visible, $_REQUEST['sender_id'], $medimage_config);
- 	   } else {
- 	   	  chmod($output_folder . $pdf_file_name, "777");
- 	   	  echo $web_path . $pdf_file_name;
- 	   	  wait_and_remove_pdf($api, $pdf_file_name, $medimage_config);
  	   }
  	   
  	  
