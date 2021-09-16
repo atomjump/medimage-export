@@ -184,7 +184,7 @@
 				}
 		
 				$new_message_id = $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
-				
+				$api->complete_parallel_calls();
 			}
 		}
 
