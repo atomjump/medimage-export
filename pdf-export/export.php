@@ -279,7 +279,8 @@
  
  
  		$dt_coms = explode(" ", $user_date_time);
- 		$filename = $forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4] . ".pdf";		//Leave off GMT etc.
+ 		$parsed_forum_title = preg_replace("/[^a-zA-Z]/", "", $forum_title);	//only allow alphnumeric chars in filename
+ 		$filename = $parsed_forum_title . " " . $dt_coms[0] . " " . $dt_coms[1] . " " . $dt_coms[2] . " ". $dt_coms[3] . " ". $dt_coms[4] . ".pdf";		//Leave off GMT etc.
  		$filename = str_replace(" ", "-", $filename);
  		$filename = str_replace(":", "-", $filename);
  		$filename = str_replace("[", "", $filename);
