@@ -55,15 +55,8 @@
 		
 		$subdomain = check_subdomain();
 
-		if((isset($cnf['readURLAllowReplacement'])) && ($cnf['readURLAllowReplacement'] == true)) {
-			if((isset($cnf['readURLIncludeDot'])) && ($cnf['readURLIncludeDot'] == true)) {
-				$web_api_url = add_trailing_slash(str_replace('[subdomain]', $subdomain . ".", $cnf['webRoot']));
-			} else {
-				$web_api_url = add_trailing_slash(str_replace('[subdomain]', $subdomain , $cnf['webRoot']));
-			}
-		} else {
-			$web_api_url = add_trailing_slash(str_replace('[subdomain]', $subdomain . ".", $cnf['webRoot']));		//Remove any mention of subdomains
-		}
+		
+		$web_api_url = add_trailing_slash(str_replace('[subdomain]', $subdomain . ".", $cnf['webRoot']));		//Remove any mention of subdomains
 		
 		$api_file_path = add_trailing_slash($cnf['fileRoot']);
 		
