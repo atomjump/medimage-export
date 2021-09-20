@@ -387,23 +387,6 @@
           
             if($this->check_switched_on(false) == false) return "";		//Early out of here, if we aren't switch on.
 
-          
-        
-           
-            /*<script>
-            	function medimageExport(msgId) {  
-            		$.ajax({
-							url: \"" . trim_trailing_slash_local($root_server_url) . "/plugins/medimage_export/export.php\", 
-							data: data,
-							type: 'POST',
-							cache: false
-							}).done(function(response) {
-								alert(\"Response : \" + response);
-        						
-        					}
-        			);
-        		}
-           	</script> */
             
            $layer_name = "";
 			if(isset($_REQUEST['passcode'])) {
@@ -416,8 +399,7 @@
             
             $sender_id = $api->get_current_user_id();
             
-           $ret_text = "<script>function medimageExport(msgId) { data = { msg_id: " . $message_id . ", layer_name: '" . $layer_name . "', sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) {  doSearch(); return closeSingleMsg();	}); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"medimageExport(" . $message_id . ");\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a>";  
-           //For any future debugging you can put some of these into spots in the command above: alert(JSON.stringify(data));   alert(\"Response : \" + response);   alert('About to run MedImage Photo Export in here. Msg ID: " . $message_id . "');
+           $ret_text = "<script>function medimageExport(msgId) { data = { msg_id: " . $message_id . ", layer_name: '" . $layer_name . "', sender_id: " . $sender_id . " };  jQuery.ajax({ url: \"" . $root_server_url . "/plugins/medimage_export/export.php\", data: data, type: 'POST', cache: false 		}).done(function(response) {  doSearch(); return closeSingleMsg();	}); }</script><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"medimageExport(" . $message_id . ");\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/images/medimage_logo.png'></a>";  
             return $ret_text;
             
         }
@@ -454,7 +436,7 @@
              
             
             //Visible buttons
-            $ret_text  .= "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return PDFExport();\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/pdf128.png'></a><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/medimage_logo.png'></a><img id='pdf-waiting' src='images/ajax-loader.gif' width='16' height='16' style='display: none;'>";
+            $ret_text  .= "<a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return PDFExport();\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/images/pdf128.png'></a><a class=\"comment-msg-button\" href=\"javascript:\" onclick=\"return medimagePDFExport();\"><img width=\"48\" src='" . $root_server_url . "/plugins/medimage_export/images/medimage_logo.png'></a><img id='pdf-waiting' src='images/ajax-loader.gif' width='16' height='16' style='display: none;'>";
             
             
             echo $ret_text;
