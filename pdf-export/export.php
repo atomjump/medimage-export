@@ -234,7 +234,7 @@
 					} else {
 						if(($low_res_image_countdown > 0) && ($image_filename)) {
 							//Use the low-res version in the .pdf
-							 $image_str = " img:" . $abs_image_dir . $image_filename . ",w50;";
+							 $image_str = " img:" . $abs_image_dir . $image_filename . ",w60;";
 							 $line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
 							 $low_res_image_countdown --;
 						} else {
