@@ -94,7 +94,7 @@
     	global $cnf;
     	
     	//General URL gathering
- 		$preg_search = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+ 		$preg_search = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]*([^\" \n]*)?/";
 		preg_match_all($preg_search, $line_text, $matches);
 			
 				
