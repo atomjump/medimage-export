@@ -97,7 +97,7 @@
  		$preg_search = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]*([^\" \n]*)?/";
 		preg_match_all($preg_search, $line_text, $matches);
 			
-		echo "Line text:" . $line_text . " API" . $web_api_url  . " FilePath:" . $api_file_path;
+		//echo "Line text:" . $line_text . " API" . $web_api_url  . " FilePath:" . $api_file_path;
 					
 		if(count($matches[0]) > 0) {
 			
@@ -113,15 +113,22 @@
 				
 					if($verbose == true) echo "Matched image raw: " . $match . "\n";
 					$raw_image_url = $match;
-					$image_name = $info['filename'] . ".jpg";
-					$image_hi_name = $info['filename'] . "_HI.jpg";
+					if(($ext == 'jpg')||($ext == 'jpeg')) {
+						//A jpg should be a locally added one
+						$image_name = $info['filename'] . ".jpg";
+						$image_hi_name = $info['filename'] . "_HI.jpg";
+					} else {
+						//This could be a .png from e.g. an emoticon
+						$image_name = $info['filename'] . "." . $ext;
+						$image_hi_name = $info['filename'] . "." . $ext;
+					}
 					if($verbose == true) echo "Image name: " . $image_name . "\n";
 				
 					$abs_image_path = str_replace($web_api_url, $api_file_path, $raw_image_url);
 					$abs_image_dir = add_trailing_slash(dirname($abs_image_path));
 				
-					echo " imagepath:" . $abs_image_path . " imagedir:" . $abs_image_dir;
-					exit(0);
+					//echo " imagepath:" . $abs_image_path . " imagedir:" . $abs_image_dir;
+					//exit(0);
 				
 					if(!file_exists($abs_image_dir . $image_name)) $image_name = false;		//Don't use this version if
 					if(!file_exists($abs_image_dir . $image_hi_name)) $image_hi_name = false;										//it doesn't exist locally
