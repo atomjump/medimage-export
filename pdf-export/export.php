@@ -228,7 +228,7 @@
  		   		  
 					if(($hi_res_image_countdown > 0) && ($image_hi_filename)) {
 						//Use the hi-res version in the .pdf
-						$image_str = " img:" . $abs_image_dir . $image_hi_filename . ",w50;";
+						$image_str = " img:" . $abs_image_dir . $image_hi_filename . ",w60;";
 						$line_text = str_replace($image_url, "",$line_text);		//Remove the textual version of image
 						$hi_res_image_countdown --;
 					} else {
