@@ -181,7 +181,15 @@
  	  	
  	  	for($cnt = 0; $cnt < count($matches['href']); $cnt++) {
 			if($matches['href'][$cnt] != '#') {
-				$result = " " . $matches['href'][$cnt];
+				//Now check extension - we don't want to include images here
+				$info = pathinfo($match);
+				$ext = $info['extension'];
+				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
+					//And image - so ignore
+				} else {
+					//A link to include
+					$result = " " . $matches['href'][$cnt];
+				}
 			}
 		}
  	  	
