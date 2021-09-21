@@ -182,7 +182,7 @@
  	  	for($cnt = 0; $cnt < count($matches['href']); $cnt++) {
 			if($matches['href'][$cnt] != '#') {
 				//Now check extension - we don't want to include images here
-				$info = pathinfo($match);
+				$info = pathinfo($matches['href'][$cnt]);
 				$ext = $info['extension'];
 				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
 					//And image - so ignore
