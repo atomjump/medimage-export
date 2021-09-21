@@ -173,9 +173,9 @@
 	function get_expand_url($line_text) {
 		/* Expand example case: <a href='#' onclick='whisper("192.55.113.105:682", "Anon 05", true, ""); return false;' title='Send comment to Anon 05 privately'>Anon 05</a>:&nbsp;This is another test with a very long url <a target="_blank" href="http://medimage.co.nz/2021/09/13/medimage-adds-a-new-messaging-interface/">Expand</a> */
  	  	   
- 	  	preg_match('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $line_text, $matches);
-		//result[1] == #
-		//result[2] == http://medimage.co.nz/2021/09/13/medimage-adds-a-new-messaging-interface/  
+ 	  	preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $line_text, $matches);
+		//result['href'][1] == #
+		//result['href'][2] == http://medimage.co.nz/2021/09/13/medimage-adds-a-new-messaging-interface/  
  	  	
  	  	$result = "";
  	  	
@@ -187,21 +187,6 @@
  	  	
  	  	
  	  	return $result;
- 	  	/*   
- 	  	//General URL gathering
- 		$preg_search = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]*([^\" \n]*)?/";
-		preg_match_all($preg_search, $line_text, $matches);
-			
-					
-		if(count($matches[0]) > 0) {
-			
-			//Yes we have at least one url
-			$raw_url = "";
-			
-			for($cnt = 0; $cnt < count($matches[0]); $cnt++) {
-			
-			}
-		}*/
 	
 	}
 
