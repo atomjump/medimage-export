@@ -277,7 +277,7 @@
  		   		  	}
  		   		  	
 					//E.g. https://atomjump.com/api/plugins/emoticons_large/icons/basic/thumbsup.png
-					if(strstr("emoticons_large", $image_filename)) {
+					if(strstr($image_filename, "emoticons_large")) {
 						//Quite likely an icon, make a bit smaller
 						$image_dim_str = ",w40";
 					}
