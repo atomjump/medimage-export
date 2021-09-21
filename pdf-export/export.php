@@ -179,7 +179,7 @@
  	  	
  	  	$result = "";
  	  	
- 	  	for($cnt = 0; $cnt < count($matches); $cnt++) {
+ 	  	for($cnt = 0; $cnt < count($matches['href']); $cnt++) {
 			if($matches['href'][$cnt] != '#') {
 				$result = " " . $matches['href'][$cnt];
 			}
