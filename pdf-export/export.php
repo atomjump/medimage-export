@@ -170,7 +170,7 @@
 		
 	}
 
-	function get_expand_url($line_text) {
+	function get_expand_url($line_text, $web_api_url) {
 		/* Expand example case: <a href='#' onclick='whisper("192.55.113.105:682", "Anon 05", true, ""); return false;' title='Send comment to Anon 05 privately'>Anon 05</a>:&nbsp;This is another test with a very long url <a target="_blank" href="http://medimage.co.nz/2021/09/13/medimage-adds-a-new-messaging-interface/">Expand</a> */
  	  	   
  	  	preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*>/i', $line_text, $matches);
@@ -182,13 +182,21 @@
  	  	for($cnt = 0; $cnt < count($matches['href']); $cnt++) {
 			if($matches['href'][$cnt] != '#') {
 				//Now check extension - we don't want to include images here
-				$info = pathinfo($matches['href'][$cnt]);
+				$url = $matches['href'][$cnt];
+				$info = pathinfo($url);
 				$ext = $info['extension'];
 				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
-					//And image - so ignore
+					//An image - so ignore, unless it is on a remote website.
+					if(strstr($url, $web_api_url)) {
+						//Is on our local server - so ignore this image url
+					} else {
+						//A remote image to include
+						$result = " " . $url;
+					}
+					
 				} else {
 					//A link to include
-					$result = " " . $matches['href'][$cnt];
+					$result = " " . $url;
 				}
 			}
 		}
@@ -243,7 +251,7 @@
  	  	   
  	  	   
  	  	   
- 	  	   $expand_url = get_expand_url($lines->res[$cnt]->text);
+ 	  	   $expand_url = get_expand_url($lines->res[$cnt]->text, $web_api_url);
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
  	  	   $parsable_text = strip_tags($lines->res[$cnt]->text, "<img>");
