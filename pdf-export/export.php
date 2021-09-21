@@ -267,7 +267,7 @@
  		   		  	//It is a local file
  		   		  	//Get dimensions to see if a landscape or portrait
  		   		  	$image_dim_str = ",w60";
- 		   		  	if(list($width, $height, $type, $attr) = getimagesize($image_filename)) {
+ 		   		  	if(list($width, $height, $type, $attr) = getimagesize($abs_image_dir . $image_filename)) {
  
  		   		  		if($width > $height) {
  		   		  			//Landscape
