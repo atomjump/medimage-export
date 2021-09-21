@@ -267,11 +267,16 @@
  		   		  	//It is a local file
  		   		  	//Get dimensions to see if a landscape or portrait
  		   		  	$image_dim_str = ",w60";
- 		   		  	if($size = getimagesize($image_filename)) {
- 		   		  		list($width, $height, $type, $attr) = $size;
+ 		   		  	if(list($width, $height, $type, $attr) = getimagesize($image_filename)) {
+ 
  		   		  		if($width > $height) {
  		   		  			//Landscape
  		   		  			$image_dim_str = ",w90";
+ 		   		  		}
+ 		   		  		
+ 		   		  		if($width == $height) {
+ 		   		  			//Quite likely an icon, make a bit smaller
+ 		   		  			$image_dim_str = ",w40";
  		   		  		}
  		   		  	}
  		   		  	
