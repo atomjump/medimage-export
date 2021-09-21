@@ -271,7 +271,7 @@
  
  		   		  		if($width > $height) {
  		   		  			//Landscape
- 		   		  			$image_dim_str = ",w90";
+ 		   		  			$image_dim_str = ",w110";
  		   		  		}
  		   		  		
  		   		  		if($width == $height) {
