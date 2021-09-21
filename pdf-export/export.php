@@ -170,6 +170,41 @@
 		
 	}
 
+	function get_expand_url($line_text) {
+		/* Expand example case: <a href='#' onclick='whisper("192.55.113.105:682", "Anon 05", true, ""); return false;' title='Send comment to Anon 05 privately'>Anon 05</a>:&nbsp;This is another test with a very long url <a target="_blank" href="http://medimage.co.nz/2021/09/13/medimage-adds-a-new-messaging-interface/">Expand</a> */
+ 	  	   
+ 	  	preg_match('~<a .*?href=[\'"]+(.*?)[\'"]+.*?>(.*?)</a>~ims', $line_text, $matches);
+		//result[1] == #
+		//result[2] == http://medimage.co.nz/2021/09/13/medimage-adds-a-new-messaging-interface/  
+ 	  	
+ 	  	$result = "";
+ 	  	
+ 	  	for($cnt = 0; $cnt < count($matches); $cnt++) {
+			if($matches[$cnt] != '#') {
+				$result = " " . $matches[$cnt];
+			}
+		}
+ 	  	
+ 	  	
+ 	  	return $result;
+ 	  	/*   
+ 	  	//General URL gathering
+ 		$preg_search = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]*([^\" \n]*)?/";
+		preg_match_all($preg_search, $line_text, $matches);
+			
+					
+		if(count($matches[0]) > 0) {
+			
+			//Yes we have at least one url
+			$raw_url = "";
+			
+			for($cnt = 0; $cnt < count($matches[0]); $cnt++) {
+			
+			}
+		}*/
+	
+	}
+
 
    function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder, $security_gid = true, $file_based = false) {
   	  
@@ -212,8 +247,10 @@
  	  	   		//A private message - show as light blue
  	  	   		$background_colour = '#eff8f8';
  	  	   }
- 	  	   echo $lines->res[$cnt]->text;		//TESTING
- 	  	   exit(0);								//TESTING
+ 	  	   
+ 	  	   
+ 	  	   
+ 	  	   $expand_url = get_expand_url($lines->res[$cnt]->text);
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
  	  	   $parsable_text = strip_tags($lines->res[$cnt]->text, "<img>");
@@ -263,6 +300,8 @@
       			$image_str = "";  
  		   	  
  		   }
+ 		   
+ 		   $line_text = $line_text . $expand_url;		//If we have an 'expand' link, we should include this at the end.
  		   
   		   $ago =  $lines->res[$cnt]->ago;
  		   
