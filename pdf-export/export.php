@@ -212,6 +212,8 @@
  	  	   		//A private message - show as light blue
  	  	   		$background_colour = '#eff8f8';
  	  	   }
+ 	  	   echo $lines->res[$cnt]->text;		//TESTING
+ 	  	   exit(0);								//TESTING
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
  	  	   $parsable_text = strip_tags($lines->res[$cnt]->text, "<img>");
