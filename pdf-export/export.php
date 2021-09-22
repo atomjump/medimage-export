@@ -281,6 +281,12 @@
 						//Quite likely an icon, make a bit smaller
 						$image_dim_str = ",w40";
 					}
+					
+					//E.g. 
+					if(strstr($abs_image_dir, "emoticons_basic")) {
+						//Quite likely a smiley basic icon, make very small
+						$image_dim_str = ",w4";
+					}
  		   		  	
  		   		  
 					if(($hi_res_image_countdown > 0) && ($image_hi_filename)) {
