@@ -6,7 +6,7 @@
     
     class plugin_medimage_export
     {
-        public $verbose = true;
+        public $verbose = false;
      	
      	private function trim_trailing_slash_local($str) {
         	return rtrim($str, "/");
@@ -75,7 +75,7 @@
         
         public function check_switched_on($initiate)
         {
-        	error_log("Check switched on:" . $_COOKIE['medimage-switched-on'] . "  initiate:" . $initiate);
+        	if($this->verbose == true) error_log("Check switched on:" . $_COOKIE['medimage-switched-on'] . "  initiate:" . $initiate);
         	if(isset($_COOKIE['medimage-switched-on'])) {
         		if($_COOKIE['medimage-switched-on'] == "true") {
         			return true;
@@ -85,7 +85,7 @@
         	} else {
         		//Not even registered yet. Set the cookie to the default status in the config file
         		$medimage_config = $this->get_medimage_config();
-        		error_log("Check switched on:" . $_COOKIE['medimage-switched-on'] . "  initiate:" . $initiate);
+        		if($this->verbose == true) error_log("Check switched on:" . $_COOKIE['medimage-switched-on'] . "  initiate:" . $initiate);
         		if(isset($medimage_config['startSwitchedOn'])) {
         			if($medimage_config['startSwitchedOn'] == true) {
         				if($initiate == true) {
