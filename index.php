@@ -421,7 +421,7 @@
 			} 
 			
 			$sender_id = $api->get_current_user_id();
-
+			if(!$sender_id) $sender_id = 0;		//A default null user if not logged in.
            
             ?>
             	<br/>
