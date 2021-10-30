@@ -235,7 +235,7 @@
 		//Not authenticated to this layer
 		//With the layer name get the layer id
 		$ly = new cls_layer();
-		$layer_info = $ly->get_layer_id($layer_name, null);
+		$layer_info = $ly->get_layer_id($_REQUEST['layer_name'], null);
 		$message_forum_id = $layer_info['int_layer_id'];
 		
 		//No matching image. Warn the user
