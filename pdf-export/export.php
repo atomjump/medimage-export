@@ -455,10 +455,13 @@
 
 	$logged = false;
 	if(($_SESSION['logged-user'] != '')&&(isset($_SESSION['logged-user']))) {
+		
+		error_log("Logged user: " . $_SESSION['logged-user']);		//TESTING
+		
 		//Already logged in, but check if we know the ip address
-	 $logged = true;				
+	 	$logged = true;				
  
-	 //Get the current layer - use to view 
+	 	//Get the current layer - use to view 
 		$layer_visible = $_REQUEST['uniqueFeedbackId'];
 	
 		$ly = new cls_layer();
@@ -469,9 +472,14 @@
 			
 	} else {
 
+	  error_log("Check email exists: " . $_REQUEST['email']);		//TESTING
+
 	  if($sh->check_email_exists($_REQUEST['email'])) {
+		
+		error_log("Email does exist " . $_REQUEST['email'] . " pass:" . $_REQUEST['pass']);		//TESTING
 		if($lg->confirm($_REQUEST['email'], $_REQUEST['pass'], null, null, $_REQUEST['uniqueFeedbackId']) == 'LOGGED_IN')
 		   {
+		     error_log("Confirmed is logged in ");		//TESTING
 			 $logged = true;
 		   }
 		 }
