@@ -455,9 +455,7 @@
 
 	$logged = false;
 	if(($_SESSION['logged-user'] != '')&&(isset($_SESSION['logged-user']))) {
-		
-		error_log("Logged user: " . $_SESSION['logged-user']);		//TESTING
-		
+				
 		//Already logged in, but check if we know the ip address
 	 	$logged = true;				
  
@@ -472,20 +470,14 @@
 			
 	} else {
 
-	  error_log("Check email exists: " . $_REQUEST['email']);		//TESTING
 
-	  if($sh->check_email_exists($_REQUEST['email'])) {
-		
-		error_log("Email does exist " . $_REQUEST['email'] . " pass:" . $_REQUEST['pass']);		//TESTING
-		if($lg->confirm($_REQUEST['email'], $_REQUEST['pass'], null, null, $_REQUEST['uniqueFeedbackId']) == 'LOGGED_IN')
-		   {
-		     error_log("Confirmed is logged in ");		//TESTING
-			 $logged = true;
-		   }
-		 }
+		if($sh->check_email_exists($_REQUEST['email'])) {
+			if($lg->confirm($_REQUEST['email'], $_REQUEST['pass'], null, null, $_REQUEST['uniqueFeedbackId']) == 'LOGGED_IN')
+		   	{
+			 	$logged = true;
+		   	}
+		}
 	}
-
-	error_log("Logged status: " . $logged);		//TESTING
 
 
 	if($logged == true) {
@@ -580,9 +572,8 @@
 	 $sh = new cls_ssshout();
 	 $ip = $ly->getFakeIpAddr();  //get new user's ip address	
 			
-	 $new_user_id = $sh->new_user('', $ip, '', false);		//Should be false?
+	 $new_user_id = $sh->new_user('', $ip, '', false);		
 	 
-	 error_log("New user: " . $new_user_id);		//TESTING
 	 medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $new_user_id, $medimage_config);
 	 exit(0);
 	  

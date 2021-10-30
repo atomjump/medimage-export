@@ -197,8 +197,63 @@
 	}
 	
 	//parse_for_image($message_id)
-	parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $_REQUEST['sender_id'], $medimage_config);
-	if($verbose == true) echo "Got to the end: " . $_REQUEST['msg_id'] . "  Layer:" . $_REQUEST['layer_name'];
+	$logged = false;
+	if(($_SESSION['logged-user'] != '')&&(isset($_SESSION['logged-user']))) {
+				
+		//Already logged in, but check if we know the ip address
+	 	$logged = true;				
+ 
+	 	//Get the current layer - use to view 
+		$layer_visible = $_REQUEST['layer_name'];
+	
+		$ly = new cls_layer();
+		$layer_info = $ly->get_layer_id($layer_visible, null);
+		if($layer_info) {
+			$_SESSION['authenticated-layer'] = $layer_info['int_layer_id'];
+		}
+			
+	} else {
 
+
+		if($sh->check_email_exists($_REQUEST['email'])) {
+			if($lg->confirm($_REQUEST['email'], $_REQUEST['pass'], null, null, $_REQUEST['uniqueFeedbackId']) == 'LOGGED_IN')
+		   	{
+			 	$logged = true;
+		   	}
+		}
+	}
+
+
+	if($logged == true) {
+	
+	
+	
+		parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $_REQUEST['sender_id'], $medimage_config);
+		if($verbose == true) echo "Got to the end: " . $_REQUEST['msg_id'] . "  Layer:" . $_REQUEST['layer_name'];
+	} else {
+	
+		//Not authenticated to this layer
+		//With the layer name get the layer id
+		$ly = new cls_layer();
+		$layer_info = $ly->get_layer_id($layer_name, null);
+		$message_forum_id = $layer_info['int_layer_id'];
+		
+		//No matching image. Warn the user
+		$new_message = "Sorry, you will need to login to use this feature. This feature exports an image to your desktop, via the MedImage software. See http://medimage.co.nz for more info.";		
+		$recipient_ip_colon_id =  "123.123.123.123:" . $_REQUEST['sender_id'];		//Send privately to the original sender
+		$sender_name_str = "MedImage";
+		$sender_email = "info@medimage.co.nz";
+		$sender_ip = "111.111.111.111";
+		$options = array('notification' => false, 'allow_plugins' => false);
+
+		if($verbose == true) {
+			echo "sender_name_str:" . $sender_name_str . "  new_message:" . $new_message . "  recipient_ip_colon_id:" . $recipient_ip_colon_id . "  sender_email:" .  $sender_email . "  sender_ip:" .  $sender_ip . "  message_forum_id:" .  $message_forum_id ."\n";
+		}
+
+		$new_message_id = $api->new_message($sender_name_str, $new_message, $recipient_ip_colon_id, $sender_email, $sender_ip, $message_forum_id, $options);
+		$api->complete_parallel_calls();
+	
+	
+	}
 
 ?>
