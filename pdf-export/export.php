@@ -569,7 +569,9 @@
 	} else {
 	 //wrong username - create a new dummy user, and send a private message to that user
 	 $sh = new cls_ssshout();
-	 $new_user_id = $sh->new_user(null, '', '', false);
+	 $ip = $ly->getFakeIpAddr();  //get new user's ip address	
+			
+	 $new_user_id = $sh->new_user('', $ip, '', false);		//Should be false?
 	 medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $new_user_id, $medimage_config);
 	 exit(0);
 	  
