@@ -224,13 +224,13 @@
 	}
 
 
-//TESTING OUT	if($logged == true) {
+	if($logged == true) {
 	
 	
 	
-//TESTING OUT		parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $_REQUEST['sender_id'], $medimage_config);
-//TESTING OUT		if($verbose == true) echo "Got to the end: " . $_REQUEST['msg_id'] . "  Layer:" . $_REQUEST['layer_name'];
-//TESTING OUT	} else {
+		parse_for_image($api, $_REQUEST['msg_id'], $_REQUEST['layer_name'], $_REQUEST['sender_id'], $medimage_config);
+		if($verbose == true) echo "Got to the end: " . $_REQUEST['msg_id'] . "  Layer:" . $_REQUEST['layer_name'];
+	} else {
 	
 		//Not authenticated to this layer
 		//With the layer name get the layer id
@@ -254,6 +254,6 @@
 		$api->complete_parallel_calls();
 	
 	
-//TESTING OUT	}
+	}
 
 ?>
