@@ -477,6 +477,7 @@
 		 }
 	}
 
+	error_log("Logged status: " . $logged);		//TESTING
 
 
 	if($logged == true) {
@@ -571,7 +572,9 @@
 	 $sh = new cls_ssshout();
 	 $ip = $ly->getFakeIpAddr();  //get new user's ip address	
 			
-	 $new_user_id = $sh->new_user('', $ip, '', true);		//Should be false?
+	 $new_user_id = $sh->new_user('', $ip, '', false);		//Should be false?
+	 
+	 error_log("New user: " . $new_user_id);		//TESTING
 	 medimage_intro_message($api, 0, $web_path, $pdf_file_name, $layer_info['int_layer_id'], $layer_visible, $new_user_id, $medimage_config);
 	 exit(0);
 	  
