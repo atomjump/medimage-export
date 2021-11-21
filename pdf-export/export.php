@@ -55,8 +55,11 @@
 		
 		$subdomain = check_subdomain();
 
-		
-		$web_api_url = add_trailing_slash(str_replace('[subdomain]', $subdomain . ".", $cnf['webRoot']));		//Remove any mention of subdomains
+		if($subdomain != "") {
+			$web_api_url = add_trailing_slash(str_replace('[subdomain]', $subdomain . ".", $cnf['webRoot']));		//Remove any mention of subdomains
+		} else {
+			$web_api_url = add_trailing_slash(str_replace('[subdomain]', "", $cnf['webRoot']));		//Remove any mention of subdomains
+		}
 		
 		$api_file_path = add_trailing_slash($cnf['fileRoot']);
 		
@@ -90,7 +93,7 @@
 	
 
 
-    function parse_for_image($line_text, $web_api_url, $api_file_path) {
+    function parse_for_image($line_text, $web_api_url, $api_file_path, $verbose) {
     	global $cnf;
     	
     	//General URL gathering
@@ -110,7 +113,7 @@
 				if(($ext == 'jpg')||($ext == 'jpeg')||($ext == 'png')||($ext == 'gif')) {
 					//Yes it's an image
 				
-					if($verbose == true) echo "Matched image raw: " . $match . "\n";
+					if($verbose == true) error_log("Matched image raw: " . $match . "\n");
 					$raw_image_url = $match;
 					if(($ext == 'jpg')||($ext == 'jpeg')) {
 						//A jpg should be a locally added one
@@ -121,11 +124,15 @@
 						$image_name = $info['filename'] . "." . $ext;
 						$image_hi_name = $info['filename'] . "." . $ext;
 					}
-					if($verbose == true) echo "Image name: " . $image_name . "\n";
+					if($verbose == true) error_log("Image name: " . $image_name . "\n");
+				
+					if($verbose == true) error_log("Replacing Web API url: " . $web_api_url . " with API file path:" . $api_file_path . "\n");
+				
 				
 					$abs_image_path = str_replace($web_api_url, $api_file_path, $raw_image_url);
 					$abs_image_dir = add_trailing_slash(dirname($abs_image_path));
 				
+					if($verbose == true) error_log("Checking file exists: " . $abs_image_dir . $image_name . "  and hi exists:" . $abs_image_dir . $image_hi_name . "\n");
 				
 					if(!file_exists($abs_image_dir . $image_name)) $image_name = false;		//Don't use this version if
 					if(!file_exists($abs_image_dir . $image_hi_name)) $image_hi_name = false;										//it doesn't exist locally
@@ -209,7 +216,7 @@
 
    function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder, $security_gid = true, $file_based = false) {
   	  
- 	  
+ 	  $verbose = false;
  	  list($web_api_url, $api_file_path) = get_image_url_remote_local();	
  	  
  	   
@@ -257,8 +264,10 @@
  	  	   $parsable_text = strip_tags($lines->res[$cnt]->text, "<img>");
  	  	   $parsable_text = str_replace("&nbsp;", " ", $parsable_text);
  	  
- 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($parsable_text, $web_api_url, $api_file_path);
+ 	  		
+ 		   list($image_url, $image_filename, $image_hi_filename, $abs_image_dir) = parse_for_image($parsable_text, $web_api_url, $api_file_path, $verbose);
  		   
+ 		   if($verbose == true) error_log("Image URL: " . $image_url . "  Image filename:" . $image_filename . "  Image hi filename:" . $image_hi_filename . "   Abs image dir:" . $abs_image_dir);
  		   
  		   if($image_url != false) {
  		   	  //So, it is at least an image from another website
