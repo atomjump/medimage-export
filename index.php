@@ -118,12 +118,12 @@
 				(strpos($uc_message, "MEDIMAGE ON") === 0)) {
 				
 				
-				 $message_1 = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. Please note: this is still a Beta service and some functionality is being tested, or is not complete. To switch off the service enter 'stop medimage'";
+				 $message_1 = "You have started the MedImage service in this browser. Uploaded photos will be sent to your desktop MedImage software, once you pair up. To switch off the service enter 'stop medimage'";
 				 $message_2 = "You should now pair with your MedImage desktop. Click one of the large pairing buttons on the MedImage desktop, and then type 'pair [your 4 digit code]' into this app, with the 4 digit code that MedImage gives you. http://medimage.co.nz/how-to/#pair";
 				
 				 if($this->check_switched_on(false) == true) {
 				 	//We were already switched on.
-				 	$message_1 = "The MedImage service is already enabled in this browser. Uploaded photos will be sent to your desktop MedImage software. Please note: this is still a Beta service and some functionality is being tested, or is not complete. To switch off the service enter 'stop medimage'";
+				 	$message_1 = "The MedImage service is already enabled in this browser. Uploaded photos will be sent to your desktop MedImage software. To switch off the service enter 'stop medimage'";
 				 	if(isset($_COOKIE['medimage-server'])) {
 				 		//We already have a MedImage Server pairing
 				 		$message_2 = "You may now want to change your MedImage patient ID, by entering e.g. 'id NHI1234 arm'.";
