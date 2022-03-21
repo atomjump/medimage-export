@@ -1,4 +1,4 @@
-# MedImage export capability. Beta
+# MedImage export capability.
 
 This is an alternative interface to the MedImage app, which allows you to take a photo from inside AtomJump Messenger, or select a photo, and have it sent through to a medical desktop system via the MedImage Server. It uses a textual chatbot-style interface.
 
