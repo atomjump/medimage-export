@@ -61,10 +61,6 @@ sudo chmod 777 plugins/medimage_export/temp
 
 Now you can take a photo, by clicking on the 'Upload' icon in any AtomJump Messaging window and follow the instructions to send photos through to your MedImage Server.
 
-We only recommend you install this software for evaluation / interest levels, and __not in a production environment__, at this stage. More careful checks are required around security of the 'temp' folder, and whether a file can be left in there under unusual circumstances.
-
-
-
 
 
 ## Future work
