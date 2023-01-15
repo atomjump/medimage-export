@@ -357,7 +357,7 @@
  		   
  		   $line_text = $line_text . $expand_url;		//If we have an 'expand' link, we should include this at the end.
  		   
-  		   $ago =  $lines->res[$cnt]->ago;
+  		   $ago =  filter_special_chars($lines->res[$cnt]->ago);
  		   
  
 		   $table->easyCell($line_text, 'width:70%; align:L; bgcolor:' . $background_colour . '; valign:T;' . $image_str);
