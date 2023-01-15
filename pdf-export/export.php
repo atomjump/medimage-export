@@ -212,6 +212,26 @@
  	  	return $result;
 	
 	}
+	
+	
+	function filter_special_chars($text) {
+		$rep = [["➁", "(2)"],
+				["➂", "(3)"],
+				["➃", "(4)"],
+				["➄", "(5)"],
+				["➅", "(6)"],
+				["➆", "(7)"],
+				["➇", "(8)"],
+				["➈", "(9)"]];
+				
+		for($cnt = 0; $cnt < count($rep); $cnt++) {
+			$text = str_replace($rep[$cnt][0], $rep[$cnt][1], $text);		
+		}
+		
+		$text = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text);		//Translate any other UTF-8 chars if we can, or convert into '?'
+	
+		return $text;
+	}
 
 
    function parse_json_into_easytable($lines, $user_date_time, $forum_title, $max_records, $output_folder, $security_gid = true, $file_based = false) {
@@ -261,6 +281,7 @@
  	  	   $expand_url = get_expand_url($lines->res[$cnt]->text, $web_api_url);
  	  	   $line_text = strip_tags($lines->res[$cnt]->text);
  	  	   $line_text = str_replace("&nbsp;", " ", $line_text);
+ 	  	   $line_text = filter_special_chars($line_text);
  	  	   $parsable_text = strip_tags($lines->res[$cnt]->text, "<img>");
  	  	   $parsable_text = str_replace("&nbsp;", " ", $parsable_text);
  	  
