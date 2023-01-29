@@ -1,5 +1,7 @@
 # MedImage export capability.
 
+__WARNING: this project has now moved to https://src.atomjump.com/atomjump/medimage_export.git__
+
 This is an alternative interface to the MedImage app, which allows you to take a photo from inside AtomJump Messenger, or select a photo, and have it sent through to a medical desktop system via the MedImage Server. It uses a textual chatbot-style interface.
 
 The add-on also provides a PDF export of the whole forum.
